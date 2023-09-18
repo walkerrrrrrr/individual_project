@@ -1,15 +1,16 @@
 # Plan
 
-* PROJECT TITLE
-* YOUR NAME
-* STUDENT ID
-* SUPERVISOR NAME
-
-Week-by-week plan for the whole project. Update this as you go along.
+* A Concurrent Runtime for the Pat Programming Language
+* Kai Wang
+* 2539930W
+* Simon Fowler
 
 ## Winter semester
 
 * **Week 1**
+  * Create initial repository
+  * Install the basic tools of the project.
+  * Meeting with supervisor
 * **Week 2**
 * **Week 3**
 * **Week 4**
