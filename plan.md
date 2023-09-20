@@ -11,6 +11,11 @@
   * Create initial repository
   * Install the basic tools of the project.
   * Meeting with supervisor
+  * Read "Special Delivery: Programming with Mailbox Types"
+  * Read "Mailbox Types for Unordered Interactions"
+  * Clone https://github.com/simonjf/mbcheck and build from source
+  * Start learning some OCaml https://ocaml.org/docs
+  * If time: have a look at EIO https://github.com/ocaml-multicore/eio
 * **Week 2**
 * **Week 3**
 * **Week 4**
