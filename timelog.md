@@ -21,4 +21,5 @@
 ### 20 Sep 2023
 
 * *1 hour* Organize meeting notes
+* *4 hour* Read "Mailbox Types for Unordered Interactions"
 
