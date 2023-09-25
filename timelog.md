@@ -27,4 +27,9 @@
 
 * *3 hour* Read "Mailbox Types for Unordered Interactions"
 
+### 22 Sep 2023
+
+* *1 hour* Read Guideline and write 'Meeting minutes' on moodle
+* *2 hour* Read "Mailbox Types for Unordered Interactions"
+
 
