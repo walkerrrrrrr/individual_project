@@ -32,4 +32,11 @@
 * *1 hour* Read Guideline and write 'Meeting minutes' on moodle
 * *2 hour* Read "Mailbox Types for Unordered Interactions"
 
+## Week 2
+
+### 25 Sep 2023
+
+* *2 hour* Try to build the mbcheck project, doesn't work:(
+* *2 hour* Learn basis of Ocaml
+
 
