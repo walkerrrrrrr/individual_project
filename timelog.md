@@ -39,4 +39,7 @@
 * *2 hour* Try to build the mbcheck project, doesn't work:(
 * *2 hour* Learn basis of Ocaml
 
+### 26 Sep 2023
 
+* *2 hour* Learn basis of Ocaml
+* *1 hour* Learn basis of Pat on "https://github.com/simonjf/mbcheck"
