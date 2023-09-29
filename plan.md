@@ -17,6 +17,10 @@
   * Start learning some OCaml https://ocaml.org/docs
   * If time: have a look at EIO https://github.com/ocaml-multicore/eio
 * **Week 2**
+  * Continue to read "Special Delivery: Programming with Mailbox Types"
+  * Continue to read "Mailbox Types for Unordered Interactions"
+  * Continue to try to clone "mbcheck" and build from source
+  * Learn more OCaml and EIO, try to write some code
 * **Week 3**
 * **Week 4**
 * **Week 5**
