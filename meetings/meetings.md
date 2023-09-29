@@ -10,6 +10,12 @@
     * Introduced the Pat programming language's type checker: We explored the Pat programming language, which supports Mailbox types, and showed some of the relevant aspects of its type checker. We discussed how Mailbox types can be used to solve communication problems in concurrent programming and to ensure that communication is correct.
     * Developed tasks for the week and preparations for the next meeting: developed a plan of tasks for the week and what I need to prepare for the next meeting to ensure that the meeting is productive and progresses.
 * **Week 2**
+  * 1PM on Thursday
+  * Meeting content:
+    * Mailbox Forms:  supervisor reviewed mailbox concepts with me, emphasizing that they are attached to processes. This is a common communication mechanism in concurrent programming.
+    * Future Example: supervisor used a future example to illustrate these concepts again, aiding my understanding of how Pat language works, especially in relation to mailboxes.
+    * Answering Basic Questions: supervisor answered some fundamental questions I had about the syntax of the Pat language, helping me establish a foundational understanding.
+    * Attempted Problem Resolution:  supervisor attempted to help me with an issue related to building "mbcheck." Due to time constraints, the problem wasn't resolved, and I plan to continue working on it in the next week.
 * **Week 3**
 * **Week 4**
 * **Week 5**
