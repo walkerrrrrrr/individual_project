@@ -43,3 +43,11 @@
 
 * *2 hour* Learn basis of Ocaml
 * *1 hour* Learn basis of Pat on "https://github.com/simonjf/mbcheck"
+
+### 28 Sep 2023
+
+* *1 hour* Meeting
+
+### 29 Sep 2023
+
+* *1 hour* Organize meeting notes
