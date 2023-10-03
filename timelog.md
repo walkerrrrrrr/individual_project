@@ -52,7 +52,7 @@
 
 * *1 hour* Organize meeting notes
 
-## Week 2
+## Week 3
 
 ### 02 Oct 2023
 
