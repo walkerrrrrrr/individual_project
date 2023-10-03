@@ -51,3 +51,10 @@
 ### 29 Sep 2023
 
 * *1 hour* Organize meeting notes
+
+## Week 2
+
+### 02 Oct 2023
+
+* *3 hour* Try to build the mbcheck project, successful:)
+* *2 hour* Learn the code of the mbcheck
