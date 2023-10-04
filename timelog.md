@@ -58,3 +58,7 @@
 
 * *3 hour* Try to build the mbcheck project, successful:)
 * *2 hour* Learn the code of the mbcheck
+
+### 03 Oct 2023
+
+* *3 hour* Play around the example of the mbcheck
