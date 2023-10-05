@@ -67,3 +67,8 @@
 
 * *5 hour* Learn the Eio
 * *1 hour* Learn the dune project structure, try to import eio to dune. Failed:(
+
+### 05 Oct 2023
+
+* *1 hour* Meeting
+* *1 hour* Organize meeting notes
