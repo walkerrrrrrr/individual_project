@@ -22,6 +22,20 @@
   * Continue to try to clone "mbcheck" and build from source
   * Learn more OCaml and EIO, try to write some code
 * **Week 3**
+  * Try to learn some concept of the programming language
+     * Elements of Programming Languages
+        * https://www.inf.ed.ac.uk/teaching/courses/epl/2017/lectures/lec1.pdf
+        * https://www.inf.ed.ac.uk/teaching/courses/epl/2017/lectures/lec13.pdf
+    * types, Syntax, Operational Semantics
+        * https://homepages.inf.ed.ac.uk/slindley/papers/links-effect.pdf (pg., 9, 10)
+  * Try to learn CEK Machine
+    * https://en.wikipedia.org/wiki/CEK_Machine
+    * https://matt.might.net/articles/cek-machines/
+  * Try to learn some concept about Pat
+    * https://gla-my.sharepoint.com/:p:/g/personal/simon_fowler_glasgow_ac_uk/EdT3Bl1-g6lGnThNS9zA5VcBRnDz8wtwfGFBFtnuQwH9fQ?e=KPTach
+    * https://simonjf.com/writing/pat.pdf (pg 15)
+  * Begin to write some code maybe
+    * Fork the mbcheck first
 * **Week 4**
 * **Week 5**
 * **Week 6**
