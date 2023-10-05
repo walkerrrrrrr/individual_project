@@ -17,6 +17,14 @@
     * Answering Basic Questions: supervisor answered some fundamental questions I had about the syntax of the Pat language, helping me establish a foundational understanding.
     * Attempted Problem Resolution:  supervisor attempted to help me with an issue related to building "mbcheck." Due to time constraints, the problem wasn't resolved, and I plan to continue working on it in the next week.
 * **Week 3**
+  * 1PM on Thursday
+  * Meeting content:
+    * Question Clarification: addressed and clarified my questions and concerns.
+    * Foundational Learning Materials: Guidance was provided on essential foundational materials to study for learning computer languages.
+    * CEK Machine: explained the fundamental principles of the CEK machine, offering insights into its operation and purpose in computation.
+    * Pat Language: focus on starting with let expressions as a foundational aspect.
+    * Reduction Principles: The meeting included an exploration of reduction principles, with practical examples illustrated on a whiteboard, helping my understand this important computational concept.
+
 * **Week 4**
 * **Week 5**
 * **Week 6**
