@@ -62,3 +62,8 @@
 ### 03 Oct 2023
 
 * *3 hour* Play around the example of the mbcheck
+
+### 04 Oct 2023
+
+* *5 hour* Learn the Eio
+* *1 hour* Learn the dune project structure, try to import eio to dune. Failed:(
