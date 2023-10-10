@@ -72,3 +72,9 @@
 
 * *1 hour* Meeting
 * *1 hour* Organize meeting notes
+
+## Week 3
+
+### 09 Oct 2023
+
+* *3 hour* Learn the Small-step semantics and abstract syntax
