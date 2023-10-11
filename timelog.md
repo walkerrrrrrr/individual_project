@@ -78,3 +78,9 @@
 ### 09 Oct 2023
 
 * *3 hour* Learn the Small-step semantics and abstract syntax
+
+### 10 Oct 2023
+
+* *3 hour* Learn the CEK machine
+* *2 hour* Learn the types of PL
+* *2 hour* Read Operational Semantics of Pat
