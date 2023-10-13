@@ -84,3 +84,15 @@
 * *3 hour* Learn the CEK machine
 * *2 hour* Learn the types of PL
 * *2 hour* Read Operational Semantics of Pat
+
+### 11 Oct 2023
+
+* *1 hour* Clone the mbcheck and read the file
+
+### 12 Oct 2023
+
+* *1 hour* Meeting
+
+### 13 Oct 2023
+
+* *0.5 hour* Organize meeting notes
