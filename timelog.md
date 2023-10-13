@@ -73,7 +73,7 @@
 * *1 hour* Meeting
 * *1 hour* Organize meeting notes
 
-## Week 3
+## Week 4
 
 ### 09 Oct 2023
 
