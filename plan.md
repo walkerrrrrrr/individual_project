@@ -37,6 +37,8 @@
   * Begin to write some code maybe
     * Fork the mbcheck first
 * **Week 4**
+  	* Continue to the concept of Syntax, CEK Machine, Semantics
+   * Trying to convert some syntax and reductions from cek machine form to OCaml code
 * **Week 5**
 * **Week 6**
 * **Week 7**
