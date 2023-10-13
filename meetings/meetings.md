@@ -24,8 +24,12 @@
     * CEK Machine: explained the fundamental principles of the CEK machine, offering insights into its operation and purpose in computation.
     * Pat Language: focus on starting with let expressions as a foundational aspect.
     * Reduction Principles: The meeting included an exploration of reduction principles, with practical examples illustrated on a whiteboard, helping my understand this important computational concept.
-
 * **Week 4**
+  * 3:30PM on Thursday
+  * Meeting content:
+    * Abstract Syntax and Reduction Rules: This section explains about Abstract Syntax and Reduction Rules and the corresponding CEK machine. 
+    * MBCheck Project Documentation: Learn about the documentation in the MBCheck project, including the Abstract Syntax and Reduction Rules that define the programming language.
+    * Solving Symbolic Problems: Solving some symbolic problems Difference between CEK Machine and Pat rules: Understood the difference between CEK Machine and Pat rules.This involves different machines and rule sets in the programming language implementation.
 * **Week 5**
 * **Week 6**
 * **Week 7**
