@@ -96,3 +96,9 @@
 ### 13 Oct 2023
 
 * *0.5 hour* Organize meeting notes
+
+## Week 5
+
+### 16 Oct 2023
+
+* *2 hour* Read Operational Semantics of Pat
