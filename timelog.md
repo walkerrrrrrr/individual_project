@@ -102,3 +102,11 @@
 ### 16 Oct 2023
 
 * *2 hour* Read Operational Semantics of Pat
+
+### 17 Oct 2023
+
+* *3 hour* Try to write CEK machine to Ocaml code
+
+### 18 Oct 2023
+
+* *7 hour* Try to write CEK machine to Ocaml code
