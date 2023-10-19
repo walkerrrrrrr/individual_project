@@ -1,5 +1,0 @@
-(library
- (name mbcheck)
- (public_name mbcheck)
- (libraries common frontend typecheck util)
-)
