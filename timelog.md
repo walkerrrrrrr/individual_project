@@ -110,3 +110,23 @@
 ### 18 Oct 2023
 
 * *7 hour* Try to write CEK machine to Ocaml code
+
+### 19 Oct 2023
+
+* *1 hour* Meeting
+* *0.5 hour* Organize meeting notes
+
+### 20 Oct 2023
+
+* *8 hour* Begin to write code of genetator for Pat
+
+### 21 Oct 2023
+
+* *4 hour* Success to write “Let” “Return” syntax reduction
+* *1 hour* Success to write steps_printer.ml for steps print
+
+### 22 Oct 2023
+
+* *5 hour* Success to write “App” syntax reduction and the substitution of all of three syntax
+* *2 hour* Success to insert generator into main and reconstrcut the file structure
+
