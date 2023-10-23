@@ -130,7 +130,7 @@
 * *5 hour* Success to write “App” syntax reduction and the substitution of all of three syntax
 * *2 hour* Success to insert generator into main and reconstrcut the file structure
 
-## Week 5
+## Week 6
 
 ### 23 Oct 2023
 
