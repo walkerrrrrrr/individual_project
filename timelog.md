@@ -130,3 +130,13 @@
 * *5 hour* Success to write “App” syntax reduction and the substitution of all of three syntax
 * *2 hour* Success to insert generator into main and reconstrcut the file structure
 
+## Week 5
+
+### 23 Oct 2023
+
+* *1 hour* Success to reconstruct the stucture and add “Annotate”
+* *2 hour* Success to Beautify Step output with the ANSITerminal Library
+* *2 hour* Success to Change the substitution to envirnment lookup
+* *2 hour* Success to Add more opratiton and update steps_printer
+* *2 hour* Success to update arithmetic operation and fix some bugs
+* *1 hour* Success to Add test fuction
