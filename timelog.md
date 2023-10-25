@@ -140,3 +140,15 @@
 * *2 hour* Success to Add more opratiton and update steps_printer
 * *2 hour* Success to update arithmetic operation and fix some bugs
 * *1 hour* Success to Add test fuction
+
+### 24 Oct 2023
+
+* *2 hour* Add “lambda” and “seq”generation
+* *3 hour* Add function call each other
+* *3 hour* Create standard output and add “-s” mode
+
+### 25 Oct 2023
+
+* *1 hour* Reconstruct output controller, add “intToString”
+* *2 hour* Add “rand”,“slepp”, “concat” generation
+* *1 hour* Add “inl” and “inr” generation
