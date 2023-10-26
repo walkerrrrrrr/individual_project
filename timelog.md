@@ -152,3 +152,8 @@
 * *1 hour* Reconstruct output controller, add “intToString”
 * *2 hour* Add “rand”,“slepp”, “concat” generation
 * *1 hour* Add “inl” and “inr” generation
+
+### 26 Oct 2023
+
+* *1 hour* Meeting
+* *0.5 hour* Organize meeting notes
