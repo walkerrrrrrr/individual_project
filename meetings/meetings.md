@@ -38,6 +38,10 @@
     * How to add new code in the repository "mbcheck".
     * Also discussed some syntax (syntax) of the Pat language.
 * **Week 6**
+  * 1:30PM on Thursday
+  * Meeting content:
+    * Discussed the keywords of "Case" "Pair".
+    * Discussed the Reduction rules of the rest in Pat, like "new" "spawn"...
 * **Week 7**
 * **Week 8**
 * **Week 9**
