@@ -43,6 +43,7 @@
   * Write more code in CEK machine(like function/if/case)
   * combine it with Pat Language
 * **Week 6**
+  * Continue to write codes for generator in Pat language
 * **Week 7**
 * **Week 8**
 * **Week 9**
