@@ -158,12 +158,12 @@
 * *1 hour* Meeting
 * *0.5 hour* Organize meeting notes
 
-
-## Week 7
-
 ### 29 Oct 2023
 
 * *2 hour* Add LetPair and "Case"
+
+
+## Week 7
 
 ### 30 Oct 2023
 
