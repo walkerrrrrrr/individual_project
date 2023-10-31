@@ -157,3 +157,19 @@
 
 * *1 hour* Meeting
 * *0.5 hour* Organize meeting notes
+
+
+## Week 7
+
+### 29 Oct 2023
+
+* *2 hour* Add LetPair and "Case"
+
+### 30 Oct 2023
+
+* *6 hour* Reconstruct environment type and add “new”
+
+### 31 Oct 2023
+
+* *6 hour* Process “spawn” with process_scheduling
+* *1 hour* Add pretty print for PID
