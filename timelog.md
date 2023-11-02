@@ -173,3 +173,8 @@
 
 * *6 hour* Process “spawn” with process_scheduling
 * *1 hour* Add pretty print for PID
+
+### 02 Nov 2023
+
+* *1 hour* Meeting
+* *0.5 hour* Organize meeting notes
