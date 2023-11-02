@@ -45,6 +45,7 @@
 * **Week 6**
   * Continue to write codes for generator in Pat language
 * **Week 7**
+  * Write the core part of generator in the Pat(mailbox, concurrent)
 * **Week 8**
 * **Week 9**
 * **Week 10**
