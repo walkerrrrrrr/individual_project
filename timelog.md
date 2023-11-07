@@ -178,3 +178,14 @@
 
 * *1 hour* Meeting
 * *0.5 hour* Organize meeting notes
+
+### 05 Nov 2023
+
+* *4 hour* Add mailbox structure and “send”
+  
+## Week 8
+
+### 30 Oct 2023
+
+* *7 hour* Add “Guard” and fix some bugs
+* *3 hour* Fix some bugs and break the generator into two parts
