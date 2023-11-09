@@ -43,6 +43,14 @@
     * Discussed the keywords of "Case" "Pair".
     * Discussed the Reduction rules of the rest in Pat, like "new" "spawn"...
 * **Week 7**
+  * 1:30PM on Thursday
+  * Meeting content:
+    * Discussed the solution of the problems
+      * Is free just removing interface from env in that process?
+      * How can I tell if I need to free a mailbox, I mean how do I know that other processes don't have a reference to
+      * How should fail be added?
+      * How to pass the mailbox bound from the current process to the new process that spawns
+    * Discussed the "free" in the Pat
 * **Week 8**
 * **Week 9**
 * **Week 10**
