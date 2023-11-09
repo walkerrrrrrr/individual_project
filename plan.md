@@ -47,6 +47,9 @@
 * **Week 7**
   * Write the core part of generator in the Pat(mailbox, concurrent)
 * **Week 8**
+  * Try to finish the part of "Block" of  mailbox 
+  * Add the "Mailbox" type
+  * Try to figure out the "free"(garbage collection) 
 * **Week 9**
 * **Week 10**
 * **Week 11 [PROJECT WEEK]**
