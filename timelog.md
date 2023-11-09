@@ -185,7 +185,21 @@
   
 ## Week 8
 
-### 30 Oct 2023
+### 06 Oct 2023
 
 * *7 hour* Add “Guard” and fix some bugs
 * *3 hour* Fix some bugs and break the generator into two parts
+
+### 07 Oct 2023
+
+* *8 hour* Fix the bugs from "Guard"
+
+### 08 Oct 2023
+
+* *8 hour* Continue fix the bugs from "Guard"
+* *2 hour* Fix bugs of "Mailbox"
+
+### 09 Nov 2023
+
+* *1 hour* Meeting
+* *0.5 hour* Organize meeting notes
