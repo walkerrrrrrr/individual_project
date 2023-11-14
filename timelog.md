@@ -203,3 +203,26 @@
 
 * *1 hour* Meeting
 * *0.5 hour* Organize meeting notes
+
+### 10 Nov 2023
+
+* *8 hour* Add checker.ml and fix lots of bugs
+
+### 11 Nov 2023
+
+* *4 hour* Fix bugs
+
+### 12 Nov 2023
+
+* *3 hour* Add block process fuction
+
+## Week 9
+
+### 13 Oct 2023
+
+* *5 hour* Add FreeMailBox and deal with the “free”
+* *3 hour* Fix a bug of sending message to mailbox
+            
+### 14 Oct 2023
+
+* *5 hour* Fix a bug of “free” mailbox
