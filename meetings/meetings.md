@@ -52,6 +52,11 @@
       * How to pass the mailbox bound from the current process to the new process that spawns
     * Discussed the "free" in the Pat
 * **Week 8**
+  * 4:30PM on Wednesday
+  * Meeting content:
+    * Discussed the unique name of interface
+    * Discussed the further improvement of "free"
+    * Discussed the structure of the mailbox(The data structure of inbox)
 * **Week 9**
 * **Week 10**
 * **Week 11 [PROJECT WEEK]**
