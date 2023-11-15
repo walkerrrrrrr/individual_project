@@ -51,6 +51,10 @@
   * Add the "Mailbox" type
   * Try to figure out the "free"(garbage collection) 
 * **Week 9**
+  * Change mailbox type and unique name
+  * Change the structure of the mailbox(The data structure of inbox)
+  * Evaluate all of the Pat test
+  * Try to reconstruct of the "free"
 * **Week 10**
 * **Week 11 [PROJECT WEEK]**
 * **Week 12 [PROJECT WEEK]** Status report submitted.
