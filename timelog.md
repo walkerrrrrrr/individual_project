@@ -226,3 +226,8 @@
 ### 14 Oct 2023
 
 * *5 hour* Fix a bug of “free” mailbox
+
+### 15 Nov 2023
+
+* *1 hour* Meeting
+* *0.5 hour* Organize meeting notes
