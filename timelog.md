@@ -231,3 +231,17 @@
 
 * *1 hour* Meeting
 * *0.5 hour* Organize meeting notes
+
+### 19 Nov 2023
+
+* *2 hour* Try to modify "Mailbox" type
+
+### 20 Nov 2023
+
+* *3 hour* Change the structure of the mailbox(mailbox_map : (RuntimeName.t,message list))
+
+* *1 hour* Change the structure of the blocked process(blocked_processes : (RuntimeName.t,process)).
+
+* *1 hour* Fix all of the error related the new mailbox type
+
+* *4 hour*  Fix bugs and Passed all programe example
