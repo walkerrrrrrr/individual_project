@@ -56,6 +56,7 @@
   * Evaluate all of the Pat test
   * Try to reconstruct of the "free"
 * **Week 10**
+  * Try to finish the initial garbage collection function
 * **Week 11 [PROJECT WEEK]**
 * **Week 12 [PROJECT WEEK]** Status report submitted.
 
