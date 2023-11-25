@@ -247,3 +247,25 @@
 * *1 hour* Fix all of the error related the new mailbox type
 
 * *4 hour*  Fix bugs and Passed all programe example
+
+### 21 Nov 2023
+
+* *10 hour* Try to add garbage collection function
+
+### 22 Nov 2023
+
+* *8 hour* Try to fix the bugs of garbage collection function
+
+### 23 Nov 2023
+
+* *1 hour* Meeting
+* *0.5 hour* Organize meeting notes
+* *5 hour* Try to reconstruct the garbage collection function
+
+### 24 Nov 2023
+
+* *10 hour* Continue to construct the garbage collection function
+
+### 25 Nov 2023
+
+* *10 hour* Fix the bugs of new garbage collection function, Finished:)
