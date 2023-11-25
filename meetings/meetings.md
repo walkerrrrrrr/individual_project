@@ -58,6 +58,9 @@
     * Discussed the further improvement of "free"
     * Discussed the structure of the mailbox(The data structure of inbox)
 * **Week 9**
+  * 1:30PM on Thursday
+  * Meeting content:
+    * Discussed the mind map of garbage collection (free guard)
 * **Week 10**
 * **Week 11 [PROJECT WEEK]**
 * **Week 12 [PROJECT WEEK]**
