@@ -269,3 +269,9 @@
 ### 25 Nov 2023
 
 * *10 hour* Fix the bugs of new garbage collection function, Finished:)
+
+## Week 11
+
+### 27 Nov 2023
+
+* *5 hour* Try to update garbage collection algorithm
