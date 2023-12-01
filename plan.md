@@ -58,6 +58,7 @@
 * **Week 10**
   * Try to finish the initial garbage collection function
 * **Week 11 [PROJECT WEEK]**
+  * Continue to optimise "Free" function
 * **Week 12 [PROJECT WEEK]** Status report submitted.
 
 ## Winter break
