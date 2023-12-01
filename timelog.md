@@ -70,7 +70,7 @@
 
 ### 05 Oct 2023
 
-* *1 hour* Meeting
+* *0.5 hour* Meeting
 * *1 hour* Organize meeting notes
 
 ## Week 4
@@ -91,7 +91,7 @@
 
 ### 12 Oct 2023
 
-* *1 hour* Meeting
+* *0.5 hour* Meeting
 
 ### 13 Oct 2023
 
@@ -113,7 +113,7 @@
 
 ### 19 Oct 2023
 
-* *1 hour* Meeting
+* *0.5 hour* Meeting
 * *0.5 hour* Organize meeting notes
 
 ### 20 Oct 2023
@@ -155,7 +155,7 @@
 
 ### 26 Oct 2023
 
-* *1 hour* Meeting
+* *0.5 hour* Meeting
 * *0.5 hour* Organize meeting notes
 
 ### 29 Oct 2023
@@ -176,7 +176,7 @@
 
 ### 02 Nov 2023
 
-* *1 hour* Meeting
+* *0.5 hour* Meeting
 * *0.5 hour* Organize meeting notes
 
 ### 05 Nov 2023
@@ -201,7 +201,7 @@
 
 ### 09 Nov 2023
 
-* *1 hour* Meeting
+* *0.5 hour* Meeting
 * *0.5 hour* Organize meeting notes
 
 ### 10 Nov 2023
@@ -229,7 +229,7 @@
 
 ### 15 Nov 2023
 
-* *1 hour* Meeting
+* *0.5 hour* Meeting
 * *0.5 hour* Organize meeting notes
 
 ### 19 Nov 2023
@@ -258,7 +258,7 @@
 
 ### 23 Nov 2023
 
-* *1 hour* Meeting
+* *0.5 hour* Meeting
 * *0.5 hour* Organize meeting notes
 * *5 hour* Try to reconstruct the garbage collection function
 
@@ -275,3 +275,12 @@
 ### 27 Nov 2023
 
 * *5 hour* Try to update garbage collection algorithm
+
+### 28 Nov 2023
+
+* *8 hour* Still try to update garbage collection algorithm, failed:(
+
+### 30 Nov 2023
+
+* *0.5 hour* Meeting
+* *0.5 hour* Organize meeting notes
