@@ -62,6 +62,9 @@
   * Meeting content:
     * Discussed the mind map of garbage collection (free guard)
 * **Week 10**
+  * 3:30PM on Thursday
+  * Meeting content:
+    * Discussed the feasibility of the reference counting.
 * **Week 11 [PROJECT WEEK]**
 * **Week 12 [PROJECT WEEK]**
 
