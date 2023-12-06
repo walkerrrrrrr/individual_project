@@ -284,3 +284,13 @@
 
 * *0.5 hour* Meeting
 * *0.5 hour* Organize meeting notes
+
+## Week 12
+
+### 04 Dec 2023
+
+* *5 hour* Learn the some algorithm of the garbage collection
+
+### 05 Dec 2023
+
+* *8 hour* Learn the method of the Perceus (Garbage Free Reference Counting with Reuse)
