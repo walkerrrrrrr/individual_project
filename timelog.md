@@ -299,3 +299,15 @@
 
 * *0.5 hour* Add run time in generator part
 * *6 hour* Try to modify the garbage collection part by reference counting
+
+### 07 Dec 2023
+
+* *8 hour* Countinue to modify the garbage collection part by reference counting
+
+### 09 Dec 2023
+
+* *9 hour* Reduce the gc complexity and fix some bugs
+
+### 10 Dec 2023
+
+* *4 hour* Passed all test now after modify the algorithm of gc :)
