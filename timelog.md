@@ -294,3 +294,8 @@
 ### 05 Dec 2023
 
 * *8 hour* Learn the method of the Perceus (Garbage Free Reference Counting with Reuse)
+
+### 06 Dec 2023
+
+* *0.5 hour* Add run time in generator part
+* *6 hour* Try to modify the garbage collection part by reference counting
