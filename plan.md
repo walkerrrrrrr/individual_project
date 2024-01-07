@@ -59,13 +59,16 @@
   * Try to finish the initial garbage collection function
 * **Week 11 [PROJECT WEEK]**
   * Continue to optimise "Free" function
-* **Week 12 [PROJECT WEEK]** Status report submitted.
+* **Week 12 [PROJECT WEEK]**
+  * Continue to optimise "Free" function
+  * Status report submitted.
 
 ## Winter break
 
 ## Spring Semester
 
 * **Week 13**
+  * Continue to research "Free" function with mailbox counting
 * **Week 14**
 * **Week 15**
 * **Week 16**
