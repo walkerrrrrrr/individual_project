@@ -66,8 +66,11 @@
   * Meeting content:
     * Discussed the feasibility of the reference counting.
 * **Week 11 [PROJECT WEEK]**
+  * No
 * **Week 12 [PROJECT WEEK]**
-
+  * 12:30PM on Friday 
+  * Meeting content:
+    * Continue to solve the mailbox counting problem.
 ## Winter break
 
 ## Spring Semester
