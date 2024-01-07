@@ -311,3 +311,10 @@
 ### 10 Dec 2023
 
 * *4 hour* Passed all test now after modify the algorithm of gc :)
+
+## Week 13
+
+### 15 Dec 2023
+
+* *0.5 hour* Meeting
+* *0.5 hour* Organize meeting notes
