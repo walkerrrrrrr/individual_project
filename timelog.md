@@ -318,3 +318,10 @@
 
 * *0.5 hour* Meeting
 * *0.5 hour* Organize meeting notes
+
+## Week 14
+
+### 09 Jan 2024
+
+* *0.5 hour* Meeting
+* *1 hour* Organize meeting notes
