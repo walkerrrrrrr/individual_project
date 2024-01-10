@@ -76,6 +76,23 @@
 ## Spring Semester
 
 * **Week 13**
+  * 12:15PM on Tuesday 
+  * Meeting content:
+    * Testing and Evaluation:
+      * Correctness Testing: Validate all examples to ensure accurate results, verifying what occurs during runtime.
+      * Runtime Testing (Benchmarking): Measure execution times for tasks like Fibonacci or k-fork calculations, and compare times with and without garbage collection (GC).
+	* Writing Guidance for a Self-Contained Dissertation:
+  		* Introduction: Present the motivation and background for your study, including the design of the Pat language.
+  		* Channels and Actors: Describe these concepts and explain the need for mailbox types in concurrent scenarios.
+  		* CEK Explanation: Take time to elaborate on what the CEK mechanism is and how it operates.
+  		* Scheduling: Potentially include code demonstrations, emphasizing the implementation of mailbox communication and the handling of free variables.
+		* Typechecker Overview: Briefly state what the type system allows you to do, the support it offers, without delving into deep analysis.
+	* Structure of the Dissertation:
+  		* Introduction: Set the stage for the research question and necessity of the study.
+  		* Background: Dive deeper into the related work and theoretical foundation.
+  		* What You Did: Detail your research methods, experimental design, and implementation steps.
+  		* Analysis: Analyze the data and results collected, discussing their significance.
+      * Conclusion: Recapitulate the main findings of the study, its contributions to the field, and potential future work.
 * **Week 14**
 * **Week 15**
 * **Week 16**
