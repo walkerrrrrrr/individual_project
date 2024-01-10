@@ -68,7 +68,7 @@
 ## Spring Semester
 
 * **Week 13**
-  * Continue to research "Free" function with mailbox counting
+  * Finish the general structure of the Thesis.
 * **Week 14**
 * **Week 15**
 * **Week 16**
