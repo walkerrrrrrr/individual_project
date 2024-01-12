@@ -325,3 +325,11 @@
 
 * *0.5 hour* Meeting
 * *1 hour* Organize meeting notes
+
+### 11 Jan 2024
+
+* *2 hour* Write the structure of the dissertation
+  
+### 12 Jan 2024
+
+* *2 hour* Continue to write the structure of the dissertation
