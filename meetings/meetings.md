@@ -94,6 +94,9 @@
   		* Analysis: Analyze the data and results collected, discussing their significance.
       * Conclusion: Recapitulate the main findings of the study, its contributions to the field, and potential future work.
 * **Week 14**
+  * 12:00PM on Wednesday
+  * Meeting content:
+  	* Some advice of the structure, highlighted the needs analysis  
 * **Week 15**
 * **Week 16**
 * **Week 17**
