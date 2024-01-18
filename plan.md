@@ -70,6 +70,8 @@
 * **Week 13**
   * Finish the general structure of the Thesis.
 * **Week 14**
+  * Modify the structure
+  * Begin to write dissertation
 * **Week 15**
 * **Week 16**
 * **Week 17**
