@@ -333,3 +333,14 @@
 ### 12 Jan 2024
 
 * *2 hour* Continue to write the structure of the dissertation
+
+## Week 15
+
+### 17 Jan 2024
+
+* *0.5 hour* Meeting
+* *0.5 hour* Organize meeting notes
+
+### 18 Jan 2024
+
+* *2 hour* modify the structure
