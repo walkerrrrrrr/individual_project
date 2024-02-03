@@ -73,7 +73,9 @@
   * Modify the structure
   * Begin to write dissertation
 * **Week 15**
+  * write the introduction and background part of the dissertation
 * **Week 16**
+  * continue to write the introduction and background part of the dissertation
 * **Week 17**
 * **Week 19**
 * **Week 20**
