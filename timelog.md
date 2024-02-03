@@ -344,3 +344,19 @@
 ### 18 Jan 2024
 
 * *2 hour* modify the structure
+
+## Week 16
+
+### 27 Jan 2024
+
+* *8 hour* write the introduction and background part of the dissertation
+
+### 28 Jan 2024
+
+* *8 hour* write the introduction and background part of the dissertation
+
+## Week 17
+
+### 03 Feb 2024
+
+* *8 hour* Continue to write the introduction and background part of the dissertation
