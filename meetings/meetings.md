@@ -98,7 +98,9 @@
   * Meeting content:
   	* Some advice of the structure, highlighted the needs analysis  
 * **Week 15**
+  * No
 * **Week 16**
+  * No
 * **Week 17**
 * **Week 19**
 * **Week 20**
