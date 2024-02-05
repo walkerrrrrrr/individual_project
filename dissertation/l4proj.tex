@@ -81,92 +81,69 @@
 \pagenumbering{arabic} 
 
 
-Why should the reader care about what are you doing and what are you actually doing?
-\section{Guidance}
+\section{Parallel Processing and Distributed Systems}
 
-\textbf{Motivate} first, then state the general problem clearly. 
+Concurrency and distributed systems are becoming increasingly important in modern computational science, especially in the context of cloud computing and big data. Concurrency refers to the ability of a system to handle multiple tasks at the same time, which allows efficient use of computational resources. For example, by processing hundreds or even thousands of client requests in parallel, modern web servers are able to significantly increase response time and system throughput. Distributed systems, on the other hand, spread the workload by distributing tasks across multiple compute nodes, which is especially critical for processing large-scale data sets. Google's Bigtable and Apache Hadoop's Distributed File System (HDFS) are excellent examples of distributed computing technologies that can handle petabytes of data and support complex data analysis tasks.
+	
+The combination of concurrency and distributed systems not only greatly improves the efficiency of task processing, but also enhances the reliability and scalability of the system. Taking distributed databases as an example, data is replicated on multiple nodes, ensuring that even if some of the nodes fail, the entire system can still maintain normal operation. In addition, this technology supports the dynamic adjustment of computing resources according to actual demand, a feature that is widely used on cloud service platforms such as Amazon Web Services and Microsoft Azure.
 
-\section{Writing guidance}
-\subsection{Who is the reader?}
+\section{Challenges}
 
-This is the key question for any writing. Your reader:
+While these systems are capable of handling unprecedented amounts of data and computational tasks, they also introduce a new set of challenges. 
 
-\begin{itemize}
-    \item
-    is a trained computer scientist: \emph{don't explain basics}.
-    \item
-    has limited time: \emph{keep on topic}.
-    \item
-    has no idea why anyone would want to do this: \emph{motivate clearly}
-    \item
-    might not know \emph{anything} about your project in particular:
-    \emph{explain your project}.
-    \item
-    but might know precise details and check them: \emph{be precise and
-    strive for accuracy.}
-    \item
-    doesn't know or care about you: \emph{personal discussions are
-    irrelevant}.
-\end{itemize}
+\subsection{Thread Deadlock}
 
-Remember, you will be marked by your supervisor and one or more members
-of staff. You might also have your project read by a prize-awarding
-committee or possibly a future employer. Bear that in mind.
+A commonly faced problem in concurrent programming is thread deadlock, a situation where multiple threads are unable to move forward because they are waiting for each other to release resources. As an example, a deadlock is caused when two threads each have some resources locked and are both waiting for the other to release the resources they hold. This situation is particularly common in database transaction processing and operating system resource allocation, and seriously affects the stability and efficiency of the programme.
 
-\subsection{References and style guides}
-There are many style guides on good English writing. You don't need to
-read these, but they will improve how you write.
 
-\begin{itemize}
-    \item
-    \emph{How to write a great research paper} \cite{Pey17} (\textbf{recommended}, even though you aren't writing a research paper)
-    \item
-    \emph{How to Write with Style} \cite{Von80}. Short and easy to read. Available online.
-    \item
-    \emph{Style: The Basics of Clarity and Grace} \cite{Wil09} A very popular modern English style guide.
-    \item
-    \emph{Politics and the English Language} \cite{Orw68}  A famous essay on effective, clear writing in English.
-    \item
-    \emph{The Elements of Style} \cite{StrWhi07} Outdated, and American, but a classic.
-    \item
-    \emph{The Sense of Style} \cite{Pin15} Excellent, though quite in-depth.
-\end{itemize}
+\subsection{Communication Mismatch}
 
-\subsubsection{Citation styles}
+Communication mismatch is another critical issue in distributed systems. Nodes in a distributed environment need to exchange information frequently, and any inconsistency in communication protocols or data formats can lead to major failures. Taking microservice architecture as an example, if the communication interfaces between services are not clearly defined or fail to maintain compatibility during version updates, it may lead to the functional failure of the whole system. This is particularly noticeable in fast iterative and multi-team projects and requires special attention.
 
-\begin{itemize}
-\item If you are referring to a reference as a noun, then cite it as: ``\citet{Orw68} discusses the role of language in political thought.''
-\item If you are referring implicitly to references, use: ``There are many good books on writing \citep{Orw68, Wil09, Pin15}.''
-\end{itemize}
+\section{Research Goals}
 
-There is a complete guide on good citation practice by Peter Coxhead available here: \url{http://www.cs.bham.ac.uk/~pxc/refs/index.html}. 
-If you are unsure about how to cite online sources, please see this guide: \url{https://student.unsw.edu.au/how-do-i-cite-electronic-sources}.
+The aim of this research is to develop a runtime environment generator specifically designed to support a new programming language, the Pat language.The Pat language addresses the programming challenges of concurrency and distributed systems, and by introducing advanced concurrent programming primitives and a unique mailbox type system, it aims to provide developers with a more intuitive and concise way to handle concurrent tasks and communication flows. While a type checker for the Pat language has been implemented, an efficient execution environment has yet to be developed. The main goal of this project is to build such an execution environment so that developers can easily write, test and run programmes written in the Pat language.
 
-\subsection{Plagiarism warning}
-
-\begin{highlight_title}{WARNING}
-    
-    If you include material from other sources without full and correct attribution, you are commiting plagiarism. The penalties for plagiarism are severe.
-    Quote any included text and cite it correctly. Cite all images, figures, etc. clearly in the caption of the figure.
-\end{highlight_title}
+This runtime environment generator should not only satisfy the runtime requirements of a general programming language, such as memory management and exception handling, but should also focus on the specific needs of concurrent and distributed computing. By providing such a tool, the Pat language will become a powerful support for the research and development of concurrent and distributed systems, which not only promotes the wide application and continuous development of the Pat language, but also provides new perspectives and methods for exploring problems in the field of concurrent programming, and establishes a solid foundation for future technological innovations.
 
 
 %==================================================================================================================================
 \chapter{Background}
-What did other people do, and how is it relevant to what you want to do?
-\section{Guidance}
-\begin{itemize}    
-    \item
-      Don't give a laundry list of references.
-    \item
-      Tie everything you say to your problem.
-    \item
-      Present an argument.
-    \item Think critically; weigh up the contribution of the background and put it in context.    
-    \item
-      \textbf{Don't write a tutorial}; provide background and cite
-      references for further information.
-\end{itemize}
+
+\section{Concurrency}
+Modern concurrent programming uses two main paradigms: Message-Passing Concurrency and Shared-Memory Concurrency, which use different strategies and mechanisms to handle concurrent tasks.
+
+\subsection{Shared Memory}
+Shared-memory concurrency model allows multiple processes or threads to share the same memory space and communicate through this shared space. While this approach improves efficiency in certain scenarios, it also introduces data consistency and synchronisation issues. In the shared memory model, developers must carefully handle locking mechanisms and synchronisation issues to prevent deadlocks and race conditions from occurring.Java and C++ are examples of languages that support this concurrency model.
+
+\subsection{Message Passing}
+In contrast, Message-passing Concurrency is a programming paradigm that enables communication and coordination by sending and receiving messages between processes or threads. The main advantage of this approach is that it provides a clear mechanism to avoid data contention and conflict, as data is passed through message exchange rather than sharing. In this model, each process or thread has a separate memory space and all communication takes place through well-defined message interfaces, but additional overhead is introduced[5].The Erlang language and the Akka framework are excellent representatives of this model.
+
+Although message-passing concurrency and shared-memory concurrency each have their own strengths, message-passing concurrency provides a clearer and more controlled approach to dealing with the problems of distributed systems and reducing complex synchronisation issues. Therefore, the message-passing concurrency paradigm was chosen in the design of the Pat language in order to provide a safer and more intuitive approach to concurrent programming.
+
+\section{Communication Mechanisms}
+With its clear communication mechanism, the message-passing concurrency model provides the Pat language with an effective means to avoid data conflicts and competition, which significantly enhances the advantages of concurrent program design. On this basis, by introducing two high-level abstractions, Channel and Actors, not only the expressive ability of message-passing concurrency is further enhanced, but also the manageability and extensibility of concurrent programs are significantly improved (Figure \ref{fig:channel_actor}). Nevertheless, both models have revealed some problems in practice.
+
+\subsection{Channel}
+The Channels model, typically found in languages such as Go, implements inter-process communication through named channels, as depicted in Figure \ref{fig:channel_actor}.a. Processes or threads communicate and coordinate with each other by passing messages through these named channels.The main advantage of Channels is their flexibility and simple type system, which makes the model easy to understand and deploy, especially in situations where communication patterns change frequently. However, Channels can raise complex synchronisation issues, such as data contention and deadlocks when multiple processes access the same channel at the same time without proper synchronisation mechanisms.
+
+\subsection{Actor}
+The Actors model, as opposed to Channels, is implemented in Erlang or Elixir, where each Actor acts as an addressable process with a single message queue or mailbox for receiving messages (Figure \ref{fig:channel_actor}.b). Each Actor acts as an independent entity and interacts with each other through asynchronous message passing.The strength of the Actors model lies in its natural support for distributed computing, especially in terms of fault tolerance and system reliability. The independence of each Actor makes the model particularly suitable for building large-scale, scalable distributed applications. However, the Actors model faces its own challenges, especially in message management. Since each Actor's mailbox may receive any type of message, runtime errors may be raised, such as receiving a message type that cannot be processed. In addition, performance may become problematic when managing a large number of fine-grained Actors, especially in application scenarios that require fast response and efficient processing of a large number of messages.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{images/channel_actor.png}    
+    \caption{Figure (a) illustrates the Channels model with concurrent units communicating via message-passing channels. Figure (b) shows the Actors model where each Actor independently processes messages from its queue.
+    }
+    \label{fig:channel_actor} 
+\end{figure}
+
+\subsection{Pat's Solution}
+To cope with these challenges, the introduction of Actor type systems has become an important advancement. In this context, the design of the Pat language introduces a new solution based on the Actor model along with a mailbox behavioural type system for the first time in a behavioural type system at the programming language level.
+
+
+
+
 
 %==================================================================================================================================
 \chapter{Analysis/Requirements}
