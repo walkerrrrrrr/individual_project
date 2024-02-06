@@ -360,3 +360,7 @@
 ### 03 Feb 2024
 
 * *8 hour* Continue to write the introduction and background part of the dissertation
+
+### 04 Feb 2024
+
+* *8 hour* Continue to write the introduction and background part of the dissertation
