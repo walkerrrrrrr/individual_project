@@ -77,6 +77,8 @@
 * **Week 16**
   * continue to write the introduction and background part of the dissertation
 * **Week 17**
+  * Modify the intro part and background part by the advices
+  * Continue to write
 * **Week 19**
 * **Week 20**
 * **Week 21**
