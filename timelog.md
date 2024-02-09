@@ -364,3 +364,15 @@
 ### 04 Feb 2024
 
 * *8 hour* Continue to write the introduction and background part of the dissertation
+
+## Week 18
+
+### 07 Feb 2024
+
+* *0.5 hour* Meeting
+* *0.5 hour* Organize meeting notes
+
+### 08 Feb 2024
+
+* *4 hour* Add some example in introduction part
+
