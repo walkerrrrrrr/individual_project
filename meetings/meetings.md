@@ -102,6 +102,9 @@
 * **Week 16**
   * No
 * **Week 17**
+  * 12:00PM on Wednesday
+  * Meeting content:
+  	* Some advice of the introduction and background part
 * **Week 19**
 * **Week 20**
 * **Week 21**
