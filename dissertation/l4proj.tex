@@ -81,11 +81,32 @@
 \pagenumbering{arabic} 
 
 
-\section{Parallel Processing and Distributed Systems}
+\section{Concurrency and Distributed Systems}
 
-Concurrency and distributed systems are becoming increasingly important in modern computational science, especially in the context of cloud computing and big data. Concurrency refers to the ability of a system to handle multiple tasks at the same time, which allows efficient use of computational resources. For example, by processing hundreds or even thousands of client requests in parallel, modern web servers are able to significantly increase response time and system throughput. Distributed systems, on the other hand, spread the workload by distributing tasks across multiple compute nodes, which is especially critical for processing large-scale data sets. Google's Bigtable and Apache Hadoop's Distributed File System (HDFS) are excellent examples of distributed computing technologies that can handle petabytes of data and support complex data analysis tasks.
-	
-The combination of concurrency and distributed systems not only greatly improves the efficiency of task processing, but also enhances the reliability and scalability of the system. Taking distributed databases as an example, data is replicated on multiple nodes, ensuring that even if some of the nodes fail, the entire system can still maintain normal operation. In addition, this technology supports the dynamic adjustment of computing resources according to actual demand, a feature that is widely used on cloud service platforms such as Amazon Web Services and Microsoft Azure.
+Concurrency and distributed systems are becoming increasingly important in modern computational science, especially in the context of cloud computing and big data. Sutter and Larus (2005) emphasize that with the proliferation of multicore processors, the software industry needs to adopt new tools and ways of thinking in order to fully utilize the potential of multicore processors. Concurrency refers to the ability of a system to handle multiple tasks at the same time, which allows efficient use of computational resources. For example, by processing hundreds or even thousands of client requests in parallel, modern Web servers are able to dramatically improve response times and system throughput. This shift in demand requires mainstream software development to stop ignoring concurrency, a challenge that requires developers to master the design and implementation of concurrent programs (Sutter & Larus, 2005).
+    
+The design of Multiplayer Online Role-Playing Game (MMORPG) servers, such as exemplified by the World of Warcraft (Figure \ref{fig:WoWlogo}) demonstrates the value of concurrent programming in real-world applications, where the use of a client-server model and event-driven architecture enables asynchronous processing of player requests. Kim and Kim's (2019) study, by utilizing Input/Output Completion Port (IOCP) and multithreading techniques, has demonstrated methods to effectively improve server performance, handle concurrent connections and employ fine-grained locking mechanisms for access control of shared resources to reduce the risk of deadlock and effectively improve system responsiveness and throughput.
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[t]{0.35\textwidth}
+        \centering
+        \includegraphics[width=\linewidth,height=5cm,keepaspectratio]{images/WoWlogo.png}
+        \caption{World of Warcraft}
+        \label{fig:WoWlogo}
+    \end{minipage}
+    \quad
+    \begin{minipage}[t]{0.30\textwidth}
+        \centering
+        \includegraphics[width=\linewidth,height=5cm,keepaspectratio]{images/PokemonGo.jpeg}
+        \caption{Pokemon GO}
+        \label{fig:PokemonGo}
+    \end{minipage}
+\end{figure}
+
+On the other hand, Distributed systems achieve workload decentralization by assigning tasks across multiple compute nodes, which is especially critical for processing large-scale data sets. For example, Google's Bigtable and Apache Hadoop's Distributed File System (HDFS) are capable of handling petabytes of data and supporting complex data analysis tasks. In this context, the distributed architecture of Pokemon GO(Figure \ref{fig:PokemonGo}) demonstrates the efficient ability of distributed systems to manage and synchronize millions of players globally, through a network of servers deployed in multiple locations around the world, and the use of geo-distributed database technology to decentralize the storage of data based on the geographic location of players, showing the importance of this technology in dealing with large-scale, real-time interactive applications.
+		
+The combination of concurrency and distributed systems not only greatly improves the efficiency of task processing, but also enhances the reliability and scalability of the system. In the case of distributed databases, for example, data is replicated across multiple nodes, ensuring that the entire system can maintain normal operation even if some of the nodes fail. In addition, this technology supports the dynamic adjustment of computing resources according to actual demand, a feature that is widely used in cloud service platforms such as Amazon Web Services and Microsoft Azure. This exposition not only demonstrates the key role of concurrent programming in ensuring high availability and optimizing user experience, but also provides an important reference for designing efficient concurrent and distributed systems.
 
 \section{Challenges}
 
@@ -133,7 +154,7 @@ The Actors model, as opposed to Channels, is implemented in Erlang or Elixir, wh
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{images/channel_actor.png}    
-    \caption{Figure (a) illustrates the Channels model with concurrent units communicating via message-passing channels. Figure (b) shows the Actors model where each Actor independently processes messages from its queue.
+    \caption{ (a) illustrates the Channels model with concurrent units communicating via message-passing channels. (b) shows the Actors model where each Actor independently processes messages from its queue. (Fowler et al. 2017)
     }
     \label{fig:channel_actor} 
 \end{figure}
@@ -142,7 +163,23 @@ The Actors model, as opposed to Channels, is implemented in Erlang or Elixir, wh
 To cope with these challenges, the introduction of Actor type systems has become an important advancement. In this context, the design of the Pat language introduces a new solution based on the Actor model along with a mailbox behavioural type system for the first time in a behavioural type system at the programming language level.
 
 
+\section{Behavioural Type System}
+Behavioural type system is a type system used in the field of concurrent and distributed programming to describe and manage system behaviour. This type system not only contains information about the type of data, but also extends to the description of program behaviour, such as message passing, inter-process communication patterns and protocol constraints. The core purpose of a behavioural type system is to improve the reliability and security of concurrent programs. By checking the behavioural patterns of a program at compile time, a behavioural type system ensures the correctness and stability of the program at runtime.
 
+\subsection{Mailbox Type}
+Mailbox types, a key part of the behavioural type system, were initially used in process algorithms to capture mainly mailbox contents as exchange regular expressions. Introduced by Ugo de'Liguoro and Luca Padovani in 2018 [3], they are intended to enhance the message-passing mechanism of programming languages based on the actor model. Mailbox types specify type annotations for each actor's mailbox, which define not only the types of messages that the mailbox can receive, but also detail expected behaviour patterns such as the order in which messages are sent and received. This careful type annotation enables strict checking of message delivery patterns, thus enabling precise control of complex communication behaviour and significant improvements in type safety in concurrent programming, avoiding problems such as protocol violations and deadlocks. The application of mailbox types, an innovative practice in the Pat language, brings significant improvements to the security and robustness of concurrent programs, opening up new perspectives and solutions in the field of concurrent programming.
+
+
+\section{Scheduling}
+Scheduling in computing systems refers to the strategic scheduling and management of the order in which jobs are executed. This process is a high-level strategic decision making aimed at optimising processes and computational tasks in terms of time and resource allocation. In a concurrent environment, it is the responsibility of the scheduler to determine the timing of execution of each task to ensure that processor resources are used efficiently while minimising the task completion time. In distributed systems, the scheduler's responsibility extends to task allocation across different compute nodes, aiming to maximise the utilisation efficiency of each node in the network. Regardless of the type of system, the fundamental purpose of scheduling is to improve the overall throughput capacity of the system. In this framework, control flow management techniques, such as CPS and CEK, provide execution-level support and implementation mechanisms for scheduling, enabling scheduling policies to be applied more flexibly and efficiently to complex computing tasks and system architectures.
+
+\subsection{CPS and CEK}
+Continuation Passing Style (CPS) is a high-level control flow management technique that operates by explicitly passing the unexecuted portion of a program, called a "continuation". In the functional programming paradigm, this approach allows a function not to return a result directly, but to continue execution by accepting another function (i.e., a "continue") and passing it control. This style is inherently suited to implementing non-blocking and asynchronous operations, and provides a great deal of flexibility in modern programming. Although CPS elegantly handles asynchronicity and non-blocking operations, it introduces the need for concurrent multi-process control and complex communication patterns in concurrent and distributed system applications. However, CPS applications may make the code structure appear more complex and rigid, which not only challenges the readability of the programme but also increases the maintenance cost.
+
+The Pat language, however, is dedicated to the problem of communication in concurrent and distributed systems, employing mailbox types as its core communication mechanism. In such systems, the communication process is often asynchronous, the order in which messages are delivered is uncertain, and multiple concurrent senders and receivers may be involved. In contrast to CPS, CEK-style abstract machines provide a more detailed division of programme state - Continuation, Environment and Control - through more detailed Explicit management provides a more structured and flexible framework for dealing with such complex communications. In the context of Pat language applications, where nested evaluation contexts and aliasing issues need to be considered, the CEK model demonstrates excellent adaptability and handling capabilities, making it ideal for supporting the features of the Pat language.
+
+\section{Implementing Pat in OCaml}
+The tool for implementing the Pat language is the use of the OCaml language. Because of its excellent functional programming features, powerful type system and pattern matching capabilities, these advantages make OCaml particularly suitable for developing compilers and dealing with concurrency. Compared to other programming languages, OCaml provides a more efficient and secure programming environment, showing its unique advantages especially in handling complex communications in concurrent and distributed systems.
 
 
 %==================================================================================================================================
