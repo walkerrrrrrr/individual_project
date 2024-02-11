@@ -82,7 +82,7 @@
 
 
 \section{Concurrency and Distributed Systems}
-\definecolor{mycolor}{RGB}{255,100,0} 
+
 Concurrency and distributed systems are becoming increasingly important in modern computational science, especially in the context of cloud computing and big data. \colorbox{yellow}{referenceHere[11]}Sutter and Larus (2005) emphasize that with the proliferation of multicore processors, the software industry needs to adopt new tools and ways of thinking in order to fully utilize the potential of multicore processors. Concurrency refers to the ability of a system to handle multiple tasks at the same time, which allows efficient use of computational resources. For example, by processing hundreds or even thousands of client requests in parallel, modern Web servers are able to dramatically improve response times and system throughput. This shift in demand requires mainstream software development to stop ignoring concurrency, a challenge that requires developers to master the design and implementation of concurrent programs (Sutter & Larus, 2005)\colorbox{yellow}{referenceHere[11]}.
     
 The design of Multiplayer Online Role-Playing Game (MMORPG) servers, such as exemplified by the \colorbox{yellow}{referenceHere[7]}World of Warcraft (Figure \ref{fig:WoWlogo}) demonstrates the value of concurrent programming in real-world applications, where the use of a client-server model and event-driven architecture enables asynchronous processing of player requests. \colorbox{yellow}{referenceHere[9]}Kim and Kim's (2019) study, by utilizing Input/Output Completion Port (IOCP) and multithreading techniques, has demonstrated methods to effectively improve server performance, handle concurrent connections and employ fine-grained locking mechanisms for access control of shared resources to reduce the risk of deadlock and effectively improve system responsiveness and throughput.
@@ -328,9 +328,50 @@ OCaml was chosen as the implementation language for the Pat language primarily b
 
 %==================================================================================================================================
 \chapter{Requirements}
-What is the problem that you want to solve, and how did you arrive at it?
-\section{Guidance}
-Make it clear how you derived the constrained form of your problem via a clear and logical process. 
+
+The purpose of this chapter is to provide a comprehensive requirements analysis of the project, including explicit functional and non-functional requirements. The detailed description of the project's core components provides clear guidance for the design and implementation of the project, ensuring that the final product will meet the intended quality standards and performance metrics.
+
+\section{Functional Requirements}
+In terms of functional requirements, we focus on the core functions that must be implemented by the interpreter, including syntax parsing, program state control, task scheduling, and memory management, to ensure the basic operation and execution efficiency of the interpreter.
+
+\subsection{Must Have}
+\textbf{Grammar parsing capability}: Must be able to accurately parse all the syntactic structures of the Pat language, including but not limited to variable declarations, control flow statements (e.g., if-else, switch), as well as support for basic data types (integers, strings).
+
+\textbf{Mailbox processing}: Realize the creation of mailboxes, message insertion, storage, retrieval and release functions.
+
+\textbf{Program state control}: Adopts CEK machine model to achieve precise control of the execution state of the Pat program to ensure the correct execution of program logic.
+
+\textbf{Task Scheduling}: Implements a round-robin-based task scheduling mechanism to achieve fair task scheduling and support parallel task creation and execution.
+
+\textbf{Memory management}: Integrate Garbage Collection mechanism to effectively manage memory usage and optimize resource utilization.
+
+\subsection{Should Have}
+\textbf{Execution flow printing}: In debug mode to provide the execution of step-by-step printing to assist developers to debug and understand the program execution process.
+
+\textbf{Error Handling Mechanism}: Design and implement a well-defined error handling mechanism to effectively manage exceptions and runtime errors.
+
+\subsection{Could Have}
+\textbf{Garbage collection optimization}: Research and implement optimized garbage collection mechanism to reduce the impact of execution time and improve execution efficiency.
+
+\textbf{Communication system enhancement}: Enhance the mailbox communication system to improve the efficiency and reliability of message delivery.
+
+\subsection{Won't Have}
+\textbf{Scheduling Algorithm Research}: Does not delve into other scheduling algorithms that might replace the polled scheduling approach such as EIO that has the capability of parallel IO operations. in order to focus on optimization of the current implementation.
+
+\section{Non-Functional Requirements}
+Non-functional requirements relate to the usability, and cross-platform compatibility of the interpreter to ensure that the interpreter not only meets the requirements in terms of functionality, but also provides a good user experience during use.
+
+\subsection{Must Have}
+\textbf{Cross-platform compatibility}: The interpreter should be able to run seamlessly on major operating systems including Windows, Linux, macOS to ensure wide availability.
+
+\subsection{Should Have}
+\textbf{Ease of use}: Design the interpreter to be friendly to novice users so that users can get started quickly.
+
+\subsection{Won't Have}
+\textbf{IDE Integration}: Plug-in support for popular IDEs (e.g. VS Code, IntelliJ) including syntax highlighting, code auto-completion, and quick jumps to definitions is not provided at this stage.
+
+\textbf{Debugging tools integration}: Not integrated debugging tools , including the lack of support for breakpoint settings , single-step execution and variable status view function .
+
 
 %==================================================================================================================================
 \chapter{Design}
