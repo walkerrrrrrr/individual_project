@@ -294,3 +294,94 @@ textfont=it,tableposition=above]{caption}
       \parsep=1pt plus 1pt
       \itemsep=\parsep}
 
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codebeige}{rgb}{1.0, 1.0, 0.9}
+
+\lstdefinestyle{patstyle}{
+    language=Scala,
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\bfseries,
+    commentstyle=\color{green},
+    stringstyle=\ttfamily, % Use this to style string literals
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=5pt,
+    backgroundcolor=\color{codebeige}, % Make sure you have defined color codebeige
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    xleftmargin=5em,
+    xrightmargin=5em,
+    frame=single,
+    rulecolor=\color{black},
+    tabsize=2,
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=true,
+    title=\lstname,
+    escapeinside={(*@}{@*)}, % for escaping to LaTeX
+    morekeywords={interface, def, guard, free, receive, print, let, spawn},
+    emph=[1]{Task,Thread,Compute,Query,Reply}, % Custom identifiers to be emphasized
+    emphstyle=[1]\color{red}, % Custom style for first set of emphasized identifiers
+    emph=[2]{produceTasks,consumeTasks,main},% Second set of emphasized words
+    emphstyle=[2]\color{blue}, % Style for second set of emphasized words
+}
+\definecolor{darkgreen}{rgb}{0.0, 0.5, 0.0}
+\lstdefinestyle{javastyle}{
+    language=java,
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green},
+    stringstyle=\color{darkgreen}, % Use this to style string literals
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=5pt,
+    backgroundcolor=\color{codebeige}, % Make sure you have defined color codebeige
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    xleftmargin=5em,
+    xrightmargin=5em,
+    frame=single,
+    rulecolor=\color{black},
+    tabsize=2,
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=true,
+    title=\lstname,
+    emph=[1]{Thread}, % Custom identifiers to be emphasized
+    emphstyle=[1]\color{red}, % Custom style for first set of emphasized identifiers
+    emph=[2]{lock1,lock2}, % Custom identifiers to be emphasized
+    emphstyle=[2]\textbf, % Custom style for first set of emphasized identifiers
+}
+
+\lstdefinestyle{erlangstyle}{
+    language=erlang,
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=5pt,
+    backgroundcolor=\color{codebeige}, % Make sure you have defined color codebeige
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    xleftmargin=5em,
+    xrightmargin=5em,
+    frame=single,
+    rulecolor=\color{black},
+    tabsize=2,
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=true,
+    title=\lstname,
+    emph=[1]{empty_task,queryable_task,client,computation}, % Custom identifiers to be emphasized
+    emphstyle=[1]\textbf, % Custom style for first set of emphasized identifiers
+}

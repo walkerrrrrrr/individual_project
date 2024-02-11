@@ -82,10 +82,10 @@
 
 
 \section{Concurrency and Distributed Systems}
-
-Concurrency and distributed systems are becoming increasingly important in modern computational science, especially in the context of cloud computing and big data. Sutter and Larus (2005) emphasize that with the proliferation of multicore processors, the software industry needs to adopt new tools and ways of thinking in order to fully utilize the potential of multicore processors. Concurrency refers to the ability of a system to handle multiple tasks at the same time, which allows efficient use of computational resources. For example, by processing hundreds or even thousands of client requests in parallel, modern Web servers are able to dramatically improve response times and system throughput. This shift in demand requires mainstream software development to stop ignoring concurrency, a challenge that requires developers to master the design and implementation of concurrent programs (Sutter & Larus, 2005).
+\definecolor{mycolor}{RGB}{255,100,0} 
+Concurrency and distributed systems are becoming increasingly important in modern computational science, especially in the context of cloud computing and big data. \colorbox{yellow}{referenceHere[11]}Sutter and Larus (2005) emphasize that with the proliferation of multicore processors, the software industry needs to adopt new tools and ways of thinking in order to fully utilize the potential of multicore processors. Concurrency refers to the ability of a system to handle multiple tasks at the same time, which allows efficient use of computational resources. For example, by processing hundreds or even thousands of client requests in parallel, modern Web servers are able to dramatically improve response times and system throughput. This shift in demand requires mainstream software development to stop ignoring concurrency, a challenge that requires developers to master the design and implementation of concurrent programs (Sutter & Larus, 2005)\colorbox{yellow}{referenceHere[11]}.
     
-The design of Multiplayer Online Role-Playing Game (MMORPG) servers, such as exemplified by the World of Warcraft (Figure \ref{fig:WoWlogo}) demonstrates the value of concurrent programming in real-world applications, where the use of a client-server model and event-driven architecture enables asynchronous processing of player requests. Kim and Kim's (2019) study, by utilizing Input/Output Completion Port (IOCP) and multithreading techniques, has demonstrated methods to effectively improve server performance, handle concurrent connections and employ fine-grained locking mechanisms for access control of shared resources to reduce the risk of deadlock and effectively improve system responsiveness and throughput.
+The design of Multiplayer Online Role-Playing Game (MMORPG) servers, such as exemplified by the \colorbox{yellow}{referenceHere[7]}World of Warcraft (Figure \ref{fig:WoWlogo}) demonstrates the value of concurrent programming in real-world applications, where the use of a client-server model and event-driven architecture enables asynchronous processing of player requests. \colorbox{yellow}{referenceHere[9]}Kim and Kim's (2019) study, by utilizing Input/Output Completion Port (IOCP) and multithreading techniques, has demonstrated methods to effectively improve server performance, handle concurrent connections and employ fine-grained locking mechanisms for access control of shared resources to reduce the risk of deadlock and effectively improve system responsiveness and throughput.
 
 \begin{figure}[h]
     \centering
@@ -104,9 +104,9 @@ The design of Multiplayer Online Role-Playing Game (MMORPG) servers, such as exe
     \end{minipage}
 \end{figure}
 
-On the other hand, Distributed systems achieve workload decentralization by assigning tasks across multiple compute nodes, which is especially critical for processing large-scale data sets. For example, Google's Bigtable and Apache Hadoop's Distributed File System (HDFS) are capable of handling petabytes of data and supporting complex data analysis tasks. In this context, the distributed architecture of Pokemon GO(Figure \ref{fig:PokemonGo}) demonstrates the efficient ability of distributed systems to manage and synchronize millions of players globally, through a network of servers deployed in multiple locations around the world, and the use of geo-distributed database technology to decentralize the storage of data based on the geographic location of players, showing the importance of this technology in dealing with large-scale, real-time interactive applications.
+On the other hand, Distributed systems achieve workload decentralization by assigning tasks across multiple compute nodes, which is especially critical for processing large-scale data sets. For example, \colorbox{yellow}{referenceHere[8][1]}Google's Bigtable and Apache Hadoop's Distributed File System (HDFS) are capable of handling petabytes of data and supporting complex data analysis tasks. In this context, the distributed architecture of \colorbox{yellow}{referenceHere[13]}Pokemon GO(Figure \ref{fig:PokemonGo}) demonstrates the efficient ability of distributed systems to manage and synchronize millions of players globally, through a network of servers deployed in multiple locations around the world, and the use of geo-distributed database technology to decentralize the storage of data based on the geographic location of players, showing the importance of this technology in dealing with large-scale, real-time interactive applications.
 		
-The combination of concurrency and distributed systems not only greatly improves the efficiency of task processing, but also enhances the reliability and scalability of the system. In the case of distributed databases, for example, data is replicated across multiple nodes, ensuring that the entire system can maintain normal operation even if some of the nodes fail. In addition, this technology supports the dynamic adjustment of computing resources according to actual demand, a feature that is widely used in cloud service platforms such as Amazon Web Services and Microsoft Azure. This exposition not only demonstrates the key role of concurrent programming in ensuring high availability and optimizing user experience, but also provides an important reference for designing efficient concurrent and distributed systems.
+The combination of concurrency and distributed systems not only greatly improves the efficiency of task processing, but also enhances the reliability and scalability of the system. In the case of distributed databases, for example, data is replicated across multiple nodes, ensuring that the entire system can maintain normal operation even if some of the nodes fail. In addition, this technology supports the dynamic adjustment of computing resources according to actual demand, a feature that is widely used in cloud service platforms such as \colorbox{yellow}{referenceHere[2][10]}Amazon Web Services and Microsoft Azure. This exposition not only demonstrates the key role of concurrent programming in ensuring high availability and optimizing user experience, but also provides an important reference for designing efficient concurrent and distributed systems.
 
 \section{Challenges}
 
@@ -114,18 +114,68 @@ While these systems are capable of handling unprecedented amounts of data and co
 
 \subsection{Thread Deadlock}
 
-A commonly faced problem in concurrent programming is thread deadlock, a situation where multiple threads are unable to move forward because they are waiting for each other to release resources. As an example, a deadlock is caused when two threads each have some resources locked and are both waiting for the other to release the resources they hold. This situation is particularly common in database transaction processing and operating system resource allocation, and seriously affects the stability and efficiency of the programme.
-
+A commonly encountered problem in concurrent programming is thread deadlock, Holt (1972) \colorbox{yellow}{referenceHere} defines that when a process P in a system is blocked in state S and there does not exist any state T such that S can transition to T, then we say that process P is in a deadlocked state in state S. A process P is considered deadlocked if it is blocked in T for all possible states T . For example, a deadlock is caused when two threads have each locked some resources and are both waiting for the other to release their holdings. This situation is particularly common in database transaction processing and operating system resource allocation, and seriously affects program stability and efficiency.
 
 \subsection{Communication Mismatch}
 
 Communication mismatch is another critical issue in distributed systems. Nodes in a distributed environment need to exchange information frequently, and any inconsistency in communication protocols or data formats can lead to major failures. Taking microservice architecture as an example, if the communication interfaces between services are not clearly defined or fail to maintain compatibility during version updates, it may lead to the functional failure of the whole system. This is particularly noticeable in fast iterative and multi-team projects and requires special attention.
 
+\section{Case Study: The Mailbox Mechanism}
+
+In further exploring the application of the Pat language in the field of concurrent programming, this paper aims to show how mailbox types in the Pat language can effectively manage concurrent tasks by introducing a concrete code example. As we see in Listing \ref{lst:patexample1}, By defining the \textbf{Tasks interface} and its implementation, the sample code clearly shows the process of producing and consuming tasks, where the \textcolor{blue}{produceTasks} function is responsible for sending tasks to instances of the Tasks interface, and the \textcolor{blue}{consumeTasks} function is responsible for receiving and executing these tasks.The Pat language utilizes the concurrency primitive \textbf{spawn} to implement the parallel execution of functions. Thus, tasks are produced and consumed simultaneously in different execution streams. By introducing mailbox types, the type and order of messages in a mailbox can be enforced. This mechanism reduces the risk of deadlocks and race conditions and improves code readability and maintainability. Thus, the example not only demonstrates the effectiveness of the Pat language in simplifying concurrent programming, but also highlights the practical value and research implications of the Pat language in the field of concurrent and distributed programming.
+
+\noindent\begin{minipage}{\linewidth}
+\lstset{style=patstyle}
+\begin{lstlisting}[caption=Pat Language Example, label={lst:patexample1}]
+interface Tasks {
+  Task(String)
+}
+
+def produceTasks(mb : Tasks!) : Unit {
+  mb ! Task("task1");
+  mb ! Task("task2")
+}
+
+def consumeTasks(self: Tasks?) : Unit {
+  guard self: Task {
+    free -> ()
+    receive Task(i) from self ->
+        print(i);
+        consumeTasks(self)
+  }
+}
+
+def main(): Unit {
+  let task = new[Tasks] in
+  spawn { produceTasks(task) };
+  consumeTasks(task)
+}
+main()
+\end{lstlisting}
+\end{minipage}
+
 \section{Research Goals}
 
-The aim of this research is to develop a runtime environment generator specifically designed to support a new programming language, the Pat language.The Pat language addresses the programming challenges of concurrency and distributed systems, and by introducing advanced concurrent programming primitives and a unique mailbox type system, it aims to provide developers with a more intuitive and concise way to handle concurrent tasks and communication flows. While a type checker for the Pat language has been implemented, an efficient execution environment has yet to be developed. The main goal of this project is to build such an execution environment so that developers can easily write, test and run programmes written in the Pat language.
+The aim of this research is to develop a runtime interpreter specifically designed to support a new programming language, the Pat language.The Pat language addresses the programming challenges of concurrency and distributed systems, and by introducing advanced concurrent programming primitives and a unique mailbox type system, it aims to provide developers with a more intuitive and concise way to handle concurrent tasks and communication flows. While a type checker for the Pat language has been implemented, an efficient execution environment has yet to be developed. The main goal of this project is to build such an execution environment so that developers can easily write, test and run programmes written in the Pat language.
 
-This runtime environment generator should not only satisfy the runtime requirements of a general programming language, such as memory management and exception handling, but should also focus on the specific needs of concurrent and distributed computing. By providing such a tool, the Pat language will become a powerful support for the research and development of concurrent and distributed systems, which not only promotes the wide application and continuous development of the Pat language, but also provides new perspectives and methods for exploring problems in the field of concurrent programming, and establishes a solid foundation for future technological innovations.
+This interpreter should not only satisfy the runtime requirements of a general programming language, such as memory management and exception handling, but should also focus on the specific needs of concurrent and distributed computing. By providing such a tool, the Pat language will become a powerful support for the research and development of concurrent and distributed systems, which not only promotes the wide application and continuous development of the Pat language, but also provides new perspectives and methods for exploring problems in the field of concurrent programming, and establishes a solid foundation for future technological innovations.
+
+\section{Outline}
+This dissertation organized into the following structure:
+
+\begin{itemize}
+  \item \textbf{Chapter 2} introduces the need for concurrent programming, and discusses the definition, differences, and relative advantages and disadvantages of channels and actors. It also examines the mailbox type system, its significance in concurrent programming, and outlines scheduling algorithms and their implementation in OCaml.
+  
+  \item \textbf{Chapter 3} identifies the essential functionalities required for the project, desirable features, and potential enhancements. It delineates the scope of the current phase by highlighting the aspects of research that are not addressed.
+  
+  \item \textbf{Chapter 4} details the application of the CEK mechanism within the Pat language. It elucidates the rationale behind choosing CEK over CPS and describes the design of Pat's scheduling and garbage collection mechanisms.
+  
+  \item \textbf{Chapter 5} covers the implementation of the CEK machine, the communication and scheduling mechanisms within Pat's mailbox system, the current state of garbage collection, and the development of both the evaluation step printer and the error-handling mechanism.
+  
+  \item \textbf{Chapter 6} assesses the system's performance using correctness and runtime tests, includes a critical evaluation, and discusses the outcomes and potential areas for improvement.
+  
+  \item \textbf{Chapter 7} reviews Pat language's principal contributions, summarizes the findings of the thesis, and proposes future work directions and potential research application areas.
+\end{itemize}
 
 
 %==================================================================================================================================
@@ -137,8 +187,37 @@ Modern concurrent programming uses two main paradigms: Message-Passing Concurren
 \subsection{Shared Memory}
 Shared-memory concurrency model allows multiple processes or threads to share the same memory space and communicate through this shared space. While this approach improves efficiency in certain scenarios, it also introduces data consistency and synchronisation issues. In the shared memory model, developers must carefully handle locking mechanisms and synchronisation issues to prevent deadlocks and race conditions from occurring.Java and C++ are examples of languages that support this concurrency model.
 
+Here is a quick Java example(Listing \ref{lst:deadlockExample}), if \textcolor{red}{Thread1} successfully acquires \textbf{lock1} and \textcolor{red}{Thread2} acquires \textbf{lock2} at the same time, and then each of them tries to acquire a lock already held by the other, this leads to a classic deadlock situation. Both threads will wait indefinitely because the locks they each hold will not be released:
+
+\lstset{style=javastyle}
+\begin{lstlisting}[caption={Java example demonstrating a potential deadlock}, label={lst:deadlockExample}]
+......
+new Thread(() -> {
+    synchronized (lock1) {
+        System.out.println("Thread 1: Holding lock 1...");
+        try { Thread.sleep(100); } catch (InterruptedException e) {}
+        System.out.println("Thread 1: Waiting for lock 2...");
+        synchronized (lock2) {
+            System.out.println("Thread 1: Holding lock 1 and 2...");
+        }
+    }
+}).start();
+        
+new Thread(() -> {
+    synchronized (lock2) {
+        System.out.println("Thread 2: Holding lock 2...");
+        try { Thread.sleep(100); } catch (InterruptedException e) {}
+        System.out.println("Thread 2: Waiting for lock 1...");
+        synchronized (lock1) {
+            System.out.println("Thread 2: Holding lock 1 and 2...");
+        }
+    }
+}).start();
+......
+\end{lstlisting}
+
 \subsection{Message Passing}
-In contrast, Message-passing Concurrency is a programming paradigm that enables communication and coordination by sending and receiving messages between processes or threads. The main advantage of this approach is that it provides a clear mechanism to avoid data contention and conflict, as data is passed through message exchange rather than sharing. In this model, each process or thread has a separate memory space and all communication takes place through well-defined message interfaces, but additional overhead is introduced[5].The Erlang language and the Akka framework are excellent representatives of this model.
+In contrast, Message-passing Concurrency is a programming paradigm that enables communication and coordination by sending and receiving messages between processes or threads. The main advantage of this approach is that it provides a clear mechanism to avoid data contention and conflict, as data is passed through message exchange rather than sharing. In this model, each process or thread has a separate memory space and all communication takes place through well-defined message interfaces, but additional overhead is introduced\colorbox{yellow}{referenceHere[14]}.The Erlang language and the Akka framework are excellent representatives of this model.
 
 Although message-passing concurrency and shared-memory concurrency each have their own strengths, message-passing concurrency provides a clearer and more controlled approach to dealing with the problems of distributed systems and reducing complex synchronisation issues. Therefore, the message-passing concurrency paradigm was chosen in the design of the Pat language in order to provide a safer and more intuitive approach to concurrent programming.
 
@@ -154,7 +233,7 @@ The Actors model, as opposed to Channels, is implemented in Erlang or Elixir, wh
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{images/channel_actor.png}    
-    \caption{ (a) illustrates the Channels model with concurrent units communicating via message-passing channels. (b) shows the Actors model where each Actor independently processes messages from its queue. (Fowler et al. 2017)
+    \caption{ (a) illustrates the Channels model with concurrent units communicating via message-passing channels. (b) shows the Actors model where each Actor independently processes messages from its queue. (Fowler et al. 2017)\colorbox{yellow}{referenceHere[6]}
     }
     \label{fig:channel_actor} 
 \end{figure}
@@ -163,14 +242,79 @@ The Actors model, as opposed to Channels, is implemented in Erlang or Elixir, wh
 To cope with these challenges, the introduction of Actor type systems has become an important advancement. In this context, the design of the Pat language introduces a new solution based on the Actor model along with a mailbox behavioural type system for the first time in a behavioural type system at the programming language level.
 
 
-\section{Behavioural Type System}
-Behavioural type system is a type system used in the field of concurrent and distributed programming to describe and manage system behaviour. This type system not only contains information about the type of data, but also extends to the description of program behaviour, such as message passing, inter-process communication patterns and protocol constraints. The core purpose of a behavioural type system is to improve the reliability and security of concurrent programs. By checking the behavioural patterns of a program at compile time, a behavioural type system ensures the correctness and stability of the program at runtime.
+\section{Mailbox}
+The mailbox communication mechanism is a core concept of concurrent programming widely used in a variety of programming environments, introduced by W.S. Ford and V.C. Hamacher in 1976\colorbox{yellow}{referenceHere[4]}. It allows program components to exchange messages asynchronously, thus enabling efficient communication between processes or threads. And Erlang, as a language designed for concurrent and distributed programming, deeply integrates the mailbox communication mechanism as the cornerstone of its inter-process communication.
+
+The Listing \ref{lst:erlangExample} is a concrete example of the application of the mailbox communication mechanism in Erlang: an asynchronous task processing model. In this model, the \textbf{empty\_task} function is a standby process that performs an asynchronous computation by receiving a message containing a Result. When the computation is complete, the Result is passed to the \textbf{queryable\_task} function. The function is in a waiting state, ready to respond to the client's query request and by sending the result of the computation back to the requester. In addition, it handles error status and returns an error if the computation request is received again. The client starts the asynchronous task through the client function, first creating a new process to run \textbf{empty\_task} through spawn, then sending computation commands and query commands to the process, and eventually receiving and printing out the results of the computation.
+
+However, it also reveals some potential problems, such as the risk of self-deadlock. Self-deadlock occurs when a process waits for an event that will never occur, causing the process to hang permanently. In this example, if the AsyncTask process fails to receive any kind of query request after completing a computation task, possibly due to a client failure or logic error that did not send a query message, the \textbf{queryable\_task} will wait indefinitely for the query request, resulting in wasted resources and potential system performance degradation. Additionally, if the client mistakenly sends the computation command again instead of the query command, although the program is designed to return an error, this does not elegantly address the problem of receiving the computation request again in the asynchronous task completion state, and may result in unnecessary error handling and resource usage.
+
+\lstset{style=erlangstyle}
+\begin{lstlisting}[caption={Asynchronous task handling and querying implemented in Erlang}, label={lst:erlangExample}]
+empty_task() ->
+    receive
+        { compute, Result} -> queryable_task(Result)
+    end.
+    
+queryable_task(Result) ->
+    receive
+        { query, Pid } -> 
+            Pid ! { reply, Result },
+            queryable_task(Result); 
+        { compute, _ } -> erlang:error("Task already computed") 
+    end.
+    
+client() ->
+    AsyncTask = spawn(async_task, empty_task, []),
+    AsyncTask ! { compute, 2 },
+    AsyncTask ! { query, self() },
+    receive
+        { reply, Result } ->
+            io:fwrite("Task result: ~w~n", [Result])
+    end.
+\end{lstlisting}
+
+\subsection{Behavioural Type System}
+To solve these problems, the behavior type system provides a solution. Behavioural type system is a type system used in the field of concurrent and distributed programming to describe and manage system behaviour. This type system not only contains information about the type of data, but also extends to the description of program behaviour, such as message passing, inter-process communication patterns and protocol constraints. The core purpose of a behavioural type system is to improve the reliability and security of concurrent programs. By checking the behavioural patterns of a program at compile time, a behavioural type system ensures the correctness and stability of the program at runtime.
 
 \subsection{Mailbox Type}
-Mailbox types, a key part of the behavioural type system, were initially used in process algorithms to capture mainly mailbox contents as exchange regular expressions. Introduced by Ugo de'Liguoro and Luca Padovani in 2018 [3], they are intended to enhance the message-passing mechanism of programming languages based on the actor model. Mailbox types specify type annotations for each actor's mailbox, which define not only the types of messages that the mailbox can receive, but also detail expected behaviour patterns such as the order in which messages are sent and received. This careful type annotation enables strict checking of message delivery patterns, thus enabling precise control of complex communication behaviour and significant improvements in type safety in concurrent programming, avoiding problems such as protocol violations and deadlocks. The application of mailbox types, an innovative practice in the Pat language, brings significant improvements to the security and robustness of concurrent programs, opening up new perspectives and solutions in the field of concurrent programming.
+Mailbox types are an essential part of behavioral type systems, originally used in process algorithms to capture mailbox contents mainly in the form of exchanged regular expressions. Mailbox types were introduced by Ugo de'Liguoro and Luca Padovani in 2018 [3]\colorbox{yellow}{referenceHere[3]} to enhance the message-passing mechanisms of programming languages based on the role model. In the Pat language, each actor's mailbox is defined in detail through type annotations that specify not only the types of messages that the mailbox can receive, but also contain expected behavioral patterns such as the order in which messages are sent and received. This fine-grained type annotation allows developers to perform strict type checking of message passing patterns to achieve precise control of complex communication behaviors, which significantly improves the type safety of concurrent programming and effectively avoids common concurrency problems such as violation of communication protocols and deadlocks.
 
+The following code snippet(Listing \ref{lst:patexample2}) from Pat's program demonstrates the application of mailbox types in real-world programming.This code simulates the processing of asynchronous compute and query tasks by defining \textbf{emptyTask} and \textbf{queryableTask} functions, as well as a client function. Where \textbf{emptyTask} is a mailbox for an empty task that can receive one \textcolor{red}{Compute} message and multiple \textcolor{red}{Query} messages. Once a \textcolor{red}{Compute} message is received, the mailbox will call \textbf{queryableTask}. and \textbf{queryableTask} represents a mailbox that has already received a \textcolor{red}{Compute} message, and this mailbox can only receive multiple \textcolor{red}{Query} messages. In these definitions, \textbf{guard} expressions are used to monitor the mailbox self and perform the appropriate actions based on the type of message received. This pattern not only shows how mailbox types can be used in Pat to control the sending and receiving of messages, but also how Pat can use the type system to statically check the behavior of concurrent programs to ensure communication protocol compliance and program robustness.
 
-\section{Scheduling}
+\lstset{style=patstyle}
+\begin{lstlisting}[caption={Implementing Concurrent Program for Asynchronous Task Processing and Result Querying}, label={lst:patexample2}]
+def emptyTask(self:EmptyTask):1 {
+    guard self: Compute · *Query {
+        receive Compute[result] from self -> 
+            fullFuture(self, result)
+    }
+}
+
+def queryableTask(self:Result:Int):1 {
+    guard self: *Query{
+        free -> ()
+        receive Query[user] from self ->
+            user ! Reply[Result];
+            queryableTask(self,Result)
+    }
+}
+
+def client():1 {
+    let asyncTask = new in spawn emptyTask(asyncTask);
+    let self = new in 
+    asyncTask ! Compute[2];
+    asyncTask ! Query[self];
+    guard self: Reply[Result] from self ->
+        free self;
+        print(intToString(result))
+}
+
+\end{lstlisting}
+
+\section{Implementation Strategies}
+
+\subsection{Scheduling}
 Scheduling in computing systems refers to the strategic scheduling and management of the order in which jobs are executed. This process is a high-level strategic decision making aimed at optimising processes and computational tasks in terms of time and resource allocation. In a concurrent environment, it is the responsibility of the scheduler to determine the timing of execution of each task to ensure that processor resources are used efficiently while minimising the task completion time. In distributed systems, the scheduler's responsibility extends to task allocation across different compute nodes, aiming to maximise the utilisation efficiency of each node in the network. Regardless of the type of system, the fundamental purpose of scheduling is to improve the overall throughput capacity of the system. In this framework, control flow management techniques, such as CPS and CEK, provide execution-level support and implementation mechanisms for scheduling, enabling scheduling policies to be applied more flexibly and efficiently to complex computing tasks and system architectures.
 
 \subsection{CPS and CEK}
@@ -178,12 +322,12 @@ Continuation Passing Style (CPS) is a high-level control flow management techniq
 
 The Pat language, however, is dedicated to the problem of communication in concurrent and distributed systems, employing mailbox types as its core communication mechanism. In such systems, the communication process is often asynchronous, the order in which messages are delivered is uncertain, and multiple concurrent senders and receivers may be involved. In contrast to CPS, CEK-style abstract machines provide a more detailed division of programme state - Continuation, Environment and Control - through more detailed Explicit management provides a more structured and flexible framework for dealing with such complex communications. In the context of Pat language applications, where nested evaluation contexts and aliasing issues need to be considered, the CEK model demonstrates excellent adaptability and handling capabilities, making it ideal for supporting the features of the Pat language.
 
-\section{Implementing Pat in OCaml}
-The tool for implementing the Pat language is the use of the OCaml language. Because of its excellent functional programming features, powerful type system and pattern matching capabilities, these advantages make OCaml particularly suitable for developing compilers and dealing with concurrency. Compared to other programming languages, OCaml provides a more efficient and secure programming environment, showing its unique advantages especially in handling complex communications in concurrent and distributed systems.
+\subsection{Implementing Pat in OCaml}
+OCaml was chosen as the implementation language for the Pat language primarily because of its excellent capabilities in functional programming. OCaml's strong type system and pattern matching capabilities provide an intuitive and flexible approach to data processing and control flow, greatly simplifying the implementation of language features. While languages like Rust also place a high value on efficiency and safety, OCaml's unique functional programming paradigm relies much less on mutable state, and this preference for immutability effectively reduces side effects, making concurrent programming safer and easier to understand. As a result, OCaml is particularly well suited to the development of systems such as compilers and language processors that require a high degree of reliability and clear logic.
 
 
 %==================================================================================================================================
-\chapter{Analysis/Requirements}
+\chapter{Requirements}
 What is the problem that you want to solve, and how did you arrive at it?
 \section{Guidance}
 Make it clear how you derived the constrained form of your problem via a clear and logical process. 
