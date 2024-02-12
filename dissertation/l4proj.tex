@@ -320,7 +320,7 @@ Scheduling in computing systems refers to the strategic scheduling and managemen
 \subsection{CPS and CEK}
 Continuation Passing Style (CPS) is a high-level control flow management technique that operates by explicitly passing the unexecuted portion of a program, called a "continuation". In the functional programming paradigm, this approach allows a function not to return a result directly, but to continue execution by accepting another function (i.e., a "continue") and passing it control. This style is inherently suited to implementing non-blocking and asynchronous operations, and provides a great deal of flexibility in modern programming. Although CPS elegantly handles asynchronicity and non-blocking operations, it introduces the need for concurrent multi-process control and complex communication patterns in concurrent and distributed system applications. However, CPS applications may make the code structure appear more complex and rigid, which not only challenges the readability of the programme but also increases the maintenance cost.
 
-The Pat language, however, is dedicated to the problem of communication in concurrent and distributed systems, employing mailbox types as its core communication mechanism. In such systems, the communication process is often asynchronous, the order in which messages are delivered is uncertain, and multiple concurrent senders and receivers may be involved. In contrast to CPS, CEK-style abstract machines provide a more detailed division of programme state - Continuation, Environment and Control - through more detailed Explicit management provides a more structured and flexible framework for dealing with such complex communications. In the context of Pat language applications, where nested evaluation contexts and aliasing issues need to be considered, the CEK model demonstrates excellent adaptability and handling capabilities, making it ideal for supporting the features of the Pat language.
+The Pat language, however, is dedicated to the problem of communication in concurrent and distributed systems, employing mailbox types as its core communication mechanism. In such systems, the communication process is often asynchronous, the order in which messages are delivered is uncertain, and multiple concurrent senders and receivers may be involved. In contrast to CPS, CEK-style abstract machines provide a more detailed division of programme state - Continuation, Environment and Control - through more detailed Explicit management provides a more structured and flexible framework for dealing with such complex communications. In the context of Pat language applications, where nested evaluation contexts and aliasing issues need to be considered, the CEK machine demonstrates excellent adaptability and handling capabilities, making it ideal for supporting the features of the Pat language.
 
 \subsection{Implementing Pat in OCaml}
 OCaml was chosen as the implementation language for the Pat language primarily because of its excellent capabilities in functional programming. OCaml's strong type system and pattern matching capabilities provide an intuitive and flexible approach to data processing and control flow, greatly simplifying the implementation of language features. While languages like Rust also place a high value on efficiency and safety, OCaml's unique functional programming paradigm relies much less on mutable state, and this preference for immutability effectively reduces side effects, making concurrent programming safer and easier to understand. As a result, OCaml is particularly well suited to the development of systems such as compilers and language processors that require a high degree of reliability and clear logic.
@@ -339,7 +339,7 @@ In terms of functional requirements, we focus on the core functions that must be
 
 \textbf{Mailbox processing}: Realize the creation of mailboxes, message insertion, storage, retrieval and release functions.
 
-\textbf{Program state control}: Adopts CEK machine model to achieve precise control of the execution state of the Pat program to ensure the correct execution of program logic.
+\textbf{Program state control}: Adopts CEK machine to achieve precise control of the execution state of the Pat program to ensure the correct execution of program logic.
 
 \textbf{Task Scheduling}: Implements a round-robin-based task scheduling mechanism to achieve fair task scheduling and support parallel task creation and execution.
 
@@ -375,9 +375,116 @@ Non-functional requirements relate to the usability, and cross-platform compatib
 
 %==================================================================================================================================
 \chapter{Design}
-How is this problem to be approached, without reference to specific implementation details? 
-\section{Guidance}
-Design should cover the abstract design in such a way that someone else might be able to do what you did, but with a different language or library or tool.
+
+\section{Principles of CEK-style Machine}
+
+\subsection{$\lambda$-Calculus}
+Before delving into the implementation and optimization of CEK machines, it is crucial to understand the underlying concepts and principles of $\lambda$-Calculus, a formal system for representing the logic of a computational process or mathematical function, introduced by mathematician Alonzo Church in the 1930s\colorbox{yellow}{referenceHere}, which is one of the core foundations of modern computer science. The system focuses on the process of binding and substitution of variables and serves as a generalized model of computation, equivalent to a Turing machine, that exhibits the fundamentals of the theory of computation.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.35\linewidth]{dissertation/images/lambda1.png}    
+    \caption{Illustration of $\lambda$-Calculus expression, showcasing the head of the expression marked in red, the body of the expression in dashed blue, and another expression following the function in solid blue.\colorbox{yellow}{referenceHere}}
+    \label{fig:lambda} 
+\end{figure}
+
+In the $\lambda$-Calculus system, all functions are defined anonymously, and their definition and application are accomplished uniquely through $\lambda$-abstraction. $\lambda$-expressions essentially define a function, which is realized by binding variables and expressing the expression inside the function body. The application of the function then simply places the actual arguments after the function name, without the need to separate them with parentheses or commas(Figure \ref{fig:lambda}). For example, Consider the $\lambda$-expression for a function that adds two numbers:
+\[
+\lambda x.\lambda y.x+y
+\]
+This expression is made up of two lambda abstractions:
+\begin{itemize}
+    \item $\lambda x$ which creates a function that takes an argument $x$
+    \item $\lambda y$ which creates a function that takes an argument $y$
+\end{itemize}
+When this function is applied to two numerical arguments, such as 3 and 2, the operation proceeds as follows:
+\begin{align*}
+\text{Apply the first number: } & (\lambda x.\lambda y.x+y)3 \rightarrow \lambda y.3+y \\
+\text{Apply the second number: } & (\lambda y.3+y)2 \rightarrow 3+2 \\
+\text{Evaluate the addition: } & 3+2 \rightarrow 5
+\end{align*}
+Hence, the application of the lambda function \(\lambda x.\lambda y.x+y\) to the arguments 3 and 2 yields the result 5, which demonstrates basic function creation and application in lambda Calculus.
+
+\subsection{Traditional CEK Machine}
+
+The CEK machine, developed by Matthias Felleisen and Dan Friedman (1986)\colorbox{yellow}{referenceHere}, is a machine for $\lambda$-Calculus that is particularly well suited for describing and enforcing the semantics of functional programming languages. This machine, with its realism and abstraction, provides a framework to show how computers can efficiently execute programs. The basic CEK machine is based on a ternary configuration of the form $⟨C\:|\:E\:|\:K⟩$. where
+\begin{itemize}
+    \item $\textbf{C}$ for Control, the expression currently being evaluated;
+    \item $\textbf{E}$ for Environment, binding free variables;
+    \item $\textbf{K}$ for Continuation, which guides the action taken by the machine after completing the evaluation of the current term $C$.
+\end{itemize}
+Let us consider an expression "let $x$ = 3 in $x$ + 2". On this occasion we will execute it using the CEK machine:
+\begin{align*}
+& \left\{C: \textcolor{red}{\text{let } x = 3 \text{ in } x + 2}, E: \{\}, K: \text{empty}\right\} \\
+\rightarrow & \left\{C: \textcolor{red}{3}, E: \{\}, K: \textcolor{red}{\text{let } x = [] \text{ in } x + 2}\right\} \\
+\rightarrow & \left\{C: \textcolor{red}{x + 2}, E: \{\textcolor{blue}{x: 3}\}, K: \text{empty}\right\} \\
+\rightarrow & \left\{C: \textcolor{red}{5}, E: \{\textcolor{blue}{x: 3}\}, K: \text{empty}\right\}
+\end{align*}
+In the initial phase, the CEK machine sets the control section to the full expression $\color{red}{\text{let } x = 3 \text{ in } x + 2}$. At this point, the environment is empty, indicating that no variable binding has been evaluated yet, and the continue section is also empty, indicating that no further computations are waiting to be evaluated. Next, the CEK machine recognizes the variable binding action in the $\color{red}{\text{let}}$ statement and begins to add the variable $\color{red}{x}$ to the environment in preparation for its association with the value $\color{red}{3}$. During this process, the control section is updated to $\color{red}{3}$, the environment is updated accordingly to contain the mapping $\color{blue}{\{x: 3\}}$, and the expression $\color{red}{x + 2}$ is placed in the continue section, waiting for a subsequent computation. When evaluating the computation of $\color{red}{x + 2}$, the CEK machine looks up and replaces the variable $\color{red}{x}$ with $\color{red}{3}$ in the environment, and then evaluates an addition operation to obtain the final result $\color{red}{5}$.
+
+\subsection{Generalized CEK Machine}
+In the design of the Pat language, reference was made to Daniel Hillerstrom and Sam Lindley's work\colorbox{yellow}{referenceHere} on the generalization of the traditional CEK machine. This generalization process is particularly important for the Pat language because the traditional CEK machine was designed primarily for simple functional programming languages, which are overwhelmed when dealing with complex control flow and state management---especially algebraic effects. In the generalized CEK machine(Figure 4.2), the configuration takes the form of $\langle \boldsymbol{M}\: |\: \boldsymbol{\gamma} \:| \:\boldsymbol{\Sigma} \rangle$, where $\boldsymbol{M}$ represents the current term to be computed, which is equivalent to the control (C) part in the original CEK machine. $\boldsymbol{\gamma}$ represents the current environment, inherited from the environment (E) part in the original machine, which is in charge of binding the variables to the corresponding values. $\boldsymbol{\Sigma}$, on the other hand, represents the continuation part, which, unlike the continuation (K) of a single instruction or state in the original machine, consists of a series of continuation frames $[\boldsymbol{\delta}_1, \ldots , \boldsymbol{\delta}_n]$, each frame $\boldsymbol{\delta} = (\boldsymbol{\chi}, \boldsymbol{\gamma}, \boldsymbol{M})$ representing a pure continuation within a particular processor closure. Here $\boldsymbol{\chi}$ denotes the processor closure (handler closure), $\boldsymbol{\gamma}$ maintains its role as an environment for mapping variables to their values, and $\boldsymbol{M}$ represents the current computational term or expression being evaluated. 
+\begin{align*}
+\text{ Configurations}\;\; & C ::= \langle M \, | \, \gamma \, | \, \Sigma \rangle \\
+\text{Environment}\;\; & \gamma ::= \cdot \, | \, \gamma, x \mapsto V \\
+\text{ Frame stack}\;\; & \Sigma ::= \cdot \, | \, \sigma \circ \Sigma \\
+\text{Frame}\;\; & \sigma ::= \langle \chi, \gamma, M \rangle \\
+\text{Value}\;\; & v ::= \gamma(v) 
+\end{align*}
+\begin{center}
+\textit{\textbf{Figure 4.2:} CEK Syntax}
+\end{center}
+\vspace{10pt}
+With this design, even though \textbf{Yield} functionality is not usually provided directly in functional programming paradigms, the model effectively implements yield-like behavior. This is particularly important for thread scheduling in Pat. In a concurrent environment, \textbf{Yield} allows a thread to actively release processor resources, thus allowing the scheduler to allocate resources to other threads or tasks. The continuation part of the generalized CEK machine $\boldsymbol{\Sigma}$ provides the basis for implementing this operation. Each continue frame can be thought of as a pause point that contains all the information needed to resume execution, similar to the pause and resume mechanism of the yield operation.
+
+Let us execute the expression again: let x = 3 in x + 2, this time with a generalized CEK machine:
+\begin{align*}
+& (M: \textcolor{red}{\text{let } \ x\ =\ 3\ \text{in } \ x\ +\ 2}, \gamma: \{\}, \Sigma: \text{empty}) \\
+\rightarrow & (M: \textcolor{red}{3}, \gamma': \{\}, \Sigma: \langle M: \textcolor{red}{x}, \gamma: \{\}, (\textcolor{red}{x+2})\rangle \cdot \Sigma) \\
+\rightarrow & (M: \textcolor{red}{x\ +\ 2}, \gamma: \{ \textcolor{blue}{x} \mapsto \textcolor{blue}{3}\}, \Sigma: \text{empty}) \\
+\rightarrow & (M: \textcolor{red}{\text{\textlbrackdbl} x \text{\textrbrackdbl}}_{\gamma} + \textcolor{red}{2}, \gamma: \{ \textcolor{blue}{x} \mapsto \textcolor{blue}{3}\}, \Sigma: \text{empty}) \\
+\rightarrow & (M: \textcolor{red}{3\ +\ 2}, \gamma: \{ \textcolor{blue}{x} \mapsto \textcolor{blue}{3}\}, \Sigma: \text{empty}) \\
+\rightarrow & (M: \textcolor{red}{5}, \gamma: \{ \textcolor{blue}{x} \mapsto \textcolor{blue}{3}\}, \Sigma: \text{empty})
+\end{align*}
+
+Included in its initial state are the entire expression as the machine state \(M\), an empty environment \(\gamma\) indicating that there are no variables bound, and an empty stack \(\Sigma\) implying that there are currently no computations to be executed. This setup is similar in nature to a traditional CEK machine. However, as the evaluation process unfolds, the machine state is first updated to {\color{red}3}, signaling that the variable $\color{red}x$ is about to be bound to it, and simultaneously pushing the expression $\color{red}x + 2$ onto the stack, awaiting further computation. The role of the stack in this step is to hold the current computational context, including variables and environment, which is very different from the traditional CEK machine that simply puts the expression to be continued into the "continue" section.
+
+Subsequently, when the machine state changes to $\color{red}x + 2$, the environment is updated to $\color{blue}x \rightarrow 3$, which shows that $\color{red}x$ has been successfully bound to {\color{red}3}. At this point, the stack is cleared, indicating that the system is ready to execute the expression. Next, the machine state expression $\color{red}\text{\textlbrackdbl} V \text{\textrbrackdbl}_{\gamma} + 2$ is computed by looking up in the environment and replacing $\color{red}x$ with {\color{red}3}, which in turn is transformed to {\color{red}3} + {\color{red}2}. Eventually, the machine status is updated to {\color{red}5}, signaling that the computation has been successfully completed. This example not only shows how the generalized CEK machine handles complex expressions and variable bindings but also highlights the importance of the stack in preserving execution context.
+
+\section{Pat Scheduling}
+The generalized CEK machine provides an execution-level support and implementation framework for the scheduling mechanism of the Pat language.Pat chooses the Round-Robin scheduling mechanism as a fair scheduling strategy, which centers on ensuring that all threads are given an equal amount of processor time, thus preventing any thread from occupying CPU resources for a long period of time. In Pat, this mechanism is improved by changing the time to steps to ensure that all threads get the same number of evaluation steps. This strategy effectively prevents threads from waiting indefinitely after a message is delivered. Once the evaluation steps of a thread reaches the preset upper limit, the system will automatically switch to the next thread in the queue, which ensures the timeliness of message processing between threads and avoids the problem of message backlog.
+
+Figure 4.3 shows a simplified example of the Pat scheduling mechanism, where the active steps of each process are represented by the length of the color slice, and different colored slice are used to distinguish between processes. In this model, the maximum value of the step slice is set to 2, which means that after any process executes two steps, the scheduler will force it to move to the next process. The diagram clearly shows the state of the four processes (P1 to P4) during the execution steps. Process P1 reaches the maximum step slice limit after two steps of execution. Process P2 still has one step left to complete after the second step, at which point the scheduling mechanism interrupts P2 and switches to the execution of P3. After P3 completes, the system returns to complete the remaining steps of P2. Finally, P4 is executed similarly to P1. This allocation model ensures that the processes are executed sequentially in a fixed number of steps, reflecting the fairness of the rotation scheduling strategy and ensuring that no process will monopolize the processor resources for a long time.
+
+\begin{center}
+\begin{tabular}{c|*{9}{p{0.5cm}}}
+\rowcolor{white}
+\multicolumn{1}{c|}{Process\textbackslash Step} & \multicolumn{1}{c}{1} &\multicolumn{1}{c}{2} &\multicolumn{1}{c}{3} &\multicolumn{1}{c}{4} &\multicolumn{1}{c}{5} &\multicolumn{1}{c}{6} &\multicolumn{1}{c}{7} &\multicolumn{1}{c}{8} &\multicolumn{1}{c}{9} \\ \hline
+P1 & \cellcolor{blue!25} & \cellcolor{blue!25} & & & & & & & \\
+P2 & & & \cellcolor{red!25} & \cellcolor{red!25} & & & \cellcolor{red!25} & & \\
+P3 & & & & &\cellcolor{green!25} & \cellcolor{green!25} & & & \\
+P4 & & & & & & & & \cellcolor{yellow!25} & \cellcolor{yellow!25} \\
+\end{tabular} \\
+\textit{\textbf{Figure 4.3:} Pat's Round-Robin Scheduling}
+\end{center}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 %==================================================================================================================================
 \chapter{Implementation}
