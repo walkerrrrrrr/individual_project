@@ -376,3 +376,23 @@
 
 * *4 hour* Add some example in introduction part
 
+### 10 Feb 2024
+
+* *1 hour* Write an outline in intro part
+* *0.1 hour* Modify "generator" to "interpreter"
+* *2 hour* Add an example of deadlock on Java in shared memory part
+* *5 hour* Modify the structure of mailbox in intro part and add an example of mailbox on Enlang and an example of mailbox type on Pat
+* *1 hour* Change "Scheduling" to a subsection of "Implementation Strategies"
+
+### 11 Feb 2024
+
+* *1 hour* Modify the reason why use OCaml
+* *3 hour* Add more references in different part
+* *2 hour* Finished the requirement part
+
+## Week 19
+
+### 12 Feb 2024
+
+* *6 hour* Finished the cek machine in design chapter
+* *2 hour* Finished the scheduling in design chapter
