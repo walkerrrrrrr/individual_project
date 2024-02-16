@@ -105,6 +105,10 @@
   * 12:00PM on Wednesday
   * Meeting content:
   	* Some advice of the introduction and background part
+* **Week 18**
+  * 12:00PM on Wednesday
+  * Meeting content:
+  	* Will discuss next week, because too late to give progress to the supervisor. He hasn't had a chance to read it yet.
 * **Week 19**
 * **Week 20**
 * **Week 21**
