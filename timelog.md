@@ -396,3 +396,7 @@
 
 * *6 hour* Finished the cek machine in design chapter
 * *2 hour* Finished the scheduling in design chapter
+
+### 14 Feb 2024
+
+* *0.5 hour* Meeting
