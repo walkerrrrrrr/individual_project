@@ -79,6 +79,9 @@
 * **Week 17**
   * Modify the intro part and background part by the advices
   * Continue to write
+* **Week 18**
+  * Continue to write
+  * Try to do some evaluation
 * **Week 19**
 * **Week 20**
 * **Week 21**
