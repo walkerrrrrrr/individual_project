@@ -298,7 +298,7 @@ textfont=it,tableposition=above]{caption}
 \usepackage{listings}
 \usepackage{xcolor}
 
-\definecolor{codebeige}{rgb}{1.0, 1.0, 0.9}
+\definecolor{codegray}{rgb}{0.99,0.99,0.99}
 
 \lstdefinestyle{patstyle}{
     language=Scala,
@@ -310,7 +310,7 @@ textfont=it,tableposition=above]{caption}
     numberstyle=\tiny\color{gray},
     stepnumber=1,
     numbersep=5pt,
-    backgroundcolor=\color{codebeige}, % Make sure you have defined color codebeige
+    backgroundcolor=\color{codegray}, % Make sure you have defined color codebeige
     showspaces=false,
     showstringspaces=false,
     showtabs=false,
@@ -341,7 +341,7 @@ textfont=it,tableposition=above]{caption}
     numberstyle=\tiny\color{gray},
     stepnumber=1,
     numbersep=5pt,
-    backgroundcolor=\color{codebeige}, % Make sure you have defined color codebeige
+    backgroundcolor=\color{codegray}, % Make sure you have defined color codebeige
     showspaces=false,
     showstringspaces=false,
     showtabs=false,
@@ -369,7 +369,7 @@ textfont=it,tableposition=above]{caption}
     numberstyle=\tiny\color{gray},
     stepnumber=1,
     numbersep=5pt,
-    backgroundcolor=\color{codebeige}, % Make sure you have defined color codebeige
+    backgroundcolor=\color{codegray}, % Make sure you have defined color codebeige
     showspaces=false,
     showstringspaces=false,
     showtabs=false,
@@ -384,4 +384,14 @@ textfont=it,tableposition=above]{caption}
     title=\lstname,
     emph=[1]{empty_task,queryable_task,client,computation}, % Custom identifiers to be emphasized
     emphstyle=[1]\textbf, % Custom style for first set of emphasized identifiers
+}
+
+\lstdefinestyle{ocamlstyle}{
+  language=[Objective]Caml,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  identifierstyle=\color{red},
+  commentstyle=\color{green},
+  stringstyle=\color{orange},
+  showstringspaces=false,
 }
