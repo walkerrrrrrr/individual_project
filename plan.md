@@ -83,6 +83,8 @@
   * Continue to write
   * Try to do some evaluation
 * **Week 19**
+  * Modify the evaluation part
+  * Begin to write the implementation part
 * **Week 20**
 * **Week 21**
 * **Week 22**
