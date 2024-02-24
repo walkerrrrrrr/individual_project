@@ -400,3 +400,29 @@
 ### 14 Feb 2024
 
 * *0.5 hour* Meeting
+
+### 16 Feb 2024
+
+* *0.5 hour* Organize meeting notes
+
+### 17 Feb 2024
+
+* *8 hour* Write the evaluation part
+
+### 18 Feb 2024
+
+* *8 hour* Write the evaluation part
+
+## Week 20
+
+### 19 Feb 2024
+
+* *6 hour* Finished the evaluation part
+
+### 21 Feb 2024
+
+* *0.5 hour* Meeting
+
+### 23 Feb 2024
+
+* *0.5 hour* Organize meeting notes
