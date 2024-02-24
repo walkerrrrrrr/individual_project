@@ -110,6 +110,18 @@
   * Meeting content:
   	* Will discuss next week, because too late to give progress to the supervisor. He hasn't had a chance to read it yet.
 * **Week 19**
+  * 12:00PM on Wednesday
+  * Meeting content:
+  	* Change the title "Correct Test" to "Concurrent Reduction".
+   	* Change the title "Fundamental" to "Functional Reduction".
+   	* Change the title "Concurrency Model" to "Concurrency Reduction".
+   	* In the "Functional Reduction" section, remove "syntax" from "no syntax or runtime errors were found". Also, check other sections for similar changes.
+   	* In the "Functional Reduction" section, add a "Description" column to the table and replace "Passed" with "Expected Result" and "Actual Result".
+   	* In the "Concurrency Reduction" section, revise "execution failures" and update the table to reflect "Expected Result" and "Actual Result",    	* indicating that the expected and actual results match.
+   	* In the "Micro-Benchmark Test" section, under "Smokers", mention that random sleep causes significantly longer execution times.
+   	* Add a comparison graph of different "k" values for like ping pong test in the "Micro-Benchmark Test" section.
+   	* In the "Micro-Benchmark Test" section, include a comparison between sequential and concurrent execution.
+   	* Clarify that Eio is not a scheduling algorithm but a framework.
 * **Week 20**
 * **Week 21**
 * **Week 22**
