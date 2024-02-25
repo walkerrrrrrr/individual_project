@@ -506,55 +506,61 @@ These points apply to the whole dissertation, not just this chapter.
 \chapter{Evaluation} 
 In this research, we comprehensively evaluated the effectiveness of the Pat language runtime interpreter, employing methods such as correctness testing and micro-benchmarking, aiming to accurately quantify its performance metrics. Correctness testing ensured that the Pat language executed as expected when processing different example files, verifying the correctness of the language design and runtime. The efficiency of the interpreter in performing computationally intensive tasks was evaluated through careful measurements of the runtime of specific algorithmic tasks (e.g., computing Fibonacci series), and these tests focused on evaluating the performance of the Pat language under real-world running conditions. The tests were performed on a computer equipped with an M2 Pro chip and 16 GB of RAM, with the operating system MacOS 14.3, using the OCaml version 5.1.0 environment, and the time calculations, which included all parts of the type checking and the interpreter, were repeated about 100 times, thus ensuring the accuracy and reliability of the results.
 
-\section{Correct Test}
+\section{Concurrent Reduction}
 
-\subsection{Fundamental}
-In performing a series of fundamental tests on the Pat language, we aim to verify whether the Pat language is able to accurately execute basic programming constructs and how well it performs in different programming scenarios. These tests help to evaluate whether the syntax of the Pat language and its runtime environment can meet the needs of concurrent and distributed systems programming, and whether it can correctly handle various programming tasks according to its design specifications.
+\subsection{Functional Reduction}
+In performing a series of fundamental tests on the Pat language, we aim to verify whether the Pat language is able to accurately execute basic programming constructs and how well it performs in different programming scenarios. These tests help to evaluate whether the runtime environment of the Pat language can meet the needs of concurrent and distributed systems programming, and whether it can correctly handle various programming tasks according to its design specifications.
 
-Specific tests performed include basic arithmetic tests, operator precedence, logical operation tests, anonymous functions, local variables and function bindings, empty interfaces and linear functions, and pattern matching. The results of the tests show (Table \ref{tab:Fundamental_results}) that all tests were successfully completed as expected and no syntax or runtime errors were found. This result proves that the underlying functionality of the Pat language matches the design specifications and is capable of handling a wide range of programming tasks.
+Specific tests performed include basic arithmetic tests, operator precedence, logical operation tests, anonymous functions, local variables and function bindings, empty interfaces and linear functions, and pattern matching. The results of the tests show (Table \ref{tab:Fundamental_results}) that all tests were successfully completed as expected and no runtime errors were found. This result proves that the underlying functionality of the Pat language matches the design specifications and is capable of handling a wide range of programming tasks.
 
-\begin{table}[h]
-\centering
-\begin{tabular}{@{}lcc@{}} % @{} removes padding at the start and end of the table
-\toprule % Top horizontal line
-\textbf{Name} & \textbf{Avg Time (ms)} & \textbf{Passed/Failed} \\
-\midrule % Middle horizontal line, below the header
-Arithmetic & 5.13& Passed \\
-Operator Precedence & 5.63& Passed \\
-Logical Operator & 6.19 & Passed \\
-Anonymous Function & 5.49 & Passed \\
-Local Binding \& Function & 5.06 & Passed \\
-Simple Local Binding & 5.16 & Passed \\
-Nested Local Binding & 5.12 & Passed \\
-Interface \& Linear Function & 9.40 & Passed \\
-Pattern Matching (Left) & 5.50 & Passed \\
-Pattern Matching (Comprehensive) & 5.26 & Passed \\
-\bottomrule \\% Bottom horizontal line
-\end{tabular}
-\caption{Basic Correct Test Results}
-\label{tab:Fundamental_results}
-\end{table}
-
-\subsection{Concurrency Model}
-After the basic correct tests were completed, we further tested the correctness of six advanced concurrency models for the Pat language, based on the original mailbox algorithmic model with ideas taken from the research of de'Liguoro and Padovani (2018)\colorbox{yellow}{referenceHere}. The specific test implementations refer to the research of Fowler et al. (2023)\colorbox{yellow}{referenceHere}. These test cases cover everything from concurrent lock, future variable handling, and account concurrent transactions, account concurrent transactions via future variables, master-worker parallel networks, and session-type communication actor models using a single arbiter.
-
-First, we simulate concurrent locks to verify the efficiency and reliability of the Pat language in handling mutually exclusive operations. In addition, we evaluated the performance of the Pat language in handling one-time write and multiple read operations by testing the "Future" variable. Then, by simulating debit/credit instruction exchanges between concurrent accounts, we further validate the accuracy and efficiency of the Pat language in complex concurrency scenarios. In order to explore the application of Pat in asynchronous programming model, we also test the debit/credit commands of accounts implemented by "Future". In addition, we evaluate the performance of the Pat language in a distributed computing environment by constructing a parallel network of master-worker jobs. Finally, we explore the ability of the Pat language to implement complex communication protocols through a session-type communication actor model, which involves the use of a single arbiter to coordinate communication behavior.
-
-All tests show that the Pat language is able to successfully handle these high-level concurrent and distributed programming tasks without finding any execution failures(Table \ref{Concurrency_result}). The test results not only validate the performance of the Pat language in different programming scenarios, but also demonstrate its power in handling concurrent and distributed system programming requirements. The average response times ranged from 45.8 ms for the concurrent model to 102.9 ms for the session type model, further proving that the Pat language is able to provide a high degree of functionality and reliability while ensuring performance.
 \begin{table}[ht]
 \centering
 \renewcommand{\arraystretch}{1.1}
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{l l c}
+\begin{tabular}{l l c c}
 \toprule
-\textbf{Name}       & \textbf{Description}   & \textbf{Avg Time (ms)} \\
+\textbf{Name}  & \textbf{Description}   & \textbf{Exp.} & \textbf{Act.}  \\
 \midrule
-Lock   & Concurrent lock modelling mutual exclusion       & 45.8                  \\
-Future              & Future variable that is written to once and read multiple times & 36.3                  \\
-Account             & Concurrent accounts exchanging debit and credit instructions  & 31.9                  \\
-Account Future & Concurrent accounts where debit instructions are effected via futures  & 53.5                  \\
-Master-Worker       & Master-worker parallel network            & 64.5                  \\
-Session Types       & Session-typed communicating actors using one arbiter   & 102.9                 \\
+Arithmetic I  & Basic arithmetic check & True & True \\
+Arithmetic II  & Operator precedence checks arithmetic order & True & True \\
+Arithmetic III & Logic \& arithmetic test combines operations  & False & False \\
+Anonymous Function & Function returns input integer value & 5 & 5 \\
+Local Binding & 
+Local binding and function definition & 10 & 10 \\
+Nested Binding & Nested function returns double input value & 10 & 10 \\
+Memory Management & Interface declaration and memory deallocation & - & - \\
+Pattern Matching (Left) & Handles union type and printing & 5 & 5 \\
+Pattern Matching (Comprehensive) & Evaluates type inference & 5 & 5 \\
+\bottomrule \\
+\end{tabular}%
+}
+\caption{Basic Correct Test Results}
+\label{tab:Fundamental_results}
+\end{table}
+
+
+
+
+\subsection{Concurrency Reduction}
+After the basic correct tests were completed, we further tested the correctness of six advanced concurrency models for the Pat language, based on the original mailbox algorithmic model with ideas taken from the research of de'Liguoro and Padovani (2018)\colorbox{yellow}{referenceHere}. The specific test implementations refer to the research of Fowler et al. (2023)\colorbox{yellow}{referenceHere}. These test cases cover everything from concurrent lock, future variable handling, and account concurrent transactions, account concurrent transactions via future variables, master-worker parallel networks, and session-type communication actor models using a single arbiter.
+
+First, we simulate concurrent locks to verify the efficiency and reliability of the Pat language in handling mutually exclusive operations. In addition, we evaluated the performance of the Pat language in handling one-time write and multiple read operations by testing the "Future" variable. Then, by simulating debit/credit instruction exchanges between concurrent accounts, we further validate the accuracy and efficiency of the Pat language in complex concurrency scenarios. In order to explore the application of Pat in asynchronous programming model, we also test the debit/credit commands of accounts implemented by "Future". In addition, we evaluate the performance of the Pat language in a distributed computing environment by constructing a parallel network of master-worker jobs. Finally, we explore the ability of the Pat language to implement complex communication protocols through a session-type communication actor model, which involves the use of a single arbiter to coordinate communication behavior.
+
+All tests show that the Pat language is able to successfully handle these high-level concurrent and distributed programming tasks, demonstrating alignment between expected and actual outcomes(Table \ref{Concurrency_result}). The test results not only validate the performance of the Pat language in different programming scenarios, but also demonstrate its power in handling concurrent and distributed system programming requirements. The average response times ranged from 45.8 ms for the concurrent model to 102.9 ms for the session type model, further proving that the Pat language is able to provide a high degree of functionality and reliability while ensuring performance.
+\begin{table}[ht]
+\centering
+\renewcommand{\arraystretch}{1.1}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l l c c}
+\toprule
+\textbf{Name}       & \textbf{Description}   & \textbf{Exp.}  & \textbf{Act.}\\
+\midrule
+Lock   & Concurrent lock modelling mutual exclusion       & 12 & 12  \\
+Future  & Future variable that is written to once and read multiple times & 55         & 55          \\
+Account             & Concurrent accounts exchanging debit and credit instructions  & - & -                 \\
+Account Future & Concurrent accounts where debit instructions are effected via futures  & INFO.. & INFO..                  \\
+Master-Worker       & Master-worker parallel network            & 55385 & 55385                  \\
+Session Types       & Session-typed communicating actors using one arbiter   & 6 & 6                 \\
 \bottomrule \\
 \end{tabular}%
 }
@@ -569,7 +575,7 @@ Based on the correctness tests, we designed and implemented a series of benchmar
 
 The purpose of these benchmarks is to establish an initial performance baseline for the Pat language and to demonstrate that it can effectively handle multiple concurrency models. Given that the Pat language is the first programming language to integrate mailbox typing, we do not use the results of these tests for direct comparisons with existing functional languages on the market. Instead, our goal is to demonstrate the controlled operation of the Pat language by showing how it can stably execute multiple concurrency patterns based on a design and implementation that incorporates the concept of mailbox types.
 
-Through this series of benchmark tests, we observe the performance of the Pat language under different concurrency models (table \ref{Savina}). For example, the Ping Pong test evaluates the message processing speed by simulating the bidirectional delivery of messages; the Thread Ring test measures the message delivery latency by passing tokens in a ring network; and the Fibonacci test demonstrates the efficiency of the Pat language in handling recursive concurrency tasks. In the K-Fork test, we made the necessary adjustments. In the original setup, the central actor distributes a large number of requests to the workers, resulting in a huge amount of data, which affects the execution efficiency of the test and the accuracy of the results. In order to more accurately evaluate the performance of the Pat language in handling concurrent tasks, we reduced the number of workers to ensure that the test results can more truly reflect the actual performance of the language.
+Through this series of benchmark tests, we observe the performance of the Pat language under different concurrency models (table \ref{Savina}). For example, the Ping Pong test evaluates the message processing speed by simulating the bidirectional delivery of messages; the Thread Ring test measures the message delivery latency by passing tokens in a ring network; and the Fibonacci test demonstrates the efficiency of the Pat language in handling recursive concurrency tasks. In the K-Fork test, we made the necessary adjustments. In the original setup, the central actor distributes a large number of requests to the workers, resulting in a huge amount of data, which affects the execution efficiency of the test and the accuracy of the results. In order to more accurately evaluate the performance of the Pat language in handling concurrent tasks, we reduced the number of workers to ensure that the test results can more truly reflect the actual performance of the language. Note that in the Smokers test, this design caused a significant increase in test execution time due to the introduction of a randomized sleep function.
 
 \begin{table}[ht]
 \centering
@@ -598,8 +604,6 @@ Log Map & Computes the term \( xx + 1 = r \cdot xx \cdot (1 - xx) \) by delegati
 
 In summary, these benchmark tests provide us with a comprehensive evaluation framework to scrutinize the performance of the Pat language in the area of concurrent programming. The unique advantages of the Pat language in handling complex concurrent tasks are demonstrated. This research provides important references and insights for the future development of functional language design and concurrent programming patterns for mailbox types.
 
-\section{Case Study}
-
 \section{Reflection}
 In the reflection section, the discussion of the research on garbage collection optimization and scheduling algorithms reveals two key areas in our research and development process, as well as pointing to potential directions for future work.
 
@@ -613,7 +617,7 @@ This in-depth reference counting strategy not only improves the efficiency of ga
 
 \subsection{Advanced Scheduling Algorithms}
 
-Regarding the research on scheduling algorithms, our current implementation employs the Round-Robin scheduling approach, which is a simple and straightforward scheduling strategy. However, we also recognize that other scheduling algorithms, such as the EIO scheduling algorithm, which is capable of supporting parallel IO operations, may provide better performance and efficiency(Figure \ref{lst:eio}).The introduction of EIO not only takes advantage of the high-performance IO operation features provided by modern operating systems, such as Linux's io\_uring, but also allows concurrent code to be written in a much more concise and efficient manner through a direct style of IO stacking. This approach does a lot more than just reduce heap allocation and increase speed, it also makes concurrent code written in the same style as non-concurrent code, which greatly improves the readability and maintainability of the code.
+Regarding the research on scheduling algorithms, our current implementation employs the Round-Robin scheduling approach, which is a simple and straightforward scheduling strategy. However, we also recognize that other framework, such as the EIO scheduling, which is capable of supporting parallel IO operations, may provide better performance and efficiency(Figure \ref{lst:eio}).The introduction of EIO not only takes advantage of the high-performance IO operation features provided by modern operating systems, such as Linux's io\_uring, but also allows concurrent code to be written in a much more concise and efficient manner through a direct style of IO stacking. This approach does a lot more than just reduce heap allocation and increase speed, it also makes concurrent code written in the same style as non-concurrent code, which greatly improves the readability and maintainability of the code.
 
 Within the time constraints of the project, we did not explore these alternatives in depth. Had we had more time, we would have compared the performance of different algorithms under multiple loads and scenarios, and we could have determined the scheduling strategy that best suited our system. In addition, research on how to combine multiple scheduling strategies in order to dynamically select the scheduling algorithm that best suits the current execution environment and task characteristics will also be a focus of our attention.
 
