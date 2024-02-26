@@ -395,3 +395,6 @@ textfont=it,tableposition=above]{caption}
   stringstyle=\color{orange},
   showstringspaces=false,
 }
+
+\usepackage{stmaryrd}
+\usepackage{svg}

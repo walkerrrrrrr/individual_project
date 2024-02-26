@@ -82,7 +82,6 @@
 
 
 \section{Concurrency and Distributed Systems}
-
 Concurrency and distributed systems are becoming increasingly important in modern computational science, especially in the context of cloud computing and big data. \colorbox{yellow}{referenceHere[11]}Sutter and Larus (2005) emphasize that with the proliferation of multicore processors, the software industry needs to adopt new tools and ways of thinking in order to fully utilize the potential of multicore processors. Concurrency refers to the ability of a system to handle multiple tasks at the same time, which allows efficient use of computational resources. For example, by processing hundreds or even thousands of client requests in parallel, modern Web servers are able to dramatically improve response times and system throughput. This shift in demand requires mainstream software development to stop ignoring concurrency, a challenge that requires developers to master the design and implementation of concurrent programs (Sutter & Larus, 2005)\colorbox{yellow}{referenceHere[11]}.
     
 The design of Multiplayer Online Role-Playing Game (MMORPG) servers, such as exemplified by the \colorbox{yellow}{referenceHere[7]}World of Warcraft (Figure \ref{fig:WoWlogo}) demonstrates the value of concurrent programming in real-world applications, where the use of a client-server model and event-driven architecture enables asynchronous processing of player requests. \colorbox{yellow}{referenceHere[9]}Kim and Kim's (2019) study, by utilizing Input/Output Completion Port (IOCP) and multithreading techniques, has demonstrated methods to effectively improve server performance, handle concurrent connections and employ fine-grained locking mechanisms for access control of shared resources to reduce the risk of deadlock and effectively improve system responsiveness and throughput.
@@ -451,6 +450,25 @@ Included in its initial state are the entire expression as the machine state \(M
 
 Subsequently, when the machine state changes to $\color{red}x + 2$, the environment is updated to $\color{blue}x \rightarrow 3$, which shows that $\color{red}x$ has been successfully bound to {\color{red}3}. At this point, the stack is cleared, indicating that the system is ready to execute the expression. Next, the machine state expression $\color{red}\text{\textlbrackdbl} V \text{\textrbrackdbl}_{\gamma} + 2$ is computed by looking up in the environment and replacing $\color{red}x$ with {\color{red}3}, which in turn is transformed to {\color{red}3} + {\color{red}2}. Eventually, the machine status is updated to {\color{red}5}, signaling that the computation has been successfully completed. This example not only shows how the generalized CEK machine handles complex expressions and variable bindings but also highlights the importance of the stack in preserving execution context.
 
+\begin{align*}
+\text{E-LET} & \quad \llparenthesis \ \textbf{let} \ x: T = M \textbf{ in } N, \Sigma \ \rrparenthesis \rightarrow \llparenthesis \  M, \langle x, N \rangle \cdot \Sigma \ \rrparenthesis \\
+\text{E-RETURN} & \quad \llparenthesis \ V, \langle x, M\rangle \cdot \Sigma \ \rrparenthesis \rightarrow \llparenthesis \ M\{V/x\}, \Sigma \ \rrparenthesis \\
+\text{E-APP} & \quad \llparenthesis \ f(\overrightarrow{V}), \Sigma \ \rrparenthesis \rightarrow \llparenthesis \ M\{\overrightarrow{V}/\overrightarrow{x}\}, \Sigma \ \rrparenthesis \quad \text{if } \Roman{P}(f) = \text{def } f(\overrightarrow{x} : A) : B \{ M \} \\
+\text{E-NEW} & \quad \llparenthesis \ \texttt{new}, \Sigma \ \rrparenthesis \rightarrow \llparenthesis \  va, (a, \Sigma) \ \rrparenthesis \quad (a \text{ is fresh}) \\
+\text{E-SEND} & \quad \llparenthesis \ a!m\overrightarrow{V}, \Sigma \ \rrparenthesis \rightarrow \llparenthesis \ (), \Sigma \parallel a \leftarrow m\overrightarrow{V} \ \rrparenthesis \\
+\text{E-SPAWN} & \quad \llparenthesis \ \texttt{spawn } M, \Sigma\ \rrparenthesis \rightarrow \llparenthesis \  (), \Sigma \parallel (M, \varepsilon)\rrparenthesis \\
+\text{E-FREE} & \quad \llparenthesis \  va)((\texttt{guard } a: E \{ G[\texttt{free } h \rightarrow M]\}), \Sigma\ \rrparenthesis \rightarrow \llparenthesis \ M, \Sigma \ \rrparenthesis
+\end{align*}
+
+
+\begin{equation}
+  \llbracket     1 \rrbracket       \quad
+  \llparenthesis 2 \rrparenthesis   \quad
+  \llceil        3 \rrceil          \quad
+  \llfloor       4 \rrfloor         \quad
+\end{equation}
+
+
 \section{Pat Scheduling}
 The generalized CEK machine provides an execution-level support and implementation framework for the scheduling mechanism of the Pat language.Pat chooses the Round-Robin scheduling mechanism as a fair scheduling strategy, which centers on ensuring that all threads are given an equal amount of processor time, thus preventing any thread from occupying CPU resources for a long period of time. In Pat, this mechanism is improved by changing the time to steps to ensure that all threads get the same number of evaluation steps. This strategy effectively prevents threads from waiting indefinitely after a message is delivered. Once the evaluation steps of a thread reaches the preset upper limit, the system will automatically switch to the next thread in the queue, which ensures the timeliness of message processing between threads and avoids the problem of message backlog.
 
@@ -601,6 +619,19 @@ Log Map & Computes the term \( xx + 1 = r \cdot xx \cdot (1 - xx) \) by delegati
 \caption{Part List of Savina Benchmarks. \colorbox{yellow}{referenceHere}}
 \label{Savina}
 \end{table}
+
+The composite graph(Figure \ref{fig:benchmark}) presents the execution time test results of four different program fragments in Pat language with different K values. From top to bottom, left to right, they are Fibonacci computation time, Ping Pong performance analysis, bank request-response chain performance, and log-mapping simulation performance. It can be observed that the execution time curves for both sequential and concurrent execution are quite close to each other, indicating that no significant additional overhead is introduced in concurrent execution.
+
+For the execution time fluctuations observed in the two graphs below, this may be due to the small time scale used for testing, which makes even minor execution variations appear as large fluctuations in the graphs. Such fluctuations may arise from system scheduling, memory cache efficiency, and other non-deterministic factors in the test environment. These results show the stability of the Pat language in handling different types of concurrent tasks and its potential to maintain low overhead for concurrent operations.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\linewidth]{dissertation/images/benchmark.png}    
+    \caption{ 
+    Comparative Execution Times of Sequential and Concurrent Code Snippets in Pat Language at Various K Values
+    }
+    \label{fig:benchmark} 
+\end{figure}
 
 In summary, these benchmark tests provide us with a comprehensive evaluation framework to scrutinize the performance of the Pat language in the area of concurrent programming. The unique advantages of the Pat language in handling complex concurrent tasks are demonstrated. This research provides important references and insights for the future development of functional language design and concurrent programming patterns for mailbox types.
 
