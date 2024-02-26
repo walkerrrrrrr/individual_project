@@ -450,23 +450,20 @@ Included in its initial state are the entire expression as the machine state \(M
 
 Subsequently, when the machine state changes to $\color{red}x + 2$, the environment is updated to $\color{blue}x \rightarrow 3$, which shows that $\color{red}x$ has been successfully bound to {\color{red}3}. At this point, the stack is cleared, indicating that the system is ready to execute the expression. Next, the machine state expression $\color{red}\text{\textlbrackdbl} V \text{\textrbrackdbl}_{\gamma} + 2$ is computed by looking up in the environment and replacing $\color{red}x$ with {\color{red}3}, which in turn is transformed to {\color{red}3} + {\color{red}2}. Eventually, the machine status is updated to {\color{red}5}, signaling that the computation has been successfully completed. This example not only shows how the generalized CEK machine handles complex expressions and variable bindings but also highlights the importance of the stack in preserving execution context.
 
+\subsection{Operational Semantics}
+
 \begin{align*}
-\text{E-LET} & \quad \llparenthesis \ \textbf{let} \ x: T = M \textbf{ in } N, \Sigma \ \rrparenthesis \rightarrow \llparenthesis \  M, \langle x, N \rangle \cdot \Sigma \ \rrparenthesis \\
-\text{E-RETURN} & \quad \llparenthesis \ V, \langle x, M\rangle \cdot \Sigma \ \rrparenthesis \rightarrow \llparenthesis \ M\{V/x\}, \Sigma \ \rrparenthesis \\
-\text{E-APP} & \quad \llparenthesis \ f(\overrightarrow{V}), \Sigma \ \rrparenthesis \rightarrow \llparenthesis \ M\{\overrightarrow{V}/\overrightarrow{x}\}, \Sigma \ \rrparenthesis \quad \text{if } \Roman{P}(f) = \text{def } f(\overrightarrow{x} : A) : B \{ M \} \\
-\text{E-NEW} & \quad \llparenthesis \ \texttt{new}, \Sigma \ \rrparenthesis \rightarrow \llparenthesis \  va, (a, \Sigma) \ \rrparenthesis \quad (a \text{ is fresh}) \\
-\text{E-SEND} & \quad \llparenthesis \ a!m\overrightarrow{V}, \Sigma \ \rrparenthesis \rightarrow \llparenthesis \ (), \Sigma \parallel a \leftarrow m\overrightarrow{V} \ \rrparenthesis \\
-\text{E-SPAWN} & \quad \llparenthesis \ \texttt{spawn } M, \Sigma\ \rrparenthesis \rightarrow \llparenthesis \  (), \Sigma \parallel (M, \varepsilon)\rrparenthesis \\
-\text{E-FREE} & \quad \llparenthesis \  va)((\texttt{guard } a: E \{ G[\texttt{free } h \rightarrow M]\}), \Sigma\ \rrparenthesis \rightarrow \llparenthesis \ M, \Sigma \ \rrparenthesis
+& \text{E-LET} &  \quad \llparenthesis \textbf{let} \ x: T = M \textbf{ in } N, \gamma, \Sigma \rrparenthesis & \quad \longrightarrow  \quad \llparenthesis M, \gamma', \langle x, \gamma, N \rangle \cdot \Sigma \rrparenthesis \\
+&\text{E-RETURN} & \quad \llparenthesis V, \gamma', \langle x, \gamma, M \rangle \cdot \Sigma \rrparenthesis & \quad\longrightarrow  \quad \llparenthesis M, \gamma:\{x\mapsto V\}, \Sigma \rrparenthesis \\
+&\text{E-APP} & \text{if } \mathbb{P} (f) = \textbf{def } f(\overrightarrow{x} : A) : B \{ M \} \quad \llparenthesis f(\overrightarrow{V}),\gamma, \Sigma \rrparenthesis & \quad\longrightarrow  \quad \llparenthesis M, \gamma:\{\overrightarrow{x} \mapsto \overrightarrow{V}\}, \Sigma \rrparenthesis \quad \\ 
+&\text{E-NEW} & \quad \llparenthesis \textbf{new}, \gamma, \Sigma \rrparenthesis & \quad \longrightarrow  \quad (va) (\llparenthesis a, \gamma', \Sigma \rrparenthesis) \quad (a \text{ is fresh}) \\
+&\text{E-SEND} & \quad \llparenthesis a!m\overrightarrow{V}, \gamma, \Sigma \rrparenthesis & \quad\longrightarrow  \quad \llparenthesis (), \gamma, \Sigma \rrparenthesis \parallel \llparenthesis a \leftarrow m[\overrightarrow{V}] \rrparenthesis \\
+&\text{E-SPAWN} & \quad \llparenthesis \textbf{spawn } M, \gamma,\Sigma \rrparenthesis & \quad \longrightarrow  \quad \llparenthesis (), \gamma, \Sigma \rrparenthesis \parallel \llparenthesis M, \varepsilon \rrparenthesis \\
+&\text{E-FREE}&  \quad \llparenthesis va)((\textbf{guard } a: E \{ G[\textbf{free } h \rightarrow M]\}), \gamma,\Sigma \rrparenthesis & \quad \longrightarrow \quad \llparenthesis M, \gamma', \Sigma \rrparenthesis \\
+\multicolumn{4}{l}{\text{E-RECV} \quad \llparenthesis \textbf{guard } a: E \{ G[\textbf{receive } m[\overrightarrow{x}] \textbf{ from } y \mapsto M]\}, \gamma, \Sigma \rrparenthesis \parallel a \leftarrow m[\overrightarrow{V}] \quad } \\
+\multicolumn{4}{r}{\longrightarrow \quad \llparenthesis M, \gamma:\{\overrightarrow{x} \mapsto \overrightarrow{V}, y \mapsto a \}, \Sigma \rrparenthesis}
 \end{align*}
 
-
-\begin{equation}
-  \llbracket     1 \rrbracket       \quad
-  \llparenthesis 2 \rrparenthesis   \quad
-  \llceil        3 \rrceil          \quad
-  \llfloor       4 \rrfloor         \quad
-\end{equation}
 
 
 \section{Pat Scheduling}
@@ -487,8 +484,26 @@ P4 & & & & & & & & \cellcolor{yellow!25} & \cellcolor{yellow!25} \\
 \end{center}
 
 
+\section{Garbage Collection}
+
+Garbage collection is a core feature of automatic memory management in programming languages, designed to identify and free memory that is no longer being used by a program. This mechanism is essential to prevent memory leaks, improve software performance, and avoid problems such as memory exhaustion. In the context of automatic memory management, developers do not need to manually free the memory; the garbage collector will be executed periodically to identify inaccessible memory areas and clean them up.
+
+The Pat language incorporates a similar mark-and-sweep and reference counting method in its garbage collection mechanism to manage memory resources efficiently. In this hybrid strategy, when the system detects that a process needs to block-usually because the process has guarded a mailbox and is waiting to receive a message-the garbage collector first performs a traversal operation. This traversal involves checking the environments of all processes to determine if a reference to the mailbox exists. If so, the garbage collector adds a reference count to the mailbox in a dictionary structure by 1. The maintenance of this reference count ensures that the mailbox will not be released while at least one process may access it in the future.
+
+The addition of the reference count provides a quick path to garbage collection(Fig \ref{fig:gc1}). On subsequent checks, if the system reconfirms the need to block the same process, the garbage collector will preferentially check if the count of the mailbox in the dictionary is greater than 0. If it is, then it will block the process without having to traverse through all the processes again, which greatly improves efficiency. Only if the count reaches 0, i.e. no process has a reference to the mailbox in its environment, will the garbage collector further traverse all processes. If, at the end of the traversal, the reference count for the mailbox is \textbf{still 0}, indicating that it is no longer being guarded or used by any process, the garbage collector will then release (free) the memory occupied by the mailbox.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{dissertation/images/gc.pdf}    
+    \caption{ 
+    Garbage Collection Workflow in Process Scheduling
+    }
+    \label{fig:gc1} 
+\end{figure}
 
 
+
+This combination of mark-and-sweep and reference counting achieves a balance in the Pat language between ensuring that resources that are no longer needed are reclaimed in a timely manner and avoiding performance problems caused by frequent traversals. In this way, Pat provides an efficient and safe memory management solution for concurrent programming, ensuring rational resource utilization and stable program operation.
 
 
 
@@ -646,7 +661,7 @@ Therefore, if we have more time, we plan to explore and implement a more in-dept
 
 This in-depth reference counting strategy not only improves the efficiency of garbage collection and reduces the cases of incorrectly reclaiming or retaining objects, but also optimizes the memory usage while ensuring the performance of the system. By researching and implementing these advanced features, we expect to further mitigate the impact of garbage collection on program execution and improve the execution efficiency and responsiveness of the entire system.
 
-\subsection{Advanced Scheduling Algorithms}
+\subsection{Advanced Scheduling Methods}
 
 Regarding the research on scheduling algorithms, our current implementation employs the Round-Robin scheduling approach, which is a simple and straightforward scheduling strategy. However, we also recognize that other framework, such as the EIO scheduling, which is capable of supporting parallel IO operations, may provide better performance and efficiency(Figure \ref{lst:eio}).The introduction of EIO not only takes advantage of the high-performance IO operation features provided by modern operating systems, such as Linux's io\_uring, but also allows concurrent code to be written in a much more concise and efficient manner through a direct style of IO stacking. This approach does a lot more than just reduce heap allocation and increase speed, it also makes concurrent code written in the same style as non-concurrent code, which greatly improves the readability and maintainability of the code.
 
