@@ -426,3 +426,21 @@
 ### 23 Feb 2024
 
 * *0.5 hour* Organize meeting notes
+
+### 24 Feb 2024
+
+* *2 hour* Modify the test description in evaluation chapter
+* *6 hour* Add benchmark curves in evaluation chapter
+
+### 25 Feb 2024
+
+* *8 hour* Add part of Pat operational semantics in design chapter
+
+### 26 Feb 2024
+
+* *8 hour* Add CEK implementation in implementation chapter
+
+### 27 Feb 2024
+
+* *5 hour* Add the rest of Pat operational semantics in design chapter
+* *1 hour* Modify the benchmark curves and description in evaluation chapter
