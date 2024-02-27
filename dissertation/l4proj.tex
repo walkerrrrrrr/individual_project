@@ -430,10 +430,12 @@ In the design of the Pat language, reference was made to Daniel Hillerstrom and 
 \text{Frame}\;\; & \sigma ::= \langle \chi, \gamma, M \rangle \\
 \text{Value}\;\; & v ::= \gamma(v) 
 \end{align*}
-\begin{center}
-\textit{\textbf{Figure 4.2:} CEK Syntax}
-\end{center}
-\vspace{10pt}
+\vspace{-2\baselineskip} 
+\begin{figure}[ht]
+    \caption{CEK Syntax}
+    \label{fig:equations}
+\end{figure}
+
 With this design, even though \textbf{Yield} functionality is not usually provided directly in functional programming paradigms, the model effectively implements yield-like behavior. This is particularly important for thread scheduling in Pat. In a concurrent environment, \textbf{Yield} allows a thread to actively release processor resources, thus allowing the scheduler to allocate resources to other threads or tasks. The continuation part of the generalized CEK machine $\boldsymbol{\Sigma}$ provides the basis for implementing this operation. Each continue frame can be thought of as a pause point that contains all the information needed to resume execution, similar to the pause and resume mechanism of the yield operation.
 
 Let us execute the expression again: let x = 3 in x + 2, this time with a generalized CEK machine:
@@ -448,22 +450,51 @@ Let us execute the expression again: let x = 3 in x + 2, this time with a genera
 
 Included in its initial state are the entire expression as the machine state \(M\), an empty environment \(\gamma\) indicating that there are no variables bound, and an empty stack \(\Sigma\) implying that there are currently no computations to be executed. This setup is similar in nature to a traditional CEK machine. However, as the evaluation process unfolds, the machine state is first updated to {\color{red}3}, signaling that the variable $\color{red}x$ is about to be bound to it, and simultaneously pushing the expression $\color{red}x + 2$ onto the stack, awaiting further computation. The role of the stack in this step is to hold the current computational context, including variables and environment, which is very different from the traditional CEK machine that simply puts the expression to be continued into the "continue" section.
 
-Subsequently, when the machine state changes to $\color{red}x + 2$, the environment is updated to $\color{blue}x \rightarrow 3$, which shows that $\color{red}x$ has been successfully bound to {\color{red}3}. At this point, the stack is cleared, indicating that the system is ready to execute the expression. Next, the machine state expression $\color{red}\text{\textlbrackdbl} V \text{\textrbrackdbl}_{\gamma} + 2$ is computed by looking up in the environment and replacing $\color{red}x$ with {\color{red}3}, which in turn is transformed to {\color{red}3} + {\color{red}2}. Eventually, the machine status is updated to {\color{red}5}, signaling that the computation has been successfully completed. This example not only shows how the generalized CEK machine handles complex expressions and variable bindings but also highlights the importance of the stack in preserving execution context.
+Subsequently, when the machine state changes to $\color{red}x + 2$, the environment is updated to $\color{blue}x \rightarrow 3$, which shows that $\color{red}x$ has been successfully bound to {\color{red}3}. At this point, the stack is cleared, indicating that the system is ready to execute the expression. Next, the machine state expression $\color{red}\text{\textlbrackdbl} V \text{\textrbrackdbl}_{\gamma} + 2$ is computed by looking up in the environment and replacing $\color{red}x$ with {\color{red}3}, which in turn is transformed to {\color{red}3} + {\color{red}2}. Eventually, the machine status is updated to {\color{red}5}, signaling that the computation has been successfully completed. This example not only shows how the generalized CEK machine handles complex expressions and variable bindings but also highlights the importance of the stack in preserving execution context. 
 
 \subsection{Operational Semantics}
 
-\begin{align*}
-& \text{E-LET} &  \quad \llparenthesis \textbf{let} \ x: T = M \textbf{ in } N, \gamma, \Sigma \rrparenthesis & \quad \longrightarrow  \quad \llparenthesis M, \gamma', \langle x, \gamma, N \rangle \cdot \Sigma \rrparenthesis \\
-&\text{E-RETURN} & \quad \llparenthesis V, \gamma', \langle x, \gamma, M \rangle \cdot \Sigma \rrparenthesis & \quad\longrightarrow  \quad \llparenthesis M, \gamma:\{x\mapsto V\}, \Sigma \rrparenthesis \\
-&\text{E-APP} & \text{if } \mathbb{P} (f) = \textbf{def } f(\overrightarrow{x} : A) : B \{ M \} \quad \llparenthesis f(\overrightarrow{V}),\gamma, \Sigma \rrparenthesis & \quad\longrightarrow  \quad \llparenthesis M, \gamma:\{\overrightarrow{x} \mapsto \overrightarrow{V}\}, \Sigma \rrparenthesis \quad \\ 
-&\text{E-NEW} & \quad \llparenthesis \textbf{new}, \gamma, \Sigma \rrparenthesis & \quad \longrightarrow  \quad (va) (\llparenthesis a, \gamma', \Sigma \rrparenthesis) \quad (a \text{ is fresh}) \\
-&\text{E-SEND} & \quad \llparenthesis a!m\overrightarrow{V}, \gamma, \Sigma \rrparenthesis & \quad\longrightarrow  \quad \llparenthesis (), \gamma, \Sigma \rrparenthesis \parallel \llparenthesis a \leftarrow m[\overrightarrow{V}] \rrparenthesis \\
-&\text{E-SPAWN} & \quad \llparenthesis \textbf{spawn } M, \gamma,\Sigma \rrparenthesis & \quad \longrightarrow  \quad \llparenthesis (), \gamma, \Sigma \rrparenthesis \parallel \llparenthesis M, \varepsilon \rrparenthesis \\
-&\text{E-FREE}&  \quad \llparenthesis va)((\textbf{guard } a: E \{ G[\textbf{free } h \rightarrow M]\}), \gamma,\Sigma \rrparenthesis & \quad \longrightarrow \quad \llparenthesis M, \gamma', \Sigma \rrparenthesis \\
-\multicolumn{4}{l}{\text{E-RECV} \quad \llparenthesis \textbf{guard } a: E \{ G[\textbf{receive } m[\overrightarrow{x}] \textbf{ from } y \mapsto M]\}, \gamma, \Sigma \rrparenthesis \parallel a \leftarrow m[\overrightarrow{V}] \quad } \\
-\multicolumn{4}{r}{\longrightarrow \quad \llparenthesis M, \gamma:\{\overrightarrow{x} \mapsto \overrightarrow{V}, y \mapsto a \}, \Sigma \rrparenthesis}
-\end{align*}
+The introduction of Environment is an essential improvement when exploring the operational semantics of the Pat language. In previous operational semantics\colorbox{yellow}{referenceHere}, the substitution of variables was usually accomplished through substitution operations, which required traversing the entire expression to replace all instances of the variable whenever a variable was used. This process is not only inefficient because it may involve multiple traversals of the entire expression tree, but it may also lead to the creation of multiple unnecessary copies. The introduction of environments optimizes this computational process and brings significant improvements at both theoretical and implementation levels.
 
+As can be seen in Figure \ref{fig:equations}, the adopted generalized CEK machine makes important changes to the runtime syntax of the previous version, with environments forming part of the core composition, in a model in which environments are not just static structures storing variable bindings, but rather act as dynamic, queryable and updatable records, in stark contrast to the traditional substitution operation. contrasting with traditional substitution operations. Specifically, an environment ($\gamma$) is defined as a possibly empty sequence in which each entry is associated with a mapping from a variable to its value. Where "$\cdot$" denotes an empty environment, "$\gamma, x \mapsto V$" denotes an extended environment that maps the variable $x$ to the value $V$ on top of the existing environment $\gamma$.
+
+In the Reduction rules section it can be seen that the environment component plays a key role. For example, in the E-APP rules, the computation of the function application $f(\overrightarrow V)$ involves retrieving the function definition from the environment and mapping the real parameter $\overrightarrow V$ to the formal parameter $\overrightarrow x$. This process again highlights the role of the environment in simplifying computation and improving efficiency.
+
+\subsubsection{Runtime syntax}
+
+\begin{align*}
+ \quad &\text{Runtime names} & a \quad & && \text{Guard contexts} \quad & \mathcal{G} ::=& \ \overrightarrow{G_1} \cdot [ \; ] \cdot \overrightarrow{G_2} \\
+ \quad &\text{Names}        & u, v, w  & ::= x \mid a && \text{Configurations} & \mathcal{C}, \mathcal{D} ::=& \ \llparenthesis \ M, \gamma, \Sigma \ \rrparenthesis \mid a \leftarrow \textcolor{red!80!black}{\textbf{m}} [\overrightarrow{V}] \\
+ \quad &\text{Environments} & \gamma  & ::=  \cdot \mid \gamma, x \mapsto V \quad  &&& \mid & \quad \mathcal{C} \ || \ \mathcal{D} \ | \ (va) \ \mathcal{C} \\
+ \quad &\text{Frames}       & \sigma  & ::=  \langle x,\gamma, M \rangle && \text{Runtime type envs} & \Delta  ::=& \ \cdot \mid \Delta, u : T \\
+ \quad &\text{Frame stacks} & \Sigma  & ::= \epsilon \mid \sigma \cdot \Sigma &&&& \fbox{%
+    $ \mathcal{C} \longrightarrow{} _\mathcal{p}\mathcal{D}$
+}
+\end{align*}
+\vspace{-\baselineskip} 
+\subsubsection{Reduction rules}
+
+\begin{align*}
+\quad & \text{E-LET} &  \quad \llparenthesis \ \textbf{let} \ x: T = M \textbf{ in } N, \gamma, \Sigma \ \rrparenthesis & \quad \longrightarrow  \quad \llparenthesis \ M, \gamma', \langle x, \gamma, N \rangle \cdot \Sigma \ \rrparenthesis \\
+\quad &\text{E-RETURN} & \quad \llparenthesis \ V, \gamma', \langle x, \gamma, M \rangle \cdot \Sigma \ \rrparenthesis & \quad\longrightarrow  \quad \llparenthesis \ M, \gamma[x \mapsto V], \Sigma \ \rrparenthesis \\
+\quad &\text{E-APP} & \quad \llparenthesis \ f(\overrightarrow{V}),\gamma, \Sigma \ \rrparenthesis & \quad\longrightarrow  \quad \llparenthesis \ M, \gamma[\overrightarrow{x} \mapsto \overrightarrow{V}], \Sigma \ \rrparenthesis \quad \\ 
+&&& \quad \quad \quad \quad  ( \text{if } \mathcal{P} (f) = \textbf{def } f(\overrightarrow{x : A} ) : B \{ M \} )\\
+\quad &\text{E-NEW} & \quad \llparenthesis \ \textbf{new}, \gamma, \Sigma \ \rrparenthesis & \quad \longrightarrow  \quad (va) (\llparenthesis  \ a, \gamma', \Sigma \ \rrparenthesis) \quad (a \text{ is fresh}) \\
+\quad &\text{E-SEND} & \quad \llparenthesis \ a \ ! \ \textcolor{red!80!black}{\textbf{m}} [\overrightarrow{V}], \gamma, \Sigma \ \rrparenthesis & \quad\longrightarrow  \quad \llparenthesis \ (), \gamma, \Sigma \ \rrparenthesis \parallel \llparenthesis a \leftarrow \textcolor{red!80!black}{\textbf{m}}[\overrightarrow{V}] \ \rrparenthesis \\
+\quad &\text{E-SPAWN} & \quad \llparenthesis \ \textbf{spawn } M, \gamma,\Sigma \ \rrparenthesis & \quad \longrightarrow  \quad \llparenthesis \ (), \gamma, \Sigma \ \rrparenthesis \parallel \llparenthesis \ M, \gamma'  \varepsilon \ \rrparenthesis \\
+\quad &\text{E-FREE}&  \quad  \ (va)(\llparenthesis \ \textbf{guard } a: E \{ \mathcal{G}[\textbf{free } \mapsto M]\}, \gamma,\Sigma \ \rrparenthesis ) & \quad \longrightarrow \quad \llparenthesis \ M, \gamma', \Sigma \ \rrparenthesis \\
+\multicolumn{4}{l}{\quad \text{E-RECV} \quad \llparenthesis \ \textbf{guard } a: E \{ G[\textbf{receive } \textcolor{red!80!black}{\textbf{m}}[\overrightarrow{x}] \textbf{ from } y \mapsto M]\}, \gamma, \Sigma \ \rrparenthesis \parallel a \leftarrow \textcolor{red!80!black}{\textbf{m}} [\overrightarrow{V}] \quad } \\
+\multicolumn{4}{r}{\longrightarrow \quad \llparenthesis \ M, \gamma[\overrightarrow{x} \mapsto \overrightarrow{V}, y \mapsto a ], \Sigma \ \rrparenthesis \quad \quad \quad }
+\end{align*}
+\vspace{-2\baselineskip} 
+\begin{align*}
+ \text{E-N}\text{\scriptsize U} \ \frac{\mathcal{C} \longrightarrow \mathcal{D}}{(va)\mathcal{C} \longrightarrow (va)\mathcal{D}} \quad \quad \text{E-P}\text{\scriptsize AR} \ \frac{\mathcal{C} \longrightarrow \mathcal{C'}}{\mathcal{C} \parallel \mathcal{D} \longrightarrow \mathcal{C'} \parallel \mathcal{D}} & \quad \quad \text{E-S}\text{\scriptsize TRUCT} \frac{\mathcal{C} \equiv \mathcal{C'} \ \ \mathcal{C'} \longrightarrow \mathcal{D'} \ \ \mathcal{D'} \equiv \mathcal{D}}{\mathcal{C} \rightarrow \mathcal{D}} & & & \\
+\end{align*}
+\vspace{-3\baselineskip} 
+\begin{figure}[ht]
+    \caption{Pat Oprational Semantics}
+    \label{fig:equations}
+\end{figure}
 
 
 \section{Pat Scheduling}
@@ -501,31 +532,78 @@ The addition of the reference count provides a quick path to garbage collection(
     \label{fig:gc1} 
 \end{figure}
 
-
-
 This combination of mark-and-sweep and reference counting achieves a balance in the Pat language between ensuring that resources that are no longer needed are reclaimed in a timely manner and avoiding performance problems caused by frequent traversals. In this way, Pat provides an efficient and safe memory management solution for concurrent programming, ensuring rational resource utilization and stable program operation.
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 
 %==================================================================================================================================
 \chapter{Implementation}
-What did you do to implement this idea, and what technical achievements did you make?
-\section{Guidance}
-You can't talk about everything. Cover the high level first, then cover important, relevant or impressive details.
+summary
+\section{CEK in Pat}
+\subsection{Definition}
+When implementing the Pat language interpreter based on the CEK machine, the main concern was to simulate the control flow in the execution of the program, the binding of environment variables, and the management of the continuation of the execution. Based on the source code provided by Listing \ref{lst:types}, we can see that processes are represented by tuples consisting of several components, including the entire \textbf{program}, \textbf{process ID}, the number of \textbf{steps}, the \textbf{computation expression}, \textbf{environment}, and the \textbf{frame stack}.
+
+The \textbf{Control} in the CEK corresponds to the \textbf{comp} section of the code, which represents the currently pending computational expression. the \textbf{Environment} corresponds to the \textbf{(Ir.Binder.t * Ir.value)} list in the code, which is an environment list where each element is a binding that places a variable name. \textbf{Continuation} corresponds to the code's \textbf{frame list}, which is a frame stack in which each frame is a three-part tuple containing a variable binding \textbf{(Binder.t)}, an environment (also a list of variable-to-value mappings), and a computational expression to be executed. 
+
+This represents the framework for the concrete implementation of the CEK machine in the Pat language interpreter. According to this framework, all subsequent code of the interpreter will follow this structure for the evaluation and execution of the program, ensuring that each step of the computation will be in the correct context and that the program flow can be properly controlled according to the execution path.
+
+\noindent\begin{minipage}{\linewidth}
+\lstset{style=Ocamlstyle}
+\begin{lstlisting}[caption={Source Code of CEK Framework in Pat}, label={lst:types}]
+type process = program * pid * steps * comp * 
+(*@\hfill@*)environment * frame_stack 
+and pid = int
+and steps = int
+and environment = (Ir.Binder.t * Ir.value) list
+and frame = Frame of Binder.t * environment * comp
+and frame_stack = frame list
+\end{lstlisting}
+\end{minipage}
 
 
+\subsection{Implementation of Keywords}
+Specifically, as shown in the lising \ref{lst:framework}, the interpreter implements the evaluation of all keywords in the Pat language through the framework, such as the \textcolor{red}{Return} keyword that marks the end of a computation, while \textcolor{red}{Let} and \textcolor{red}{LetPair} are concerned with variable binding and scope management, keeping the environment consistent. Composite structures such as \textcolor{red}{Seq} and \textcolor{red}{Case} show how the interpreter handles sequential and conditional branching, while \textcolor{red}{App} demonstrates the handling of function applications. More advanced control structures, such as \textcolor{red}{Spawn} and \textcolor{red}{Send}, deal with concurrency and message passing, showing how the interpreter operates within a broader model of computation, while \textcolor{red}{Guard} expressions allow for pattern matching as messages arrive, and are key to synchronization and communication in concurrent programming. This implementation ensures that program execution not only follows the semantics, but also maintains precision and consistency of execution.
+
+\noindent\begin{minipage}{\linewidth}
+\lstset{style=Ocamlstyle}
+\begin{lstlisting}[caption={Source code for the specific implementation of evaluation for all keywords in Pat using the CEK architecture}, label={lst:framework}]
+match comp, env, stack with
+| Return _, _, [] -> ...
+| Annotate (term, _), env, stack 
+| Let {binder; term; cont}, env, stack 
+| LetPair {binders; pair; cont}, env, stack 
+| Seq (comp1, comp2), env, stack 
+| Return v, env, Frame (x, env', cont) :: stack
+| App {func; args}, env, stack
+| If {test; then_expr; else_expr}, env, stack
+| Case {term; branch1; branch2}, env, stack 
+| New interface_name, env, Frame (v, _, cont) :: stack
+| Spawn comp, env, stack
+| Send {target; message; _}, env, stack
+| Guard {target; pattern; guards; _}, env, stack
+\end{lstlisting}
+\end{minipage}
+
+\subsection{Case Study}
+
+We may demonstrate the specific execution process and the value seeking strategy by means of an example. Below is a description of the two keywords Let and App for evaluating values in execution(Listing \ref{lst:letapp}). In the Pat language, the \textcolor{red}{Let} expression allows us to bind the result of an expression to a variable so that it can be used in subsequent computations. When this expression is encountered, we create a new \textcolor{darkgreen}{Frame} that contains the variable binders, the current environment, and the continuation body. We then recursively execute the bound expression \textbf{term}.
+
+\noindent\begin{minipage}{\linewidth}
+\lstset{style=Ocamlstyle}
+\begin{lstlisting}[caption={Let and App Keyword Specific Implementation}, label={lst:letapp}]
+    | Let {binder; term; cont},env,stack ->
+        execute (program,pid,steps+1,term,env,
+        (*@\hfill@*)(Frame (binder,env,cont)) :: stack)
+    | App {func; args}, env, stack -> 
+        (match func with
+            | Lam {parameters; body; _} 
+            | Primitive op
+            | Variable (func_var, _))
+\end{lstlisting}
+\end{minipage}
+
+If it is an \textcolor{red}{App} expression, the function will be applied to the arguments, and if the function is a lambda expression, a new environment will be created and bound to the arguments and the \textbf{Lambda} body will be executed recursively. For primitive operations such as \textbf{print}, \textbf{intToString}, etc., we will perform a specific evaluation strategy for each primitive and update the result buffer if necessary. As for ordinary functions, a lookup of the function definition will be performed, and if the corresponding function is found in the declaration of the program, the function body will be executed in the new environment \textbf{env'}. If a closure is found in the current environment, the corresponding function body is also executed. As a whole with these examples, it is shown how the CEK model handles different keywords in the Pat language and how the environment, stack, and continuation bodies are used to maintain program state during the value seeking process.
 
 \section{General points}
 
@@ -637,11 +715,13 @@ Log Map & Computes the term \( xx + 1 = r \cdot xx \cdot (1 - xx) \) by delegati
 
 The composite graph(Figure \ref{fig:benchmark}) presents the execution time test results of four different program fragments in Pat language with different K values. From top to bottom, left to right, they are Fibonacci computation time, Ping Pong performance analysis, bank request-response chain performance, and log-mapping simulation performance. It can be observed that the execution time curves for both sequential and concurrent execution are quite close to each other, indicating that no significant additional overhead is introduced in concurrent execution.
 
-For the execution time fluctuations observed in the two graphs below, this may be due to the small time scale used for testing, which makes even minor execution variations appear as large fluctuations in the graphs. Such fluctuations may arise from system scheduling, memory cache efficiency, and other non-deterministic factors in the test environment. These results show the stability of the Pat language in handling different types of concurrent tasks and its potential to maintain low overhead for concurrent operations.
+In the field of concurrent computation, efficiently managing the overhead of parallel execution is one of the key factors in achieving high performance. By comparing the performance of these two strategies in computing Fibonacci series, we aim to evaluate the efficiency and feasibility of concurrent execution in the Pat language. We have chosen selected a range of K values (from 1 to 10) as input parameters to observe the variation of execution time for different input sizes. As shown in the figure \ref{fig:benchmark}, the graph on the left side demonstrates the comparative results of Fibonacci computational performance. The curves for sequential execution and concurrent execution closely follow each other, showing the similarity in time complexity between the two execution modes. Notably, Concurrent execution introduces no additional significant overhead, suggesting that the concurrency model of the Pat language has a potential advantage in maintaining low overhead.
+
+In addition, we consider a Ping Pong performance test as an example of concurrent communication overhead. In this test, we only considered concurrent execution (without the sequential execution model) to demonstrate the linear relationship between execution time and input size. The graph on the right clearly depicts this relationship, a finding that suggests that in the Pat language, even in concurrent tasks that require frequent communication, the execution time remains linear, unaffected by significant concurrency overhead.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.9\linewidth]{dissertation/images/benchmark.png}    
+    \includegraphics[width=0.88\linewidth]{dissertation/images/benchmark.pdf}    
     \caption{ 
     Comparative Execution Times of Sequential and Concurrent Code Snippets in Pat Language at Various K Values
     }

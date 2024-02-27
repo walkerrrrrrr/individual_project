@@ -295,9 +295,6 @@ textfont=it,tableposition=above]{caption}
       \itemsep=\parsep}
 
 
-\usepackage{listings}
-\usepackage{xcolor}
-
 \definecolor{codegray}{rgb}{0.99,0.99,0.99}
 
 \lstdefinestyle{patstyle}{
@@ -396,5 +393,20 @@ textfont=it,tableposition=above]{caption}
   showstringspaces=false,
 }
 
+\definecolor{darkgreen}{RGB}{0,100,0}
+\lstdefinestyle{Ocamlstyle}{
+  language=[Objective]Caml,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  commentstyle=\color{green},
+  stringstyle=\color{orange},
+  showstringspaces=false,
+  emph=[1]{Ir,Binder},
+  emphstyle=[1]\color{blue}, 
+  emph=[1]{Frame},
+  emphstyle=[1]\color{darkgreen}, 
+  emph=[2]{Return,Annotate,Let,LetPair,Seq,Return,App,If,Case,New,Spawn,Send,Guard},
+  emphstyle=[2]\color{red}, 
+}
+
 \usepackage{stmaryrd}
-\usepackage{svg}
