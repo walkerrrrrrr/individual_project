@@ -123,6 +123,29 @@
    	* In the "Micro-Benchmark Test" section, include a comparison between sequential and concurrent execution.
    	* Clarify that Eio is not a scheduling algorithm but a framework.
 * **Week 20**
+  * 10:00PM on Wednesday
+  * Meeting content:
+  	* The GC section needs to be a bit better motivated. In general OCaml is a managed language anyway so garbage collection of OCaml objects will happen transparently. What you're doing is specifically necessary due to the Pat semantics. Specifically, there is a 'free' guard -- we want to trigger this iff no other process has a reference to the particular mailbox.
+  	* Your diagram confuses two things: freeing a process and freeing a mailbox. You only really care about freeing a mailbox. Freeing a process is easy: you can discard it from the scheduler as soon as it evaluates to a value.
+  	* I know we've referred to it as mark-and-sweep, but I don't think that's quite precise. I'd say it has parallels to mark-and-sweep, in that it requires a state traversal, but it's not exactly the same. Probably better to say that your approach is inspired by mark-and-sweep GCs.
+  	* I liked your 'Implementation of Keywords' section. Thing is though, the code for many of them is missing (I assume for space reasons). So I think the better way of doing this would be to paste in the AST definition (mentioning that it was done already) and then discuss interesting evaluation clauses.
+  	* Let and App are important but not what you want to highlight. Highlight concurrent reduction: things like spawning, mailbox communication, guards, etc. How does the evaluation of each of these interact with the scheduler? At the moment it feels there's a lot missing from the actual concurrent implementation, which is one of the most important parts of your project.
+  	* In the evaluation section: "about 100 times" -- why not exactly 100 times?
+Why is there no result for the memory management test? Is the result ()? If so, put that rather than -. Also, pattern matching (comprehensive) -- what does the description for that mean?
+  	* Don't say "distributed computing environment" -- you're not doing distribution! 
+  	* Can you mention a bit about the '-' and the 'INFO..' in Table 6.2?
+  	* minor: 'table 6.3' --> 'Table 6.3'
+  	* When you describe K-Fork -- how many was K originally, and what did you edit it to? For each of these you should specify the value of 'K' in the table.
+  	* When discussing reference counting in the reflection, would recommend discussing / citing the Perceus algorithm https://dl.acm.org/doi/10.1145/3453483.3454032
+  	* I'm not sure the distributed systems / Hadoop discussion adds much (think it confuses things a bit). It would also be good to mention in the bit about MMOs etc. that there are protocols that need to be followed
+  	* The discussion of thread deadlock is too formal for an introduction. I'd just say that it means that no thread can make progress because of a cyclic lock or communication dependency.
+  	* You're launching into Pat in Sec 1.3 without really describing it first. I'd firstly briefly describe actor languages (e.g., Erlang) and how they use mailboxes, and then introduce Pat as a research language with first-class mailboxes and mailbox types.
+  	* Minor: need a space between full stop and Java. Love the deadlock example!
+  	* I think it's important to make it clear that issues with channels are mainly due to communication mismatches and channel-based deadlocks (e.g., two processes both receiving on the same channel, or two processes receiving on channels where a send is blocked by a receive)
+  	* When discussing channels vs. actors, it's worth saying that it's easier to give types to channels (e.g., in Go) but more difficult for actors (the first was TAkka in early 2010s -- there's a paper called "Typecasting Actors: From Akka to TAkka"). At the same time it's more difficult to implement channels   	* in a distributed way (requiring, e.g., complex distributed algorithms -- see "A Concurrent ML Library in Concurrent Haskell (ICFP '09)" and "Session-Based Distributed Programming in Java" by Hu & Yoshida (I think ECOOP '09-ish)
+  	* I think you'd be better referring to "A Universal Modular ACTOR Formalism for Artificial Intelligence" by Hewitt et al (IJCAI '73) as a better reference for the first actor paper rather than Ford & Hamacher. Also Gul Agha's thesis "Actors: A model of concurrent computation in distributed systems" is also good to cite.
+  	* It might be good to cite the book "Behavioural Types: From Theory to Tools" in the behavioural types section, same with the survey paper "Behavioural Types in Programming Languages"
+  	* The "Mailbox Type" section (2.3.2) needs a bit of work -- but I've run out of time... I'll get comments from here on out later 
 * **Week 21**
 * **Week 22**
 * **Week 23 [TERM ENDS]**
