@@ -86,6 +86,8 @@
   * Modify the evaluation part
   * Begin to write the implementation part
 * **Week 20**
+  * Modify the dissertation according to guidance
+  * Finish the first draft of dissertation
 * **Week 21**
 * **Week 22**
 * **Week 23 [TERM ENDS]**
