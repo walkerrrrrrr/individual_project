@@ -436,6 +436,8 @@
 
 * *8 hour* Add part of Pat operational semantics in design chapter
 
+## Week 20
+
 ### 26 Feb 2024
 
 * *8 hour* Add CEK implementation in implementation chapter
@@ -444,3 +446,11 @@
 
 * *5 hour* Add the rest of Pat operational semantics in design chapter
 * *1 hour* Modify the benchmark curves and description in evaluation chapter
+
+### 28 Feb 2024
+
+* *0.5 hour* Organize meeting notes
+
+### 01 Mar 2024
+
+* *0.5 hour* Organize meeting notes
