@@ -454,3 +454,13 @@
 ### 01 Mar 2024
 
 * *0.5 hour* Organize meeting notes
+* *6 hour* Modify the dissertation based on supervisor's suggestions
+
+### 02 Mar 2024
+
+* *8 hour* Modify the dissertation based on supervisor's suggestions
+
+### 03 Mar 2024
+
+* *2 hour* Modify the dissertation based on supervisor's suggestions
+* *8 hour* Write the implementation chapter
