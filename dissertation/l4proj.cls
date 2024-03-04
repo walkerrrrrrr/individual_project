@@ -385,7 +385,7 @@ textfont=it,tableposition=above]{caption}
 
 \lstdefinestyle{ocamlstyle}{
   language=[Objective]Caml,
-  basicstyle=\ttfamily\small,
+  basicstyle=\ttfamily\footnotesize,
   keywordstyle=\color{blue},
   identifierstyle=\color{red},
   commentstyle=\color{green},
@@ -393,20 +393,28 @@ textfont=it,tableposition=above]{caption}
   showstringspaces=false,
 }
 
-\definecolor{darkgreen}{RGB}{0,100,0}
+\definecolor{darkgreen}{RGB}{0,150,0}
 \lstdefinestyle{Ocamlstyle}{
   language=[Objective]Caml,
-  basicstyle=\ttfamily\small,
+  basicstyle=\ttfamily\footnotesize,
   keywordstyle=\color{blue},
   commentstyle=\color{green},
   stringstyle=\color{orange},
+  commentstyle=\color{darkgreen},
   showstringspaces=false,
   emph=[1]{Ir,Binder},
   emphstyle=[1]\color{blue}, 
   emph=[1]{Frame},
   emphstyle=[1]\color{darkgreen}, 
-  emph=[2]{Return,Annotate,Let,LetPair,Seq,Return,App,If,Case,New,Spawn,Send,Guard},
+  emph=[2]{Return,Annotate,Let,LetPair,Seq,Return,App,If,Case,New,Spawn,Send,Guard,Finished,Unfinished,Spawned,MessageToSend,Blocked,FreeMailbox,VAnnotate,Constant,Primitive,Variable,Pair,Inl,Inr,Lam,Mailbox,Receive,Free,Fail},
   emphstyle=[2]\color{red}, 
+}
+
+\lstdefinestyle{printer}{
+  showstringspaces=false,
+  keywordstyle=\textbf,
+  emph=[1]{Mailbox_counting,Blocked,process,Current,PID,Comp,Env,Frame,Stack,},
+  emphstyle=[1]\textbf
 }
 
 \usepackage{stmaryrd}

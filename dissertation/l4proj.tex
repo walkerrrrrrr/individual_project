@@ -82,9 +82,9 @@
 
 
 \section{Concurrency and Distributed Systems}
-Concurrency and distributed systems are becoming increasingly important in modern computational science, especially in the context of cloud computing and big data. \colorbox{yellow}{referenceHere[11]}Sutter and Larus (2005) emphasize that with the proliferation of multicore processors, the software industry needs to adopt new tools and ways of thinking in order to fully utilize the potential of multicore processors. Concurrency refers to the ability of a system to handle multiple tasks at the same time, which allows efficient use of computational resources. For example, by processing hundreds or even thousands of client requests in parallel, modern Web servers are able to dramatically improve response times and system throughput. This shift in demand requires mainstream software development to stop ignoring concurrency, a challenge that requires developers to master the design and implementation of concurrent programs (Sutter & Larus, 2005)\colorbox{yellow}{referenceHere[11]}.
+Concurrency and distributed systems are becoming increasingly important in modern computational science, especially in the context of cloud computing and big data. \cite{sutter_2005_software} emphasize that with the proliferation of multicore processors, the software industry needs to adopt new tools and ways of thinking in order to fully utilize the potential of multicore processors. Concurrency refers to the ability of a system to handle multiple tasks at the same time, which allows efficient use of computational resources. For example, by processing hundreds or even thousands of client requests in parallel, modern Web servers are able to dramatically improve response times and system throughput. This shift in demand requires mainstream software development to stop ignoring concurrency, a challenge that requires developers to master the design and implementation of concurrent programs (\cite{sutter_2005_software}).
     
-The design of Multiplayer Online Role-Playing Game (MMORPG) servers, such as exemplified by the \colorbox{yellow}{referenceHere[7]}World of Warcraft (Figure \ref{fig:WoWlogo}) demonstrates the value of concurrent programming in real-world applications, where the use of a client-server model and event-driven architecture enables asynchronous processing of player requests. \colorbox{yellow}{referenceHere[9]}Kim and Kim's (2019) study, by utilizing Input/Output Completion Port (IOCP) and multithreading techniques, has demonstrated methods to effectively improve server performance, handle concurrent connections and employ fine-grained locking mechanisms for access control of shared resources to reduce the risk of deadlock and effectively improve system responsiveness and throughput.
+The design of Multiplayer Online Role-Playing Game (MMORPG) servers, such as exemplified by the \cite{glenday_guinness} (Figure \ref{fig:WoWlogo}) demonstrates the value of concurrent programming in real-world applications, where the use of a client-server model and event-driven architecture enables asynchronous processing of player requests. \cite{kim_2018_design} study, by utilizing Input/Output Completion Port (IOCP) and multithreading techniques, has demonstrated methods to effectively improve server performance, handle concurrent connections and employ fine-grained locking mechanisms for access control of shared resources to reduce the risk of deadlock and effectively improve system responsiveness and throughput.
 
 \begin{figure}[h]
     \centering
@@ -103,9 +103,9 @@ The design of Multiplayer Online Role-Playing Game (MMORPG) servers, such as exe
     \end{minipage}
 \end{figure}
 
-On the other hand, Distributed systems achieve workload decentralization by assigning tasks across multiple compute nodes, which is especially critical for processing large-scale data sets. For example, \colorbox{yellow}{referenceHere[8][1]}Google's Bigtable and Apache Hadoop's Distributed File System (HDFS) are capable of handling petabytes of data and supporting complex data analysis tasks. In this context, the distributed architecture of \colorbox{yellow}{referenceHere[13]}Pokemon GO(Figure \ref{fig:PokemonGo}) demonstrates the efficient ability of distributed systems to manage and synchronize millions of players globally, through a network of servers deployed in multiple locations around the world, and the use of geo-distributed database technology to decentralize the storage of data based on the geographic location of players, showing the importance of this technology in dealing with large-scale, real-time interactive applications.
+On the other hand, Distributed systems achieve workload decentralization by assigning tasks across multiple compute nodes, which is especially critical for processing large-scale data sets. For example, the distributed architecture of \cite{wikipediacontributors_2019_pokmon} demonstrates the efficient ability of distributed systems to manage and synchronize millions of players globally, through a network of servers deployed in multiple locations around the world, and the use of geo-distributed database technology to decentralize the storage of data based on the geographic location of players, showing the importance of this technology in dealing with large-scale, real-time interactive applications.
 		
-The combination of concurrency and distributed systems not only greatly improves the efficiency of task processing, but also enhances the reliability and scalability of the system. In the case of distributed databases, for example, data is replicated across multiple nodes, ensuring that the entire system can maintain normal operation even if some of the nodes fail. In addition, this technology supports the dynamic adjustment of computing resources according to actual demand, a feature that is widely used in cloud service platforms such as \colorbox{yellow}{referenceHere[2][10]}Amazon Web Services and Microsoft Azure. This exposition not only demonstrates the key role of concurrent programming in ensuring high availability and optimizing user experience, but also provides an important reference for designing efficient concurrent and distributed systems.
+The combination of concurrency and distributed systems not only greatly improves the efficiency of task processing, but also enhances the reliability and scalability of the system. In the case of distributed databases, for example, data is replicated across multiple nodes, ensuring that the entire system can maintain normal operation even if some of the nodes fail. In addition, this technology supports the dynamic adjustment of computing resources according to actual demand, a feature that is widely used in cloud service platforms such as \cite{aws_2023_amazon} and \cite{microsoft_2023_cloud}. This exposition not only demonstrates the key role of concurrent programming in ensuring high availability and optimizing user experience, but also provides an important reference for designing efficient concurrent and distributed systems.
 
 \section{Challenges}
 
@@ -113,7 +113,7 @@ While these systems are capable of handling unprecedented amounts of data and co
 
 \subsection{Thread Deadlock}
 
-A commonly encountered problem in concurrent programming is thread deadlock, Holt (1972) \colorbox{yellow}{referenceHere} defines that when a process P in a system is blocked in state S and there does not exist any state T such that S can transition to T, then we say that process P is in a deadlocked state in state S. A process P is considered deadlocked if it is blocked in T for all possible states T . For example, a deadlock is caused when two threads have each locked some resources and are both waiting for the other to release their holdings. This situation is particularly common in database transaction processing and operating system resource allocation, and seriously affects program stability and efficiency.
+Thread deadlocks are a common problem in concurrent programming, which in short means that no thread is able to continue execution due to circular locking or communication dependencies. For example, if two threads each occupy a portion of a resource and are waiting for the other to release its resource in order to continue execution, this creates a deadlock. This situation is particularly common in database transactions and operating system resource allocation, and it can seriously affect the stability and efficiency of a program.
 
 \subsection{Communication Mismatch}
 
@@ -121,7 +121,11 @@ Communication mismatch is another critical issue in distributed systems. Nodes i
 
 \section{Case Study: The Mailbox Mechanism}
 
-In further exploring the application of the Pat language in the field of concurrent programming, this paper aims to show how mailbox types in the Pat language can effectively manage concurrent tasks by introducing a concrete code example. As we see in Listing \ref{lst:patexample1}, By defining the \textbf{Tasks interface} and its implementation, the sample code clearly shows the process of producing and consuming tasks, where the \textcolor{blue}{produceTasks} function is responsible for sending tasks to instances of the Tasks interface, and the \textcolor{blue}{consumeTasks} function is responsible for receiving and executing these tasks.The Pat language utilizes the concurrency primitive \textbf{spawn} to implement the parallel execution of functions. Thus, tasks are produced and consumed simultaneously in different execution streams. By introducing mailbox types, the type and order of messages in a mailbox can be enforced. This mechanism reduces the risk of deadlocks and race conditions and improves code readability and maintainability. Thus, the example not only demonstrates the effectiveness of the Pat language in simplifying concurrent programming, but also highlights the practical value and research implications of the Pat language in the field of concurrent and distributed programming.
+When exploring the field of concurrent programming in depth, actor modeling languages, such as Erlang, provide an effective concurrent programming paradigm. By introducing mailboxes as a communication mechanism, these languages allow processes to collaborate with each other in a message-passing fashion, effectively avoiding the locking and shared state management problems of traditional concurrent programming. However, while mailboxes serve as a bridge between actors, they do not explicitly constrain the types of messages and can only process messages in the order they are received, which is not sufficient to deal with an inherently unorganized message flow.
+
+Building on this, the Pat language, an emerging language in the research field, introduces the notion of mailboxes and mailbox types for first-class. Compared with traditional actor modeling languages, the Pat language is designed to emphasize the importance of mailbox types, and further enhance the security and maintainability of concurrent programs by constraining the types and processing order of messages in the mailboxes through a type system.This innovative point of the Pat language not only simplifies the complexity of concurrent programming, but also provides new perspectives and tools for research in the field of concurrent and distributed programming.
+
+In further exploring the application of the Pat language in the field of concurrent programming, this paper aims to show how mailbox types in the Pat language can effectively manage concurrent tasks by introducing a concrete code example. As we see in Listing \ref{lst:patexample1}, By defining the \textbf{Tasks interface} and its implementation, the message type in the mailbox is forced to be constrained to String. The sample code clearly shows the process of producing and consuming tasks, where the \textcolor{blue}{produceTasks} function is responsible for sending tasks to instances of the Tasks interface, and the \textcolor{blue}{consumeTasks} function is responsible for receiving and executing these tasks.The Pat language utilizes the concurrency primitive \textbf{spawn} to implement the parallel execution of functions. Thus, tasks are produced and consumed simultaneously in different execution streams. 
 
 \noindent\begin{minipage}{\linewidth}
 \lstset{style=patstyle}
@@ -149,6 +153,7 @@ def main(): Unit {
   spawn { produceTasks(task) };
   consumeTasks(task)
 }
+
 main()
 \end{lstlisting}
 \end{minipage}
@@ -191,6 +196,7 @@ Here is a quick Java example(Listing \ref{lst:deadlockExample}), if \textcolor{r
 \lstset{style=javastyle}
 \begin{lstlisting}[caption={Java example demonstrating a potential deadlock}, label={lst:deadlockExample}]
 ......
+
 new Thread(() -> {
     synchronized (lock1) {
         System.out.println("Thread 1: Holding lock 1...");
@@ -212,11 +218,12 @@ new Thread(() -> {
         }
     }
 }).start();
+
 ......
 \end{lstlisting}
 
 \subsection{Message Passing}
-In contrast, Message-passing Concurrency is a programming paradigm that enables communication and coordination by sending and receiving messages between processes or threads. The main advantage of this approach is that it provides a clear mechanism to avoid data contention and conflict, as data is passed through message exchange rather than sharing. In this model, each process or thread has a separate memory space and all communication takes place through well-defined message interfaces, but additional overhead is introduced\colorbox{yellow}{referenceHere[14]}.The Erlang language and the Akka framework are excellent representatives of this model.
+In contrast, Message-passing Concurrency is a programming paradigm that enables communication and coordination by sending and receiving messages between processes or threads. The main advantage of this approach is that it provides a clear mechanism to avoid data contention and conflict, as data is passed through message exchange rather than sharing. In this model, each process or thread has a separate memory space and all communication takes place through well-defined message interfaces, but additional overhead is introduced(\cite{a2023_message}).The Erlang language and the Akka framework are excellent representatives of this model.
 
 Although message-passing concurrency and shared-memory concurrency each have their own strengths, message-passing concurrency provides a clearer and more controlled approach to dealing with the problems of distributed systems and reducing complex synchronisation issues. Therefore, the message-passing concurrency paradigm was chosen in the design of the Pat language in order to provide a safer and more intuitive approach to concurrent programming.
 
@@ -224,15 +231,18 @@ Although message-passing concurrency and shared-memory concurrency each have the
 With its clear communication mechanism, the message-passing concurrency model provides the Pat language with an effective means to avoid data conflicts and competition, which significantly enhances the advantages of concurrent program design. On this basis, by introducing two high-level abstractions, Channel and Actors, not only the expressive ability of message-passing concurrency is further enhanced, but also the manageability and extensibility of concurrent programs are significantly improved (Figure \ref{fig:channel_actor}). Nevertheless, both models have revealed some problems in practice.
 
 \subsection{Channel}
-The Channels model, typically found in languages such as Go, implements inter-process communication through named channels, as depicted in Figure \ref{fig:channel_actor}.a. Processes or threads communicate and coordinate with each other by passing messages through these named channels.The main advantage of Channels is their flexibility and simple type system, which makes the model easy to understand and deploy, especially in situations where communication patterns change frequently. However, Channels can raise complex synchronisation issues, such as data contention and deadlocks when multiple processes access the same channel at the same time without proper synchronisation mechanisms.
+The channel model, especially widely used in languages such as Go, facilitates message passing between processes or threads by naming channels. As shown in the Figure \ref{fig:channel_actor}.a, processes or threads communicate and coordinate with each other by passing messages through these channels. These named channels allow messages to be exchanged between different execution units and are a key mechanism in concurrent programming. However, the use of channels is not without challenges, especially when it comes to synchronization issues. These problems stem mainly from communication mismatches and channel-based deadlocks, for example, when two processes are both waiting to receive data on the same channel, or when they try to send data on a channel blocked by a receive operation. These types of deadlocks and communication mismatches are common challenges in concurrent programming in the channel model.
+
+Implementing channels in a distributed environment is more complex, as discussed by \cite{chaudhuri_2009_a} in his paper "Concurrent ML Library in Concurrent Haskell", which is mainly attributed to the complexity of the distributed abstract state machine required for synchronization. Channels, points, and synchronizers interact according to rules and states defined for each entity to facilitate operations and transitions. In turn, state changes of entities lead to the complexity of implementing channels. In addition, the implementation of channels in a distributed environment involves not only communication structures and types, but also how to handle complex interaction patterns such as iteration, branching, and delegation(\cite{hu_sessionbased}). These researches show that while channel messaging between processes or threads explicitly specifies the type of data transferred by the channel, ensuring deadlock-free and efficient communication in distributed systems is a challenge.
+
 
 \subsection{Actor}
-The Actors model, as opposed to Channels, is implemented in Erlang or Elixir, where each Actor acts as an addressable process with a single message queue or mailbox for receiving messages (Figure \ref{fig:channel_actor}.b). Each Actor acts as an independent entity and interacts with each other through asynchronous message passing.The strength of the Actors model lies in its natural support for distributed computing, especially in terms of fault tolerance and system reliability. The independence of each Actor makes the model particularly suitable for building large-scale, scalable distributed applications. However, the Actors model faces its own challenges, especially in message management. Since each Actor's mailbox may receive any type of message, runtime errors may be raised, such as receiving a message type that cannot be processed. In addition, performance may become problematic when managing a large number of fine-grained Actors, especially in application scenarios that require fast response and efficient processing of a large number of messages.
+In contrast, the actor model, first proposed by \cite{hewitt_a} and implemented in languages such as Erlang, demonstrates the efficiency and generalizability of the actor model for AI languages dealing with the need for high parallelism. The model focuses on enabling each individual actor entity to interact via asynchronous message passing. According to Figure \ref{fig:channel_actor}.b, where each Actor is an addressable process with a message queue or mailbox for receiving messages. Each Actor is a separate entity that interacts via asynchronous message passing. This model is particularly well suited for building large-scale, scalable distributed applications, providing natural support for distributed computing, especially in terms of fault tolerance and system reliability. \cite{agha_1985_actors} points out that the Actor model has addressed key challenges in distributed computing, such as deadlocks and divergence. However, the actor model faces challenges in implementing type safety, and in the case of Akka, a framework that provides a model based on the actor model, it relies on dynamically typed messages, which can lead to type errors that are not detected until runtime, making debugging and maintenance more difficult. \cite{he_2014_typecasting} in "Typecasting Actors: from Akka to TAkka" in which they first attempted to address this problem and improve type safety by introducing statically typed messages to TAkka. Compared to the simplicity of specifying message types directly in the channel model, such an improvement requires additional design and implementation on top of the actor model, which is more complex to implement.
 
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{images/channel_actor.png}    
-    \caption{ (a) illustrates the Channels model with concurrent units communicating via message-passing channels. (b) shows the Actors model where each Actor independently processes messages from its queue. (Fowler et al. 2017)\colorbox{yellow}{referenceHere[6]}
+    \caption{ (a) illustrates the Channels model with concurrent units communicating via message-passing channels. (b) shows the Actors model where each Actor independently processes messages from its queue. (\cite{fowler_mixing})
     }
     \label{fig:channel_actor} 
 \end{figure}
@@ -242,7 +252,8 @@ To cope with these challenges, the introduction of Actor type systems has become
 
 
 \section{Mailbox}
-The mailbox communication mechanism is a core concept of concurrent programming widely used in a variety of programming environments, introduced by W.S. Ford and V.C. Hamacher in 1976\colorbox{yellow}{referenceHere[4]}. It allows program components to exchange messages asynchronously, thus enabling efficient communication between processes or threads. And Erlang, as a language designed for concurrent and distributed programming, deeply integrates the mailbox communication mechanism as the cornerstone of its inter-process communication.
+The mailbox communication mechanism is a core concept of concurrent programming widely used in a variety of programming environments, introduced by 
+\cite{ford_1976_hardware}. It allows program components to exchange messages asynchronously, thus enabling efficient communication between processes or threads. And Erlang, as a language designed for concurrent and distributed programming, deeply integrates the mailbox communication mechanism as the cornerstone of its inter-process communication.
 
 The Listing \ref{lst:erlangExample} is a concrete example of the application of the mailbox communication mechanism in Erlang: an asynchronous task processing model. In this model, the \textbf{empty\_task} function is a standby process that performs an asynchronous computation by receiving a message containing a Result. When the computation is complete, the Result is passed to the \textbf{queryable\_task} function. The function is in a waiting state, ready to respond to the client's query request and by sending the result of the computation back to the requester. In addition, it handles error status and returns an error if the computation request is received again. The client starts the asynchronous task through the client function, first creating a new process to run \textbf{empty\_task} through spawn, then sending computation commands and query commands to the process, and eventually receiving and printing out the results of the computation.
 
@@ -274,10 +285,12 @@ client() ->
 \end{lstlisting}
 
 \subsection{Behavioural Type System}
-To solve these problems, the behavior type system provides a solution. Behavioural type system is a type system used in the field of concurrent and distributed programming to describe and manage system behaviour. This type system not only contains information about the type of data, but also extends to the description of program behaviour, such as message passing, inter-process communication patterns and protocol constraints. The core purpose of a behavioural type system is to improve the reliability and security of concurrent programs. By checking the behavioural patterns of a program at compile time, a behavioural type system ensures the correctness and stability of the program at runtime.
+As described in the book "Behavioral Typing: from Theory to Tools" written by \cite{gay_2017_behavioural}, the Behavioral Typing System provides an innovative solution to the typing problem. The system facilitates efficient cooperation patterns in distributed applications by regulating inter-component interactions through behavioral contracts as service-level protocols. By defining precise communication protocols (i.e., timing session types), the behavioral typing system is able to carefully control and manage the timing of inter-component interactions, effectively deal with concurrency and synchronization issues, and ensure the consistency and predictability of system behavior. In addition, the runtime monitoring mechanism of the behavioral typing system can detect and respond to abnormal behaviors in the system in real time, which significantly improves the reliability and security of the system.
+
+Further, \cite{ancona_2016_behavioral} researchers point out that recent developments in behavioral type theory are applied to guarantee diverse correctness properties of large-scale communication-intensive systems. They explored ways to use behavioral types in conjunction with object-oriented programming. Overall, behavioral type systems have not only successfully solved the type problem, but also empirically supported the correctness, security, and maintainability of distributed systems through their application in a variety of programming languages and computing environments. This highlights the importance of behavioral type systems in contemporary software development, especially in building complex distributed application scenarios.
 
 \subsection{Mailbox Type}
-Mailbox types are an essential part of behavioral type systems, originally used in process algorithms to capture mailbox contents mainly in the form of exchanged regular expressions. Mailbox types were introduced by Ugo de'Liguoro and Luca Padovani in 2018 [3]\colorbox{yellow}{referenceHere[3]} to enhance the message-passing mechanisms of programming languages based on the role model. In the Pat language, each actor's mailbox is defined in detail through type annotations that specify not only the types of messages that the mailbox can receive, but also contain expected behavioral patterns such as the order in which messages are sent and received. This fine-grained type annotation allows developers to perform strict type checking of message passing patterns to achieve precise control of complex communication behaviors, which significantly improves the type safety of concurrent programming and effectively avoids common concurrency problems such as violation of communication protocols and deadlocks.
+Mailbox types are an essential part of behavioral type systems, originally used in process algorithms to capture mailbox contents mainly in the form of exchanged regular expressions. Mailbox types were introduced by \cite{deaposliguoro_2018_mailbox} to enhance the message-passing mechanisms of programming languages based on the role model. In the Pat language, each actor's mailbox is defined in detail through type annotations that specify not only the types of messages that the mailbox can receive, but also contain expected behavioral patterns such as the order in which messages are sent and received. This fine-grained type annotation allows developers to perform strict type checking of message passing patterns to achieve precise control of complex communication behaviors, which significantly improves the type safety of concurrent programming and effectively avoids common concurrency problems such as violation of communication protocols and deadlocks.
 
 The following code snippet(Listing \ref{lst:patexample2}) from Pat's program demonstrates the application of mailbox types in real-world programming.This code simulates the processing of asynchronous compute and query tasks by defining \textbf{emptyTask} and \textbf{queryableTask} functions, as well as a client function. Where \textbf{emptyTask} is a mailbox for an empty task that can receive one \textcolor{red}{Compute} message and multiple \textcolor{red}{Query} messages. Once a \textcolor{red}{Compute} message is received, the mailbox will call \textbf{queryableTask}. and \textbf{queryableTask} represents a mailbox that has already received a \textcolor{red}{Compute} message, and this mailbox can only receive multiple \textcolor{red}{Query} messages. In these definitions, \textbf{guard} expressions are used to monitor the mailbox self and perform the appropriate actions based on the type of message received. This pattern not only shows how mailbox types can be used in Pat to control the sending and receiving of messages, but also how Pat can use the type system to statically check the behavior of concurrent programs to ensure communication protocol compliance and program robustness.
 
@@ -378,12 +391,12 @@ Non-functional requirements relate to the usability, and cross-platform compatib
 \section{Principles of CEK-style Machine}
 
 \subsection{$\lambda$-Calculus}
-Before delving into the implementation and optimization of CEK machines, it is crucial to understand the underlying concepts and principles of $\lambda$-Calculus, a formal system for representing the logic of a computational process or mathematical function, introduced by mathematician Alonzo Church in the 1930s\colorbox{yellow}{referenceHere}, which is one of the core foundations of modern computer science. The system focuses on the process of binding and substitution of variables and serves as a generalized model of computation, equivalent to a Turing machine, that exhibits the fundamentals of the theory of computation.
+Before delving into the implementation and optimization of CEK machines, it is crucial to understand the underlying concepts and principles of $\lambda$-Calculus, a formal system for representing the logic of a computational process or mathematical function, introduced by mathematician Alonzo Church in the 1930s, which is one of the core foundations of modern computer science. The system focuses on the process of binding and substitution of variables and serves as a generalized model of computation, equivalent to a Turing machine, that exhibits the fundamentals of the theory of computation.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.35\linewidth]{dissertation/images/lambda1.png}    
-    \caption{Illustration of $\lambda$-Calculus expression, showcasing the head of the expression marked in red, the body of the expression in dashed blue, and another expression following the function in solid blue.\colorbox{yellow}{referenceHere}}
+    \caption{Illustration of $\lambda$-Calculus expression, showcasing the head of the expression marked in red, the body of the expression in dashed blue, and another expression following the function in solid blue (\cite{a2015_the})}
     \label{fig:lambda} 
 \end{figure}
 
@@ -406,7 +419,7 @@ Hence, the application of the lambda function \(\lambda x.\lambda y.x+y\) to the
 
 \subsection{Traditional CEK Machine}
 
-The CEK machine, developed by Matthias Felleisen and Dan Friedman (1986)\colorbox{yellow}{referenceHere}, is a machine for $\lambda$-Calculus that is particularly well suited for describing and enforcing the semantics of functional programming languages. This machine, with its realism and abstraction, provides a framework to show how computers can efficiently execute programs. The basic CEK machine is based on a ternary configuration of the form $⟨C\:|\:E\:|\:K⟩$. where
+The CEK machine, developed by \cite{felleisen_1986_control}, is a machine for $\lambda$-Calculus that is particularly well suited for describing and enforcing the semantics of functional programming languages. This machine, with its realism and abstraction, provides a framework to show how computers can efficiently execute programs. The basic CEK machine is based on a ternary configuration of the form $⟨C\:|\:E\:|\:K⟩$. where
 \begin{itemize}
     \item $\textbf{C}$ for Control, the expression currently being evaluated;
     \item $\textbf{E}$ for Environment, binding free variables;
@@ -422,7 +435,7 @@ Let us consider an expression "let $x$ = 3 in $x$ + 2". On this occasion we will
 In the initial phase, the CEK machine sets the control section to the full expression $\color{red}{\text{let } x = 3 \text{ in } x + 2}$. At this point, the environment is empty, indicating that no variable binding has been evaluated yet, and the continue section is also empty, indicating that no further computations are waiting to be evaluated. Next, the CEK machine recognizes the variable binding action in the $\color{red}{\text{let}}$ statement and begins to add the variable $\color{red}{x}$ to the environment in preparation for its association with the value $\color{red}{3}$. During this process, the control section is updated to $\color{red}{3}$, the environment is updated accordingly to contain the mapping $\color{blue}{\{x: 3\}}$, and the expression $\color{red}{x + 2}$ is placed in the continue section, waiting for a subsequent computation. When evaluating the computation of $\color{red}{x + 2}$, the CEK machine looks up and replaces the variable $\color{red}{x}$ with $\color{red}{3}$ in the environment, and then evaluates an addition operation to obtain the final result $\color{red}{5}$.
 
 \subsection{Generalized CEK Machine}
-In the design of the Pat language, reference was made to Daniel Hillerstrom and Sam Lindley's work\colorbox{yellow}{referenceHere} on the generalization of the traditional CEK machine. This generalization process is particularly important for the Pat language because the traditional CEK machine was designed primarily for simple functional programming languages, which are overwhelmed when dealing with complex control flow and state management---especially algebraic effects. In the generalized CEK machine(Figure 4.2), the configuration takes the form of $\langle \boldsymbol{M}\: |\: \boldsymbol{\gamma} \:| \:\boldsymbol{\Sigma} \rangle$, where $\boldsymbol{M}$ represents the current term to be computed, which is equivalent to the control (C) part in the original CEK machine. $\boldsymbol{\gamma}$ represents the current environment, inherited from the environment (E) part in the original machine, which is in charge of binding the variables to the corresponding values. $\boldsymbol{\Sigma}$, on the other hand, represents the continuation part, which, unlike the continuation (K) of a single instruction or state in the original machine, consists of a series of continuation frames $[\boldsymbol{\delta}_1, \ldots , \boldsymbol{\delta}_n]$, each frame $\boldsymbol{\delta} = (\boldsymbol{\chi}, \boldsymbol{\gamma}, \boldsymbol{M})$ representing a pure continuation within a particular processor closure. Here $\boldsymbol{\chi}$ denotes the processor closure (handler closure), $\boldsymbol{\gamma}$ maintains its role as an environment for mapping variables to their values, and $\boldsymbol{M}$ represents the current computational term or expression being evaluated. 
+In the design of the Pat language, reference was made to \cite{hillerstrm_2016_liberating}'s work on the generalization of the traditional CEK machine. This generalization process is particularly important for the Pat language because the traditional CEK machine was designed primarily for simple functional programming languages, which are overwhelmed when dealing with complex control flow and state management---especially algebraic effects. In the generalized CEK machine(Figure 4.2), the configuration takes the form of $\langle \boldsymbol{M}\: |\: \boldsymbol{\gamma} \:| \:\boldsymbol{\Sigma} \rangle$, where $\boldsymbol{M}$ represents the current term to be computed, which is equivalent to the control (C) part in the original CEK machine. $\boldsymbol{\gamma}$ represents the current environment, inherited from the environment (E) part in the original machine, which is in charge of binding the variables to the corresponding values. $\boldsymbol{\Sigma}$, on the other hand, represents the continuation part, which, unlike the continuation (K) of a single instruction or state in the original machine, consists of a series of continuation frames $[\boldsymbol{\delta}_1, \ldots , \boldsymbol{\delta}_n]$, each frame $\boldsymbol{\delta} = (\boldsymbol{\chi}, \boldsymbol{\gamma}, \boldsymbol{M})$ representing a pure continuation within a particular processor closure. Here $\boldsymbol{\chi}$ denotes the processor closure (handler closure), $\boldsymbol{\gamma}$ maintains its role as an environment for mapping variables to their values, and $\boldsymbol{M}$ represents the current computational term or expression being evaluated. 
 \begin{align*}
 \text{ Configurations}\;\; & C ::= \langle M \, | \, \gamma \, | \, \Sigma \rangle \\
 \text{Environment}\;\; & \gamma ::= \cdot \, | \, \gamma, x \mapsto V \\
@@ -454,14 +467,14 @@ Subsequently, when the machine state changes to $\color{red}x + 2$, the environm
 
 \subsection{Operational Semantics}
 
-The introduction of Environment is an essential improvement when exploring the operational semantics of the Pat language. In previous operational semantics\colorbox{yellow}{referenceHere}, the substitution of variables was usually accomplished through substitution operations, which required traversing the entire expression to replace all instances of the variable whenever a variable was used. This process is not only inefficient because it may involve multiple traversals of the entire expression tree, but it may also lead to the creation of multiple unnecessary copies. The introduction of environments optimizes this computational process and brings significant improvements at both theoretical and implementation levels.
+The introduction of Environment is an essential improvement when exploring the operational semantics of the Pat language. In previous operational semantics design by \cite{fowler_2023_special}, the substitution of variables was usually accomplished through substitution operations, which required traversing the entire expression to replace all instances of the variable whenever a variable was used. This process is not only inefficient because it may involve multiple traversals of the entire expression tree, but it may also lead to the creation of multiple unnecessary copies. The introduction of environments optimizes this computational process and brings significant improvements at both theoretical and implementation levels.
 
 As can be seen in Figure \ref{fig:equations}, the adopted generalized CEK machine makes important changes to the runtime syntax of the previous version, with environments forming part of the core composition, in a model in which environments are not just static structures storing variable bindings, but rather act as dynamic, queryable and updatable records, in stark contrast to the traditional substitution operation. contrasting with traditional substitution operations. Specifically, an environment ($\gamma$) is defined as a possibly empty sequence in which each entry is associated with a mapping from a variable to its value. Where "$\cdot$" denotes an empty environment, "$\gamma, x \mapsto V$" denotes an extended environment that maps the variable $x$ to the value $V$ on top of the existing environment $\gamma$.
 
 In the Reduction rules section it can be seen that the environment component plays a key role. For example, in the E-APP rules, the computation of the function application $f(\overrightarrow V)$ involves retrieving the function definition from the environment and mapping the real parameter $\overrightarrow V$ to the formal parameter $\overrightarrow x$. This process again highlights the role of the environment in simplifying computation and improving efficiency.
 
-\subsubsection{Runtime syntax}
-
+\textbf{Runtime syntax}
+\vspace{-\baselineskip} 
 \begin{align*}
  \quad &\text{Runtime names} & a \quad & && \text{Guard contexts} \quad & \mathcal{G} ::=& \ \overrightarrow{G_1} \cdot [ \; ] \cdot \overrightarrow{G_2} \\
  \quad &\text{Names}        & u, v, w  & ::= x \mid a && \text{Configurations} & \mathcal{C}, \mathcal{D} ::=& \ \llparenthesis \ M, \gamma, \Sigma \ \rrparenthesis \mid a \leftarrow \textcolor{red!80!black}{\textbf{m}} [\overrightarrow{V}] \\
@@ -471,22 +484,21 @@ In the Reduction rules section it can be seen that the environment component pla
     $ \mathcal{C} \longrightarrow{} _\mathcal{p}\mathcal{D}$
 }
 \end{align*}
-\vspace{-\baselineskip} 
-\subsubsection{Reduction rules}
-
+\vspace{-0.5\baselineskip} 
+\textbf{Reduction rules}
 \begin{align*}
-\quad & \text{E-LET} &  \quad \llparenthesis \ \textbf{let} \ x: T = M \textbf{ in } N, \gamma, \Sigma \ \rrparenthesis & \quad \longrightarrow  \quad \llparenthesis \ M, \gamma', \langle x, \gamma, N \rangle \cdot \Sigma \ \rrparenthesis \\
+\quad & \text{E-LET} &  \quad \llparenthesis \ \textbf{let} \ x: T = M \textbf{ in } N, \gamma, \Sigma \ \rrparenthesis & \quad \longrightarrow  \quad \llparenthesis \ M, \gamma, \langle x, \gamma, N \rangle \cdot \Sigma \ \rrparenthesis \\
 \quad &\text{E-RETURN} & \quad \llparenthesis \ V, \gamma', \langle x, \gamma, M \rangle \cdot \Sigma \ \rrparenthesis & \quad\longrightarrow  \quad \llparenthesis \ M, \gamma[x \mapsto V], \Sigma \ \rrparenthesis \\
 \quad &\text{E-APP} & \quad \llparenthesis \ f(\overrightarrow{V}),\gamma, \Sigma \ \rrparenthesis & \quad\longrightarrow  \quad \llparenthesis \ M, \gamma[\overrightarrow{x} \mapsto \overrightarrow{V}], \Sigma \ \rrparenthesis \quad \\ 
 &&& \quad \quad \quad \quad  ( \text{if } \mathcal{P} (f) = \textbf{def } f(\overrightarrow{x : A} ) : B \{ M \} )\\
-\quad &\text{E-NEW} & \quad \llparenthesis \ \textbf{new}, \gamma, \Sigma \ \rrparenthesis & \quad \longrightarrow  \quad (va) (\llparenthesis  \ a, \gamma', \Sigma \ \rrparenthesis) \quad (a \text{ is fresh}) \\
-\quad &\text{E-SEND} & \quad \llparenthesis \ a \ ! \ \textcolor{red!80!black}{\textbf{m}} [\overrightarrow{V}], \gamma, \Sigma \ \rrparenthesis & \quad\longrightarrow  \quad \llparenthesis \ (), \gamma, \Sigma \ \rrparenthesis \parallel \llparenthesis a \leftarrow \textcolor{red!80!black}{\textbf{m}}[\overrightarrow{V}] \ \rrparenthesis \\
-\quad &\text{E-SPAWN} & \quad \llparenthesis \ \textbf{spawn } M, \gamma,\Sigma \ \rrparenthesis & \quad \longrightarrow  \quad \llparenthesis \ (), \gamma, \Sigma \ \rrparenthesis \parallel \llparenthesis \ M, \gamma'  \varepsilon \ \rrparenthesis \\
-\quad &\text{E-FREE}&  \quad  \ (va)(\llparenthesis \ \textbf{guard } a: E \{ \mathcal{G}[\textbf{free } \mapsto M]\}, \gamma,\Sigma \ \rrparenthesis ) & \quad \longrightarrow \quad \llparenthesis \ M, \gamma', \Sigma \ \rrparenthesis \\
+\quad &\text{E-NEW} & \quad \llparenthesis \ \textbf{new}, \gamma, \Sigma \ \rrparenthesis & \quad \longrightarrow  \quad (va) (\llparenthesis  \ a, \gamma, \Sigma \ \rrparenthesis) \quad (a \text{ is fresh}) \\
+\quad &\text{E-SEND} & \quad \llparenthesis \ a \ ! \ \textcolor{red!80!black}{\textbf{m}} [\overrightarrow{V}], \gamma, \Sigma \ \rrparenthesis & \quad\longrightarrow  \quad \llparenthesis \ (), \gamma, \Sigma \ \rrparenthesis \parallel a \leftarrow \textcolor{red!80!black}{\textbf{m}}[\overrightarrow{V}] \\
+\quad &\text{E-SPAWN} & \quad \llparenthesis \ \textbf{spawn } M, \gamma,\Sigma \ \rrparenthesis & \quad \longrightarrow  \quad \llparenthesis \ (), \gamma, \Sigma \ \rrparenthesis \parallel \llparenthesis \ M, \gamma , \varepsilon \ \rrparenthesis \\
+\quad &\text{E-FREE}&  \quad  \ (va)(\llparenthesis \ \textbf{guard } a: E \{ \mathcal{G}[\textbf{free } \mapsto M]\}, \gamma,\Sigma \ \rrparenthesis ) & \quad \longrightarrow \quad \llparenthesis \ M, \gamma, \Sigma \ \rrparenthesis \\
 \multicolumn{4}{l}{\quad \text{E-RECV} \quad \llparenthesis \ \textbf{guard } a: E \{ G[\textbf{receive } \textcolor{red!80!black}{\textbf{m}}[\overrightarrow{x}] \textbf{ from } y \mapsto M]\}, \gamma, \Sigma \ \rrparenthesis \parallel a \leftarrow \textcolor{red!80!black}{\textbf{m}} [\overrightarrow{V}] \quad } \\
 \multicolumn{4}{r}{\longrightarrow \quad \llparenthesis \ M, \gamma[\overrightarrow{x} \mapsto \overrightarrow{V}, y \mapsto a ], \Sigma \ \rrparenthesis \quad \quad \quad }
 \end{align*}
-\vspace{-2\baselineskip} 
+\vspace{-1.5\baselineskip} 
 \begin{align*}
  \text{E-N}\text{\scriptsize U} \ \frac{\mathcal{C} \longrightarrow \mathcal{D}}{(va)\mathcal{C} \longrightarrow (va)\mathcal{D}} \quad \quad \text{E-P}\text{\scriptsize AR} \ \frac{\mathcal{C} \longrightarrow \mathcal{C'}}{\mathcal{C} \parallel \mathcal{D} \longrightarrow \mathcal{C'} \parallel \mathcal{D}} & \quad \quad \text{E-S}\text{\scriptsize TRUCT} \frac{\mathcal{C} \equiv \mathcal{C'} \ \ \mathcal{C'} \longrightarrow \mathcal{D'} \ \ \mathcal{D'} \equiv \mathcal{D}}{\mathcal{C} \rightarrow \mathcal{D}} & & & \\
 \end{align*}
@@ -517,11 +529,12 @@ P4 & & & & & & & & \cellcolor{yellow!25} & \cellcolor{yellow!25} \\
 
 \section{Garbage Collection}
 
-Garbage collection is a core feature of automatic memory management in programming languages, designed to identify and free memory that is no longer being used by a program. This mechanism is essential to prevent memory leaks, improve software performance, and avoid problems such as memory exhaustion. In the context of automatic memory management, developers do not need to manually free the memory; the garbage collector will be executed periodically to identify inaccessible memory areas and clean them up.
+Garbage collection is a core feature of automatic memory management in programming languages, designed to identify and free memory that is no longer being used by a program. This mechanism is essential for preventing memory leaks, improving software performance, and avoiding problems such as memory exhaustion. Especially in managed languages such as OCaml, the garbage collection process of objects is mostly transparent, however, the unique semantic properties of the Pat programming language, in particular its unique '\textbf{Free}' guard condition, make it necessary to adopt a special garbage collection strategy. This strategy ensures that the release of a mailbox is triggered only when no process references the particular mailbox.
 
-The Pat language incorporates a similar mark-and-sweep and reference counting method in its garbage collection mechanism to manage memory resources efficiently. In this hybrid strategy, when the system detects that a process needs to block-usually because the process has guarded a mailbox and is waiting to receive a message-the garbage collector first performs a traversal operation. This traversal involves checking the environments of all processes to determine if a reference to the mailbox exists. If so, the garbage collector adds a reference count to the mailbox in a dictionary structure by 1. The maintenance of this reference count ensures that the mailbox will not be released while at least one process may access it in the future.
+The garbage collection mechanism in the Pat language(Fig \ref{fig:gc1}), inspired by the Mark-and-Sweep and Reference Counting methods, has been improved to manage memory resources efficiently. In the context of the Pat language, garbage collection of mailboxes requires traversing the state to ensure that all potential references have been considered. When the system detects that a process needs to block - usually because it is guarding a mailbox and waiting for a message, the garbage collector initiates a state traversal. This traversal consists of examining the environment of all processes to determine if a reference to the mailbox exists. If it exists, the reference counting method adds a reference count to that mailbox in a dictionary structure. The maintenance of this reference count ensures that the mailbox will not be released while at least one process may access it in the future.
 
-The addition of the reference count provides a quick path to garbage collection(Fig \ref{fig:gc1}). On subsequent checks, if the system reconfirms the need to block the same process, the garbage collector will preferentially check if the count of the mailbox in the dictionary is greater than 0. If it is, then it will block the process without having to traverse through all the processes again, which greatly improves efficiency. Only if the count reaches 0, i.e. no process has a reference to the mailbox in its environment, will the garbage collector further traverse all processes. If, at the end of the traversal, the reference count for the mailbox is \textbf{still 0}, indicating that it is no longer being guarded or used by any process, the garbage collector will then release (free) the memory occupied by the mailbox.
+When subsequent checks require the same process to be blocked again, the garbage collector will act based on the reference count of the mailbox in the dictionary. If the reference count is greater than zero, the garbage collector will block the process without having to do a full traversal, which is a significant efficiency improvement. The garbage collector will only perform a further full traversal if the reference count goes to zero, i.e., if the mailbox is not referenced in any process environment. If the reference count of the mailbox is \textbf{still zero}, meaning that it is no longer being guarded or used by any process, the garbage collector releases (frees) the memory occupied by the mailbox.
+
 
 \begin{figure}[h]
     \centering
@@ -532,14 +545,15 @@ The addition of the reference count provides a quick path to garbage collection(
     \label{fig:gc1} 
 \end{figure}
 
-This combination of mark-and-sweep and reference counting achieves a balance in the Pat language between ensuring that resources that are no longer needed are reclaimed in a timely manner and avoiding performance problems caused by frequent traversals. In this way, Pat provides an efficient and safe memory management solution for concurrent programming, ensuring rational resource utilization and stable program operation.
+In summary, the Pat language effectively manages memory resources by combining a garbage collection strategy with a similar idea of Mark-Sweep and Reference Counting methods, while avoiding the performance loading that frequent traversal may bring. The adoption of this strategy provides an efficient and safe solution for memory management in concurrent programming scenarios, guaranteeing the reasonable utilization of resources and stable execution of programs.
 
 
 
 
 %==================================================================================================================================
 \chapter{Implementation}
-summary
+
+
 \section{CEK in Pat}
 \subsection{Definition}
 When implementing the Pat language interpreter based on the CEK machine, the main concern was to simulate the control flow in the execution of the program, the binding of environment variables, and the management of the continuation of the execution. Based on the source code provided by Listing \ref{lst:types}, we can see that processes are represented by tuples consisting of several components, including the entire \textbf{program}, \textbf{process ID}, the number of \textbf{steps}, the \textbf{computation expression}, \textbf{environment}, and the \textbf{frame stack}.
@@ -552,7 +566,7 @@ This represents the framework for the concrete implementation of the CEK machine
 \lstset{style=Ocamlstyle}
 \begin{lstlisting}[caption={Source Code of CEK Framework in Pat}, label={lst:types}]
 type process = program * pid * steps * comp * 
-(*@\hfill@*)environment * frame_stack 
+(*@\hfill@*)environment * frame_stack
 and pid = int
 and steps = int
 and environment = (Ir.Binder.t * Ir.value) list
@@ -563,70 +577,370 @@ and frame_stack = frame list
 
 
 \subsection{Implementation of Keywords}
-Specifically, as shown in the lising \ref{lst:framework}, the interpreter implements the evaluation of all keywords in the Pat language through the framework, such as the \textcolor{red}{Return} keyword that marks the end of a computation, while \textcolor{red}{Let} and \textcolor{red}{LetPair} are concerned with variable binding and scope management, keeping the environment consistent. Composite structures such as \textcolor{red}{Seq} and \textcolor{red}{Case} show how the interpreter handles sequential and conditional branching, while \textcolor{red}{App} demonstrates the handling of function applications. More advanced control structures, such as \textcolor{red}{Spawn} and \textcolor{red}{Send}, deal with concurrency and message passing, showing how the interpreter operates within a broader model of computation, while \textcolor{red}{Guard} expressions allow for pattern matching as messages arrive, and are key to synchronization and communication in concurrent programming. This implementation ensures that program execution not only follows the semantics, but also maintains precision and consistency of execution.
+Specifically, depicted in  Lising \ref{lst:framework} is a pre-constructed Abstract Syntax Tree (AST) for the Pat language, a structure that provides the underlying framework for the interpreter execution discussed in the current dissertation. In this syntax tree, the evaluation of all keywords is realized through the CEK mechanism. Such as the \textcolor{red}{Return} keyword that marks the end of a computation, while \textcolor{red}{Let} and \textcolor{red}{LetPair} are concerned with variable binding and scope management, keeping the environment consistent. Composite structures such as \textcolor{red}{Seq} and \textcolor{red}{Case} show how the interpreter handles sequential and conditional branching, while \textcolor{red}{App} demonstrates the handling of function applications. More advanced control structures, such as \textcolor{red}{Spawn} and \textcolor{red}{Send}, deal with concurrency and message passing, showing how the interpreter operates within a broader model of computation, while \textcolor{red}{Guard} expressions allow for pattern matching as messages arrive, and are key to synchronization and communication in concurrent programming. As for \textbf{value}, it includes various data types such as \textcolor{red}{Constants},\textcolor{red}{Variables}, functions (via the \textcolor{red}{Lam} keyword), and \textcolor{red}{Mailbox} specialized for messaging, which are the elements that form the basis of program execution. This implementation ensures that the execution of the program not only follows the semantics, but also maintains the precision and consistency of the execution. Building on the above, the later parts of this chapter details the inner workings of some key mechanisms, including how the \textcolor{red}{Spawn} keyword supports process spawning, how the \textcolor{red}{Mailbox} enables efficient communication between processes, and how garbage collection is performed to optimize memory usage. The implementation of these mechanisms is critical to understanding the concurrent programming model and how the Pat language manages resources and synchronizes processes.
+
+% \noindent\begin{minipage}{\linewidth}
+% \lstset{style=Ocamlstyle}
+% \begin{lstlisting}[caption={Source code for the specific implementation of evaluation for all keywords in Pat using the CEK architecture}, label={lst:framework}]
+% match comp, env, stack with
+% | Return _, _, [] -> ...
+% | Annotate (term, _), env, stack 
+% | Let {binder; term; cont}, env, stack 
+% | LetPair {binders; pair; cont}, env, stack 
+% | Seq (comp1, comp2), env, stack 
+% | Return v, env, Frame (x, env', cont) :: stack
+% | App {func; args}, env, stack
+% | If {test; then_expr; else_expr}, env, stack
+% | Case {term; branch1; branch2}, env, stack 
+% | New interface_name, env, Frame (v, _, cont) :: stack
+% | Spawn comp, env, stack
+% | Send {target; message; _}, env, stack
+% | Guard {target; pattern; guards; _}, env, stack
+% \end{lstlisting}
+% \end{minipage}
 
 \noindent\begin{minipage}{\linewidth}
 \lstset{style=Ocamlstyle}
-\begin{lstlisting}[caption={Source code for the specific implementation of evaluation for all keywords in Pat using the CEK architecture}, label={lst:framework}]
-match comp, env, stack with
-| Return _, _, [] -> ...
-| Annotate (term, _), env, stack 
-| Let {binder; term; cont}, env, stack 
-| LetPair {binders; pair; cont}, env, stack 
-| Seq (comp1, comp2), env, stack 
-| Return v, env, Frame (x, env', cont) :: stack
-| App {func; args}, env, stack
-| If {test; then_expr; else_expr}, env, stack
-| Case {term; branch1; branch2}, env, stack 
-| New interface_name, env, Frame (v, _, cont) :: stack
-| Spawn comp, env, stack
-| Send {target; message; _}, env, stack
-| Guard {target; pattern; guards; _}, env, stack
+\begin{lstlisting}[caption={AST in Pat}, label={lst:framework}]
+type program = {
+    prog_interfaces: Interface.t list;
+    prog_decls: decl list; prog_body: comp option}
+and decl = {
+    decl_name: Binder.t; decl_parameters: (Binder.t * Type.t) list;
+    decl_return_type: Type.t; decl_body: comp}
+and comp =
+    | Annotate of comp * Type.t
+    | Let of {binder: Binder.t; term: comp; cont: comp}
+    | Seq of (comp * comp)
+    | Return of value
+    | App of {func: value; args: value list}
+    | If of { test: value; then_expr: comp; else_expr: comp}
+    | LetPair of {binders: (Binder.t * Binder.t); 
+                       pair: value; cont: comp}
+    | Case of {term: value; branch1: (Binder.t * Type.t) * comp; 
+                                    branch2: (Binder.t * Type.t) * comp}
+    | New of string
+    | Spawn of comp
+    | Send of {target: value; message: message; 
+                   iname: string option}
+    | Guard of {target: value; pattern: Type.Pattern.t;
+                    guards: guard list; iname: string option}
+and value =
+    | VAnnotate of value * Type.t
+    | Constant of constant
+    | Primitive of string
+    | Variable of Var.t * Pretype.t option
+    | Pair of value * value
+    | Inl of value
+    | Inr of value
+    | Lam of {linear: bool; parameters: (Binder.t * Type.t) list;
+                 result_type: Type.t; body: comp}
+    | Mailbox of RuntimeName.t
+and message = (string * value list)
+and guard =
+    | Receive of {tag: string; payload_binders: Binder.t list;
+                       mailbox_binder: Binder.t; cont: comp}
+    | Free of comp
+    | Fail
+
 \end{lstlisting}
 \end{minipage}
 
-\subsection{Case Study}
+% \subsection{Case Study}
+% We may demonstrate the specific execution process and the value seeking strategy by means of an example. Below is a description of the two keywords Let and App for evaluating values in execution(Listing \ref{lst:letapp}). In the Pat language, the \textcolor{red}{Let} expression allows us to bind the result of an expression to a variable so that it can be used in subsequent computations. When this expression is encountered, we create a new \textcolor{darkgreen}{Frame} that contains the variable binders, the current environment, and the continuation body. We then recursively execute the bound expression \textbf{term}.
 
-We may demonstrate the specific execution process and the value seeking strategy by means of an example. Below is a description of the two keywords Let and App for evaluating values in execution(Listing \ref{lst:letapp}). In the Pat language, the \textcolor{red}{Let} expression allows us to bind the result of an expression to a variable so that it can be used in subsequent computations. When this expression is encountered, we create a new \textcolor{darkgreen}{Frame} that contains the variable binders, the current environment, and the continuation body. We then recursively execute the bound expression \textbf{term}.
+% \noindent\begin{minipage}{\linewidth}
+% \lstset{style=Ocamlstyle}
+% \begin{lstlisting}[caption={Let and App Keyword Specific Implementation}, label={lst:letapp}]
+%     | Let {binder; term; cont},env,stack ->
+%         execute (program,pid,steps+1,term,env,
+%         (*@\hfill@*)(Frame (binder,env,cont)) :: stack)
+%     | App {func; args}, env, stack -> 
+%         (match func with
+%             | Lam {parameters; body; _} 
+%             | Primitive op
+%             | Variable (func_var, _))
+% \end{lstlisting}
+% \end{minipage}
+
+% If it is an \textcolor{red}{App} expression, the function will be applied to the arguments, and if the function is a lambda expression, a new environment will be created and bound to the arguments and the \textbf{Lambda} body will be executed recursively. For primitive operations such as \textbf{print}, \textbf{intToString}, etc., we will perform a specific evaluation strategy for each primitive and update the result buffer if necessary. As for ordinary functions, a lookup of the function definition will be performed, and if the corresponding function is found in the declaration of the program, the function body will be executed in the new environment \textbf{env'}. If a closure is found in the current environment, the corresponding function body is also executed. As a whole with these examples, it is shown how the CEK model handles different keywords in the Pat language and how the environment, stack, and continuation bodies are used to maintain program state during the value seeking process.
+
+\section{Scheduler interaction}
+
+In the implementation of Pat language, the core function of scheduler is introduced with the aim of providing an efficient and reliable concurrency mechanism for program running. Unlike the traditional round-robin scheduling mechanism based on time slices, we adopt a rotation scheduling strategy based on evaluation steps in the Pat language. Instead of scheduling tasks in terms of time, this strategy rotates tasks based on the number of evaluation steps they have completed. And we limit the maximum number of evaluation steps to 30. This is mainly for preliminary testing purposes, and aims to balance the execution efficiency and computational complexity of the language. It should be clear that this limit is not fixed, but is an adjustable parameter. As the language is further developed and application scenarios are expanded, this limit will be adjusted according to specific needs.
+
+In the code shown on Listing \ref{lst:Scheduler}, the process\_scheduling function takes two arguments: \textbf{processes} is a list containing all the process to be executed, and \textbf{max\_steps} is the maximum number of steps each process is allowed to execute before being suspended. The logic of the function starts with a pattern match against the processes list. If the list is empty, all processes have been completed, which means the function is over. Otherwise, it takes the first process from the list and checks to see if the process has reached or exceeded its maximum number of allowed steps. If so, the process will be placed back at the end of the list and the number of steps reset to 0 so that it can be scheduled again later. If the process has not reached its maximum number of steps, it will be executed via the execute function. Execute returns a tuple containing the new \textbf{status} of the process and an \textbf{updated process}. Based on the status of the process after execution, the scheduler decides how to process next:
+
+\begin{itemize}
+\item $\textbf{Finished}$: If a process has completed, it is removed from the process list, and the scheduler proceeds to handle the remaining processes.
+\item $\textbf{Unfinished}$: If a process is not finished(Reaching the maximum number of steps or other reasons), its updated state is appended to the end of the process list for future execution.
+\item $\textbf{Spawned new\_process}$: If the execution spawns a new process (new\_process), this new process is added to the beginning of the process list, while the updated state of the current process is appended to the end.
+\item $\textbf{MessageToSend (target, message)}$: If the current process needs to send a message to another process, the scheduler handles the message sending through the function.
+\item $\textbf{Blocked need\_free\_check}$: If a process is blocked due to waiting for resources, some functions is responsible for managing the blocked state.
+\item $\textbf{FreeMailbox mailbox}$: If a process releases a mailbox, the function takes care of the logic after freeing the mailbox.
+\end{itemize}
+
+Through this approach, the scheduler can effectively manage the execution of processes, concurrent spawning of processes, message passing, process blocking, and resource release, ensuring efficient system operation and rational resource allocation. The implementation of this scheduling strategy not only enhances the performance of concurrent programs but also achieves flexible adaptation to the varying computational demands of different tasks by dynamically adjusting the order and frequency of process execution.
+
+\noindent\begin{minipage}{\linewidth}
+\lstset{style=Ocamlstyle,}
+\begin{lstlisting}[caption={Implementation of a round-robin scheduler based on evaluation steps in the Pat language}, label={lst:Scheduler}]
+let rec process_scheduling processes max_steps =
+  match processes with
+  | [] -> ()
+  | (prog, pid, steps, comp, env, stack) :: rest ->
+     if steps >= max_steps then process_scheduling (rest @
+     (*@\hfill@*)[(prog, pid, 0, comp, env, stack)]) max_steps
+     else
+       let (status, updated_process) = 
+          execute (prog, pid, 0, comp, env, stack) 
+       in
+          match status with
+          | Finished -> 
+              process_scheduling rest max_steps
+          | Unfinished -> 
+              process_scheduling (rest @ [updated_process]) max_steps
+          | Spawned new_process -> ...
+          | MessageToSend (target, message) -> ...
+          | Blocked need_free_check -> ...
+          | FreeMailbox mailbox -> ...
+
+\end{lstlisting}
+\end{minipage}
+
+
+\section{Case Study}
+
+\subsection{Process Spawn}
+
+Code snippet 1 in Listing \ref{lst:spawn} shows the specific code section that handles the generation of a new process by a process. When a \textcolor{red}{Spawn} operation is encountered, the system first generates a new process identifier(PID) through the \textbf{generat\_new\_pid()} function, which ensures that each generated PID is unique, incremented sequentially starting from 1, and ensures that the IDs of processes that have been marked as Finished are not reused. Subsequently, the newly created process is initialized with a new \textbf{PID}, a \textbf{step} reset to 0, and \textbf{comp}, \textbf{env}, and an \textbf{empty stack} inherited from the current process, as a way to ensure that the new process can continue to perform the computational tasks split from the current process. For the current process, its computation expression is updated to \textbf{Return (Constant Unit)}, which is designed to allow the current process to simply terminate its recursive execution early. This design ensures that the current process can quickly return to the scheduler, which in turn allows the scheduler to continue executing the newly spawned process.
+
+In the process\_scheduling function depicted in Listing \ref{lst:Scheduler}, the returned Spawn state is precisely captured. At this point, the second code snippet in Listing \ref{lst:spawn} detailed this status, the scheduler places the newly spawned \textbf{new\_process} at the top of the process list by matching the state of the current process, while the current process, which failed to complete its execution, is relocated to the end of the process list. This operation ensures that the newly spawned process gets immediate scheduling so that it can start executing as soon as possible, and also ensures that the original process can continue executing in subsequent scheduling rounds if it has not completed its computational tasks. This mechanism ensures that every process gets scheduled at the right time, enabling efficient and fair resource allocation.
+
+\noindent\begin{minipage}{\linewidth}
+\lstset{style=Ocamlstyle,}
+\begin{lstlisting}[caption={Process spawning mechanism in Pat}, label={lst:spawn}]
+(*......*)
+| Spawn comp, env, stack ->
+    let new_pid = generate_new_pid () in
+    let new_process = (program,new_pid, 0, comp, env, []) in
+      Spawned new_process, (program, pid,steps+1, 
+                                    Return (Constant Unit), env, stack)
+(*......*)
+| Spawned new_process -> 
+    process_scheduling (new_process :: rest @ 
+                                 [updated_process]) max_steps
+(*......*)
+\end{lstlisting}
+\end{minipage}
+
+\subsection{Mailbox Communication}
+The mailbox communication feature is a key feature in the Pat language, providing an elaborate mechanism for inter-process message passing. This section describes the process of sending and receiving messages separately. 
+
+\subsubsection{Sending Messages} \hfill\\\\
+Listing Sending looks at how the send message operation is handled in the process. \textcolor{red}{Send} in the code snippet first constructs a \textcolor{red}{MessageToSend} status that includes the target mailbox variable (\textbf{target}), the message variable to be sent (\textbf{message}), and the actual value in its environment (\textbf{env}). It then updates the state of the current process by increasing its step count by one and updating the computational expression to \textbf{Return (Constant Unit)}, which indicates that the current process is expected to end its execution path.
+
+Further, in the scheduler, the \textcolor{red}{MessageToSend} status is processed with the appropriate substitution and preparation of the destination address and message content via the \textbf{substitute\_in\_message} function to ensure that the message can be correctly sent to the specified mailbox. Afterwards, the \textbf{add\_message\_to\_mailbox} function is called to place the prepared message into the appropriate mailbox, and this operation may unblock the process waiting for the message on that mailbox. The scheduling process then proceeds with the remainder of the execution by rescheduling unblocked processes as a result of message reception into the execution queue, followed by placing the current process at the head of the list.
+
+\noindent\begin{minipage}{\linewidth}
+\lstset{style=Ocamlstyle,}
+\begin{lstlisting}[caption={Message Sending in Pat}, label={lst:Sending}]
+(*......*)
+| Send {target; message; _}, env, stack ->
+    (MessageToSend (target, message, env), (program, pid, 
+  (*@\hfill@*)steps+1, Return (Constant Unit), env, stack))
+(*......*)
+| MessageToSend (target, ((tag, _) as message),env'') ->
+    let _,messages = message in
+    let (substituted_target, substituted_values) = 
+    (*@\hfill@*)substitute_in_message env'' target messages 
+    in let unblocked_process = add_message_to_mailbox 
+    (*@\hfill@*)substituted_target (tag,substituted_values) pid 
+    in process_scheduling ([updated_process] @ rest @ 
+    (*@\hfill@*)unblocked_process) max_steps
+(*......*)
+\end{lstlisting}
+\end{minipage}
+ 
+\subsubsection{Receiving Messages} \hfill\\\\
+In this receive message section(Listing \ref{lst:Guard}), when a process guards a mailbox, it first determines if the target is a Mailbox by using the \textbf{eval\_of\_var} function, and if it is, then it looks up the message list corresponding to the mailbox name. If a message exists in the corresponding message list, it iterates through the receive conditions defined in the guards. For each receive condition, check if there is a message in the message list that matches the condition. If it exists, the message is extracted, the message content is bound to an environment variable, and the corresponding continue expression (\textbf{cont}) is executed. If no matching message is found in the message list, the current process is marked as \textcolor{red}{Blocked}, indicating that it is waiting for a specific message to arrive.
+
+\noindent\begin{minipage}{\linewidth}
+\lstset{style=Ocamlstyle,}
+\begin{lstlisting}[caption={Message Reception and Guard Evaluation in Pat Language}, label={lst:Guard}]
+(*......*)
+| Guard {target; pattern; guards; _}, env, stack ->
+  (match pattern with  
+    | Type.Pattern.One -> (* Free Mailbox *)
+    | _ ->
+      let need_free_check = (*......*) in
+      let m = eval_of_var env target in
+      match m with
+        | Mailbox mailbox_name ->
+            match Hashtbl.find_opt mailbox_map mailbox_name with
+            | Some msg_list -> 
+              let rec match_guards = function
+                | Receive {tag; payload_binders; mailbox_binder; cont} 
+                (*@\hfill@*):: rest ->
+                    if (* tag = (tag in msg_list) *) then
+                      let message_to_process = 
+                          extract_message tag mailbox_name msg_list in
+                      let new_env = bind_env message_to_process 
+                      (*@\hfill@*)payload_binders env target mailbox_binder in
+                      execute(program,pid,steps+1,cont,new_env,stack)
+                    else
+                      match_guards rest
+                | [] -> 
+                  (Blocked (need_free_check, mailbox_name), 
+                              (program, pid, steps, comp, env, stack))
+                | _ :: rest -> match_guards rest 
+              in
+              match_guards guards
+(*......*)
+\end{lstlisting}
+\end{minipage}
+
+\section{Execution of Garbage Collection Strategies}
+
+In the Pat language, to implement its unique "Free" guarding feature, we use a garbage collection mechanism. This feature has three cases:
+
+\begin{itemize}
+\item When guard matches the pattern $\mathbb{1}$ or \textbf{Free V} appearing in the receive statement (which is syntactic sugar for the former), it means that the mailbox is empty, and therefore the mailbox can be freed directly. Specifically, according to Listing \ref{lst:Guard} when a match is made to \textbf{Type.Pattern.One}, the system returns \textcolor{red}{freeMailbox} (the message of the empty mailbox) to the scheduler. The first part of Listing \ref{lst:blockfree} shows the garbage collection process, in which all processes and references in their environments related to this mailbox are removed and the updated process is returned to the scheduler.
+
+\item If the guard does not contain \textbf{Free V} or does not contain the pattern $\mathbb{1}$, the system will not perform a garbage collection operation (\textbf{need\_free\_check} is false in listing \ref{lst:Guard}), but instead, the process will be added directly in the scheduler to the \textbf{blocked\_list} and wait for further processing.
+
+\item In addition to the above two cases, the system will perform the most important garbage collection check. When \textbf{need\_free\_check} is true, all processes will be traversed in \textcolor{red}{Blocked} status in the scheduler (second part of Listing \ref{lst:blockfree}) by \textbf{mailbox\_counting\_update}. Checks to see if a reference to a specific mailbox exists. If a reference exists, the mailbox counting is incremented and blocked on the next check. If still no reference is found, the same process as in the first case is performed.
+\end{itemize}
+
+\noindent\begin{minipage}{\linewidth}
+\lstset{style=Ocamlstyle,}
+\begin{lstlisting}[caption={Mailbox Free and Process Blocking}, label={lst:blockfree}]
+(*......*)
+| FreeMailbox mailbox -> 
+    let new_processes = update_processes_after_free 
+    (*@\hfill@*)(updated_process::rest) mailbox 
+    in
+    process_scheduling new_processes max_steps
+| Blocked (need_free_check,mailbox)->
+    let should_block = 
+      if need_free_check then
+        let all_processes = rest @
+          (Hashtbl.fold (fun _ process acc -> process :: acc) 
+          (*@\hfill@*)blocked_processes []) in
+          if mailbox_counting_update mailbox all_processes then true
+          else (* Still no reference, free mailbox *)
+      else true
+    in
+    if should_block then
+        add_process_to_blocked_list mailbox updated_process;
+        process_scheduling rest max_steps
+    else ()
+(*......*)
+\end{lstlisting}
+\end{minipage}
+
+\section{Evaluation Step Printer}
+
+In order to achieve transparent observation during the evaluation process of the Pat language and to easily be debugged, this research implements a step printer whose core function is to capture and print the current execution state at each evaluation step. Specifically, by calling the \textbf{print\_config} function defined in Listing \ref{lst:Printer}, the current number of evaluation steps is first recorded via counter to allow for tracking the progress of the execution process. Next, the function constructs and splices the status strings of different components separately, including the identifier of the current process, the number of steps, the description of the computation expression, the environment variables, the contents of the execution stack, and the current status of the mailbox mapping and blocking processes. This mechanism not only provides developers with real-time execution feedback, but also greatly simplifies the debugging process and performance analysis by accurately displaying the state changes at each step. In addition, the listing shows that the printer will specifically label the states such as the end of the process and blocking, further increasing the visualization and readability of state changes. With these detailed outputs, it is easier to locate problems and optimize concurrency strategies and resource management.
+
+\noindent\begin{minipage}{\linewidth}
+\lstset{style=Ocamlstyle,}
+\begin{lstlisting}[caption={Evaluation Step Printer}, label={lst:Printer}]
+(*......*)
+let print_config (comp, env, stack, steps, pid, mailbox_map, 
+                         blocked_processes) =
+  counter := !counter + 1;
+  let step_str = Printf.sprintf "\n Total step %d\n" !counter in
+  let mailbox_map = print_mailbox_map mailbox_map in
+  let blocked_processes = 
+          print_blocked_processes blocked_processes in
+  let steps_str = Printf.sprintf "\n\nCurrent PID: 
+  (*@\hfill@*)%s Steps: %d\n\n" string_of_int pid steps in
+  let comp_str = Printf.sprintf "Comp: %s\n\n" (show_comp comp) in
+  let env_str = Printf.sprintf "Env: %s\n\n" (show_env env) in
+  let frame_stack_str = Printf.sprintf "Frame Stack: %s\n"
+  (*@\hfill@*)(show_frame_stack stack) in
+  step_str ^ mailbox_map^ blocked_processes ^ steps_str ^
+                 comp_str ^ env_str ^ frame_stack_str
+(*......*)
+Buffer.add_string steps_buffer
+         (Printf.sprintf "\n Process %d Finished \u{2705} \n" pid);
+(*......*)
+Buffer.add_string steps_buffer 
+         (Printf.sprintf "\n Process %d Blocked \u{1F6AB} \n" pid);
+
+\end{lstlisting}
+\end{minipage}
+
+Listing \ref{lst:output} shows a concrete example of the output of the step printer during the execution of the Pat language, where the output first shows the mailbox count status. This is followed by a detailed listing of the state of all mailboxes currently in the system, including mailbox identifiers (e.g., alice0, bob1, self2) and a list of the messages each contains. This section provides an intuitive view for understanding inter-process communication and is especially important when debugging message passing and synchronization issues. A list of currently blocked processes is also shown, including the mailboxes waiting for messages and their corresponding PIDs. this information helps developers to quickly identify potential deadlocks or resource contention problems. Finally, a full picture of the current execution context is provided, including inter-process function calls, variable bindings, and stack frame changes.
+
+\noindent\begin{minipage}{\linewidth}
+\lstset{style=printer,}
+\begin{lstlisting}[caption={Example of Evaluation Step Printer Output}, label={lst:output}]
+Mailbox_counting:
+    Mailbox: self2, Value: 1
+------------------- Total step 22 --------------------
+Mailbox: alice0, Messages: [(Debit, [(Ir.Constant 
+(*@\hfill@*)(Common_types.Constant.Int 20)),(Ir.Mailbox future3)]);]
+Mailbox: bob1, Messages: []
+Mailbox: self2, Messages: []
+Blocked process:
+   Mailbox: self2 -> PID: 1 
+   Mailbox: alice0 -> PID: 2 
+Current PID: 3 Steps: 2
+Comp: Ir.App {func = (Ir.Variable (await4, (Some (Int, 
+                             AccountMb!(Debit) [U]) -> FutureMb)));
+                   args = [(Ir.Variable (amount29, (Some Int)));
+                      (Ir.Variable (recipient28, (Some AccountMb)))]}
+Env: [self30 -> Mailbox bob1; amount29 -> 20; recipient28 -> 
+        Mailbox alice0; sender27 -> Mailbox self2; 
+        self22 -> Mailbox bob1; balance21 -> 20]
+Frame Stack: 
+   [Frame(future,[self30->Mailbox bob1;amount29->20; 
+            recipient28 -> Mailbox alice0; sender27 -> Mailbox self2]
+\end{lstlisting}
+\end{minipage}
+
+\section{Error Handling Strategies}
+
+During the development of the Pat language, in addition to enhancing debugging transparency through step printers, a set of error handling strategies were designed to ensure the maintainability of the program in case of runtime errors. The \textbf{failwith\_and\_print\_buffer} function, illustrated in Listing \ref{lst:error}, is the core of this strategy and is called when a runtime error such as "invalid configuration", "no mailbox matched" or "no free guard found" is encountered during program execution.
+
+The logic of this function is to first call a series of print functions, these functions are responsible for the buffer accumulated in all the execution steps, process status and the results of the output, thus providing a detailed record of the execution of the track. By presenting this information, it is possible to quickly track down the specific step and context that triggered the error. In short, it provides effective support for handling complex error scenarios that are common in concurrent programming.
 
 \noindent\begin{minipage}{\linewidth}
 \lstset{style=Ocamlstyle}
-\begin{lstlisting}[caption={Let and App Keyword Specific Implementation}, label={lst:letapp}]
-    | Let {binder; term; cont},env,stack ->
-        execute (program,pid,steps+1,term,env,
-        (*@\hfill@*)(Frame (binder,env,cont)) :: stack)
-    | App {func; args}, env, stack -> 
-        (match func with
-            | Lam {parameters; body; _} 
-            | Primitive op
-            | Variable (func_var, _))
+\begin{lstlisting}[caption={Integrating Step Printing with Runtime Error Diagnosis.}, label={lst:error}]
+(*......*)
+let failwith_and_print_buffer msg =
+  steps_buffer_print (); 
+  process_buffer_print ();
+  result_buffer_print ();
+  failwith msg
+(*......*)
+| _ ->  failwith_and_print_buffer "Invalid configuration"
+(*......*)
+| None -> failwith_and_print_buffer "No mailbox matched"
+(*......*)
+| _ -> failwith_and_print_buffer "No free guard found")
+(*......*)
 \end{lstlisting}
 \end{minipage}
-
-If it is an \textcolor{red}{App} expression, the function will be applied to the arguments, and if the function is a lambda expression, a new environment will be created and bound to the arguments and the \textbf{Lambda} body will be executed recursively. For primitive operations such as \textbf{print}, \textbf{intToString}, etc., we will perform a specific evaluation strategy for each primitive and update the result buffer if necessary. As for ordinary functions, a lookup of the function definition will be performed, and if the corresponding function is found in the declaration of the program, the function body will be executed in the new environment \textbf{env'}. If a closure is found in the current environment, the corresponding function body is also executed. As a whole with these examples, it is shown how the CEK model handles different keywords in the Pat language and how the environment, stack, and continuation bodies are used to maintain program state during the value seeking process.
-
-\section{General points}
-
-These points apply to the whole dissertation, not just this chapter.
-
-
-
 
 
 %==================================================================================================================================
 \chapter{Evaluation} 
-In this research, we comprehensively evaluated the effectiveness of the Pat language runtime interpreter, employing methods such as correctness testing and micro-benchmarking, aiming to accurately quantify its performance metrics. Correctness testing ensured that the Pat language executed as expected when processing different example files, verifying the correctness of the language design and runtime. The efficiency of the interpreter in performing computationally intensive tasks was evaluated through careful measurements of the runtime of specific algorithmic tasks (e.g., computing Fibonacci series), and these tests focused on evaluating the performance of the Pat language under real-world running conditions. The tests were performed on a computer equipped with an M2 Pro chip and 16 GB of RAM, with the operating system MacOS 14.3, using the OCaml version 5.1.0 environment, and the time calculations, which included all parts of the type checking and the interpreter, were repeated about 100 times, thus ensuring the accuracy and reliability of the results.
+In this research, we comprehensively evaluated the effectiveness of the Pat language runtime interpreter, employing methods such as correctness testing and micro-benchmarking, aiming to accurately quantify its performance metrics. Correctness testing ensured that the Pat language executed as expected when processing different example files, verifying the correctness of the language design and runtime. The efficiency of the interpreter in performing computationally intensive tasks was evaluated through careful measurements of the runtime of specific algorithmic tasks (e.g., computing Fibonacci series), and these tests focused on evaluating the performance of the Pat language under real-world running conditions. The tests were performed on a computer equipped with an M2 Pro chip and 16 GB of RAM, with the operating system MacOS 14.3, using the OCaml version 5.1.0 environment, and the time calculations, which included all parts of the type checking and the interpreter, were repeated 100 times, thus ensuring the accuracy and reliability of the results.
 
 \section{Concurrent Reduction}
 
 \subsection{Functional Reduction}
-In performing a series of fundamental tests on the Pat language, we aim to verify whether the Pat language is able to accurately execute basic programming constructs and how well it performs in different programming scenarios. These tests help to evaluate whether the runtime environment of the Pat language can meet the needs of concurrent and distributed systems programming, and whether it can correctly handle various programming tasks according to its design specifications.
+In performing a series of fundamental tests on the Pat language, we aim to verify whether the Pat language is able to accurately execute basic programming constructs and how well it performs in different programming scenarios. These tests help to evaluate whether the runtime environment of the Pat language can meet the needs of concurrent programming, and whether it can correctly handle various programming tasks according to its design specifications.
 
-Specific tests performed include basic arithmetic tests, operator precedence, logical operation tests, anonymous functions, local variables and function bindings, empty interfaces and linear functions, and pattern matching. The results of the tests show (Table \ref{tab:Fundamental_results}) that all tests were successfully completed as expected and no runtime errors were found. This result proves that the underlying functionality of the Pat language matches the design specifications and is capable of handling a wide range of programming tasks.
+Specific tests performed include basic arithmetic tests, operator precedence, logical operation tests, anonymous functions, local variables and function bindings, empty interfaces and linear functions, type annotations, and pattern matching. The results of the tests show (Table \ref{tab:Fundamental_results}) that all tests were successfully completed as expected and no runtime errors were found. This result proves that the underlying functionality of the Pat language matches the design specifications and is capable of handling a wide range of programming tasks.
 
 \begin{table}[ht]
 \centering
-\renewcommand{\arraystretch}{1.1}
+\renewcommand{\arraystretch}{0.9}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{l l c c}
 \toprule
@@ -639,25 +953,22 @@ Anonymous Function & Function returns input integer value & 5 & 5 \\
 Local Binding & 
 Local binding and function definition & 10 & 10 \\
 Nested Binding & Nested function returns double input value & 10 & 10 \\
-Memory Management & Interface declaration and memory deallocation & - & - \\
-Pattern Matching (Left) & Handles union type and printing & 5 & 5 \\
-Pattern Matching (Comprehensive) & Evaluates type inference & 5 & 5 \\
+Memory Management & Interface declaration and memory deallocation & ( ) & ( ) \\
+Type annotations & Handles union type and printing & 5 & 5 \\
+Pattern Matching & Pattern matching with union types & 5 & 5 \\
 \bottomrule \\
 \end{tabular}%
 }
-\caption{Basic Correct Test Results}
+\caption{Functional Correct Test Results}
 \label{tab:Fundamental_results}
 \end{table}
 
-
-
-
 \subsection{Concurrency Reduction}
-After the basic correct tests were completed, we further tested the correctness of six advanced concurrency models for the Pat language, based on the original mailbox algorithmic model with ideas taken from the research of de'Liguoro and Padovani (2018)\colorbox{yellow}{referenceHere}. The specific test implementations refer to the research of Fowler et al. (2023)\colorbox{yellow}{referenceHere}. These test cases cover everything from concurrent lock, future variable handling, and account concurrent transactions, account concurrent transactions via future variables, master-worker parallel networks, and session-type communication actor models using a single arbiter.
+After the functional correct tests were completed, we further tested the correctness of six advanced concurrency models for the Pat language, based on the original mailbox algorithmic model with ideas taken from the research of \cite{deaposliguoro_2018_mailbox}. The specific test implementations refer to the research of \cite{fowler_2023_special}. These test cases cover everything from concurrent lock, future variable handling, and account concurrent transactions, account concurrent transactions via future variables, master-worker parallel networks, and session-type communication actor models using a single arbiter.
 
-First, we simulate concurrent locks to verify the efficiency and reliability of the Pat language in handling mutually exclusive operations. In addition, we evaluated the performance of the Pat language in handling one-time write and multiple read operations by testing the "Future" variable. Then, by simulating debit/credit instruction exchanges between concurrent accounts, we further validate the accuracy and efficiency of the Pat language in complex concurrency scenarios. In order to explore the application of Pat in asynchronous programming model, we also test the debit/credit commands of accounts implemented by "Future". In addition, we evaluate the performance of the Pat language in a distributed computing environment by constructing a parallel network of master-worker jobs. Finally, we explore the ability of the Pat language to implement complex communication protocols through a session-type communication actor model, which involves the use of a single arbiter to coordinate communication behavior.
+First, we simulate concurrent locks to verify the efficiency and reliability of the Pat language in handling mutually exclusive operations. In addition, we evaluated the performance of the Pat language in handling one-time write and multiple read operations by testing the "Future" variable. Then, by simulating debit/credit instruction exchanges between concurrent accounts, we further validate the accuracy and efficiency of the Pat language in complex concurrency scenarios. In order to explore the application of Pat in asynchronous programming model, we also test the debit/credit commands of accounts implemented by "Future". In addition, we evaluate the performance of the Pat language by constructing a parallel network of master-worker jobs. Finally, we explore the ability of the Pat language to implement complex communication protocols through a session-type communication actor model, which involves the use of a single arbiter to coordinate communication behavior.
 
-All tests show that the Pat language is able to successfully handle these high-level concurrent and distributed programming tasks, demonstrating alignment between expected and actual outcomes(Table \ref{Concurrency_result}). The test results not only validate the performance of the Pat language in different programming scenarios, but also demonstrate its power in handling concurrent and distributed system programming requirements. The average response times ranged from 45.8 ms for the concurrent model to 102.9 ms for the session type model, further proving that the Pat language is able to provide a high degree of functionality and reliability while ensuring performance.
+All tests show that the Pat language is able to successfully handle these high-level concurrent and programming tasks, fully indicating alignment between expected and actual output(Table \ref{Concurrency_result}). The test results not only validate the performance of the Pat language in different programming scenarios, but also demonstrate its power in handling concurrent system programming requirements. The average response times ranged from 45.8 ms for the concurrent model to 102.9 ms for the session type model, further proving that the Pat language is able to provide a high degree of functionality and reliability while ensuring performance.
 \begin{table}[ht]
 \centering
 \renewcommand{\arraystretch}{1.1}
@@ -668,25 +979,27 @@ All tests show that the Pat language is able to successfully handle these high-l
 \midrule
 Lock   & Concurrent lock modelling mutual exclusion       & 12 & 12  \\
 Future  & Future variable that is written to once and read multiple times & 55         & 55          \\
-Account             & Concurrent accounts exchanging debit and credit instructions  & - & -                 \\
-Account Future & Concurrent accounts where debit instructions are effected via futures  & INFO.. & INFO..                  \\
+Account             & Concurrent accounts exchanging debit and credit instructions  & ( ) & ( )                 \\
+Account Future & Concurrent accounts where debit instructions are effected via futures  & ( ) & ( )                  \\
 Master-Worker       & Master-worker parallel network            & 55385 & 55385                  \\
 Session Types       & Session-typed communicating actors using one arbiter   & 6 & 6                 \\
 \bottomrule \\
 \end{tabular}%
 }
-\caption{Advanced Concurrency Model Correct Test Results \colorbox{yellow}{referenceHere}}
+\caption{Advanced Concurrency Model Correct Test Results}
 \label{Concurrency_result}
 \end{table}
 
 
 \section{Micro-Benchmark Test}
 
-Based on the correctness tests, we designed and implemented a series of benchmark tests aimed at evaluating the performance of the Pat language's runtime interpreter under different concurrent programming patterns. These tests cover a wide range of concurrent programming scenarios including master-worker (e.g., KFork, Fibonacci, Log Map), client-server (e.g., Ping Pong, Counter), and peer-to-peer (e.g., Big), and involve common network topologies such as Star (e.g. Philosopher, Smokers, Transaction) and Ring (e.g. Thread Ring) \colorbox{yellow}{referenceHere}. Each test is designed to evaluate the execution efficiency of the Pat language under a particular concurrency model.
+Based on the correctness tests, we designed and implemented a series of benchmark tests aimed at evaluating the performance of the Pat language's runtime interpreter under different concurrent programming patterns. These tests cover a wide range of concurrent programming scenarios including master-worker (e.g., KFork, Fibonacci, Log Map), client-server (e.g., Ping Pong, Counter), and peer-to-peer (e.g., Big), and involve common network topologies such as Star (e.g. Philosopher, Smokers, Transaction) and Ring (e.g. Thread Ring), as referenced from part of the savina benchmarks written by \cite{imam_2014_savina}. Each test is designed to evaluate the execution efficiency of the Pat language under a particular concurrency model.
 
 The purpose of these benchmarks is to establish an initial performance baseline for the Pat language and to demonstrate that it can effectively handle multiple concurrency models. Given that the Pat language is the first programming language to integrate mailbox typing, we do not use the results of these tests for direct comparisons with existing functional languages on the market. Instead, our goal is to demonstrate the controlled operation of the Pat language by showing how it can stably execute multiple concurrency patterns based on a design and implementation that incorporates the concept of mailbox types.
 
-Through this series of benchmark tests, we observe the performance of the Pat language under different concurrency models (table \ref{Savina}). For example, the Ping Pong test evaluates the message processing speed by simulating the bidirectional delivery of messages; the Thread Ring test measures the message delivery latency by passing tokens in a ring network; and the Fibonacci test demonstrates the efficiency of the Pat language in handling recursive concurrency tasks. In the K-Fork test, we made the necessary adjustments. In the original setup, the central actor distributes a large number of requests to the workers, resulting in a huge amount of data, which affects the execution efficiency of the test and the accuracy of the results. In order to more accurately evaluate the performance of the Pat language in handling concurrent tasks, we reduced the number of workers to ensure that the test results can more truly reflect the actual performance of the language. Note that in the Smokers test, this design caused a significant increase in test execution time due to the introduction of a randomized sleep function.
+Through this series of benchmark tests, we observe the performance of the Pat language under different concurrency models (table \ref{Savina}). For example, the Ping Pong test evaluates the message processing speed by simulating the bidirectional delivery of messages; the Thread Ring test measures the message delivery latency by passing tokens in a ring network; and the Fibonacci test demonstrates the efficiency of the Pat language in handling recursive concurrency tasks. Note that in the Smokers test, this design caused a significant increase in test execution time due to the introduction of a randomized sleep function.
+
+In tests performing the K-Fork model, the range of random numbers generated by the rand function in the initial code was too large, thus making the computation process excessively time-consuming. In light of this, we adjusted the upper limit of random numbers from 100,000 ms to 10 ms. This adjustment makes the computation process more efficient and more closely matches the lightweight computation needs of actors processing messages in real application scenarios. In addition, the initial code's multiple message flooding of a single mailbox (100, 1000, and 10000 messages, respectively) actually caused the mailbox to be overloaded. To more realistically simulate mailbox performance under regular load, we reduced the number of floods to a two and fixed the total number of messages to 20. These optimizations improve the accuracy and reliability of the benchmark in evaluating concurrent processing performance.
 
 \begin{table}[ht]
 \centering
@@ -696,24 +1009,22 @@ Through this series of benchmark tests, we observe the performance of the Pat la
 \toprule
 \textbf{Name} & \textbf{Description} & \textbf{Avg Time (ms)} \\
 \midrule
-Ping Pong & Process pair exchanging \( k \) ping and pong messages & 54.5 \\
-Thread Ring & Ring network where actors cyclically relay one token with counter \( k \) & 541.5 \\
+Ping Pong & Process pair exchanging \( k = 5 \) ping and pong messages & 54.5 \\
+Thread Ring & Ring network where actors cyclically relay one token with counter \( k = 1000 \) & 541.5 \\
 Counter & One actor sending messages to a second that sums the count & 45.5 \\
-K-Fork & Fork-join pattern where a central actor delegates \( k \) requests to workers & 298.9 \\
-Fibonacci & Fibonacci server delegating terms \( (k - 1) \) and \( (k - 2) \) to parallel actors & 56.7 \\
+K-Fork & Fork-join pattern where a central actor delegates \( k = 20 \) requests to workers & 76.2 \\
+Fibonacci & Fibonacci server delegating parallel actors with \( k = 5 \) & 56.7 \\
 Fib\_pairs & Fibonacci actors recursively resolving and returning terms independently & 55.1 \\
-Big & Peer-to-peer network where actors exchange \( k \) messages & 265.8 \\
+Big & Peer-to-peer network where actors exchange \( k = 100 \) messages & 265.8 \\
 Philosopher & Dining philosophers problem & 111.9 \\
-Smokers & Centralised network where one arbiter allocates \( k \) messages to actors & 5578.4 \\
+Smokers & Centralised network where one arbiter allocates \( k = 10 \) messages to actors & 5578.4 \\
 Log Map & Computes the term \( xx + 1 = r \cdot xx \cdot (1 - xx) \) by delegating to parallel actors & 97.9 \\
 \bottomrule \\
 \end{tabular}
 }
-\caption{Part List of Savina Benchmarks. \colorbox{yellow}{referenceHere}}
+\caption{Part List of Savina Benchmarks}
 \label{Savina}
 \end{table}
-
-The composite graph(Figure \ref{fig:benchmark}) presents the execution time test results of four different program fragments in Pat language with different K values. From top to bottom, left to right, they are Fibonacci computation time, Ping Pong performance analysis, bank request-response chain performance, and log-mapping simulation performance. It can be observed that the execution time curves for both sequential and concurrent execution are quite close to each other, indicating that no significant additional overhead is introduced in concurrent execution.
 
 In the field of concurrent computation, efficiently managing the overhead of parallel execution is one of the key factors in achieving high performance. By comparing the performance of these two strategies in computing Fibonacci series, we aim to evaluate the efficiency and feasibility of concurrent execution in the Pat language. We have chosen selected a range of K values (from 1 to 10) as input parameters to observe the variation of execution time for different input sizes. As shown in the figure \ref{fig:benchmark}, the graph on the left side demonstrates the comparative results of Fibonacci computational performance. The curves for sequential execution and concurrent execution closely follow each other, showing the similarity in time complexity between the two execution modes. Notably, Concurrent execution introduces no additional significant overhead, suggesting that the concurrency model of the Pat language has a potential advantage in maintaining low overhead.
 
@@ -737,19 +1048,21 @@ In the reflection section, the discussion of the research on garbage collection 
 
 For garbage collection optimization section, we currently employ a mechanism that similarly combines a simple Mark-Sweep algorithm and a Reference Counting method. This approach provides our system with basic memory management capabilities. Although this combined strategy works effectively in many cases, we also recognize its limitations when dealing with branching statements such as if/switch, and complex programming constructs such as recursion. Especially in recursive calls and complex control flow structures, the simple reference counting method may not be able to accurately identify all garbage objects, resulting in memory not being reclaimed in a timely manner, thus affecting the execution efficiency and stability of the system.
 
-Therefore, if we have more time, we plan to explore and implement a more in-depth reference counting mechanism. This advanced reference counting method will be optimized especially for branching structures and recursive calls in programming. For example, by introducing a branch-sensitive reference counting update mechanism, we can more accurately track the lifecycle of an object at runtime, and thus more intelligently manage the reference counting of objects in different branching paths. In addition, for the optimization of recursive structures, we can consider introducing tail recursion optimization or specific recursive pattern recognition to reduce unnecessary memory occupation and improve the accuracy of reference counting.
+Therefore, given enough time, we plan to explore and implement a deeper reference counting algorithm: Perceus, a precise reference counting method that combines reuse and specialization developed by \cite{reinking_2021_perceus}. This approach is mainly implemented by delaying the execution of the dup operation and executing the drop operation as early as possible. A dup operation here means increasing the reference count of an object, while a drop operation decreases the reference count. When the reference count drops to zero, the object is released.
 
-This in-depth reference counting strategy not only improves the efficiency of garbage collection and reduces the cases of incorrectly reclaiming or retaining objects, but also optimizes the memory usage while ensuring the performance of the system. By researching and implementing these advanced features, we expect to further mitigate the impact of garbage collection on program execution and improve the execution efficiency and responsiveness of the entire system.
+In a traditional reference counting system, whenever a variable is copied, the dup operation is executed immediately to increase the reference count of the object. However, this immediate increase in the reference count may not always be necessary, especially if some variables are no longer needed in the short term.The Perceus algorithm increases the reference count by delaying the execution of the dup operation until the reference actually needs to be shared by multiple owners. This strategy reduces unnecessary reference count adjustments. In contrast to delaying execution of the dup operation, the Perceus algorithm performs the drop operation as early as possible. This means that as soon as it is determined that an object is no longer needed, its reference count is immediately reduced, and the object is also freed immediately if the reference count drops to zero. This approach optimizes memory utilization because it ensures that objects that are no longer needed are reclaimed in a timely manner.
+
+In summary, Perceus provides an efficient reference counting mechanism that supports complex control flow and programming constructs through precise memory management, while reducing memory leaks and improving system performance. We therefore believe that Pat's memory management and stability can be significantly improved by introducing this innovative algorithm.
 
 \subsection{Advanced Scheduling Methods}
 
-Regarding the research on scheduling algorithms, our current implementation employs the Round-Robin scheduling approach, which is a simple and straightforward scheduling strategy. However, we also recognize that other framework, such as the EIO scheduling, which is capable of supporting parallel IO operations, may provide better performance and efficiency(Figure \ref{lst:eio}).The introduction of EIO not only takes advantage of the high-performance IO operation features provided by modern operating systems, such as Linux's io\_uring, but also allows concurrent code to be written in a much more concise and efficient manner through a direct style of IO stacking. This approach does a lot more than just reduce heap allocation and increase speed, it also makes concurrent code written in the same style as non-concurrent code, which greatly improves the readability and maintainability of the code.
+Regarding the research on scheduling algorithms, our current implementation employs the Round-Robin scheduling approach, which is a simple and straightforward scheduling strategy. However, we also recognize that other framework, such as the \cite{_2024_ocamlmulticoreeio} scheduling, which is capable of supporting parallel IO operations, may provide better performance and efficiency(Figure \ref{lst:eio}).The introduction of EIO not only takes advantage of the high-performance IO operation features provided by modern operating systems, such as Linux's io\_uring, but also allows concurrent code to be written in a much more concise and efficient manner through a direct style of IO stacking. This approach does a lot more than just reduce heap allocation and increase speed, it also makes concurrent code written in the same style as non-concurrent code, which greatly improves the readability and maintainability of the code.
 
 Within the time constraints of the project, we did not explore these alternatives in depth. Had we had more time, we would have compared the performance of different algorithms under multiple loads and scenarios, and we could have determined the scheduling strategy that best suited our system. In addition, research on how to combine multiple scheduling strategies in order to dynamically select the scheduling algorithm that best suits the current execution environment and task characteristics will also be a focus of our attention.
 
 \noindent\begin{minipage}{\linewidth}
 \lstset{style=ocamlstyle}
-\begin{lstlisting}[caption={Example of running two threads of execution concurrently using Eio.Fiber \colorbox{yellow}{referenceHere}}, label={lst:eio}]
+\begin{lstlisting}[caption={Example of running two threads of execution concurrently using Eio.Fiber}, label={lst:eio}]
 let main _env =
   Fiber.both
     (fun () -> for x = 1 to 3 do traceln "x = %d" x; Fiber.yield () done)
