@@ -449,7 +449,7 @@
 
 ### 28 Feb 2024
 
-* *0.5 hour* Organize meeting notes
+* *0.5 hour* Meeting
 
 ### 01 Mar 2024
 
@@ -464,3 +464,14 @@
 
 * *2 hour* Modify the dissertation based on supervisor's suggestions
 * *8 hour* Write the implementation chapter
+
+## Week 21
+
+### 04 Mar 2024
+
+* *6 hour* Finished implementation chapter
+
+### 07 Mar 2024
+
+* *0.5 hour* Meeting
+* *0.5 hour* Organize meeting notes
