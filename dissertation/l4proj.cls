@@ -58,13 +58,13 @@
 \usepackage[compact]{titlesec} % section heading formatting
 \usepackage{color} % colors
 \usepackage[table,svgnames]{xcolor}
-\usepackage{parskip} % adjustable line spacing
 \usepackage{listings} % nice code listings
 
 % remove dots from ToC
 \usepackage[titles]{tocloft} 
 \renewcommand{\cftdot}{}
 \usepackage[nottoc]{tocbibind}
+\usepackage{parskip} % adjustable line spacing
 
 % from: https://gist.github.com/FelipeCortez/10729134
 % set up listings for prettier output

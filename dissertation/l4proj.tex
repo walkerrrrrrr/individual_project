@@ -294,7 +294,9 @@ Mailbox types are an essential part of behavioral type systems, originally used 
 
 The following code snippet(Listing \ref{lst:patexample2}) from Pat's program demonstrates the application of mailbox types in real-world programming.This code simulates the processing of asynchronous compute and query tasks by defining \textbf{emptyTask} and \textbf{queryableTask} functions, as well as a client function. Where \textbf{emptyTask} is a mailbox for an empty task that can receive one \textcolor{red}{Compute} message and multiple \textcolor{red}{Query} messages. Once a \textcolor{red}{Compute} message is received, the mailbox will call \textbf{queryableTask}. and \textbf{queryableTask} represents a mailbox that has already received a \textcolor{red}{Compute} message, and this mailbox can only receive multiple \textcolor{red}{Query} messages. In these definitions, \textbf{guard} expressions are used to monitor the mailbox self and perform the appropriate actions based on the type of message received. This pattern not only shows how mailbox types can be used in Pat to control the sending and receiving of messages, but also how Pat can use the type system to statically check the behavior of concurrent programs to ensure communication protocol compliance and program robustness.
 
-\lstset{style=patstyle}
+\lstset{
+    style=patstyle,
+    literate={·}{{\textperiodcentered}}1}
 \begin{lstlisting}[caption={Implementing Concurrent Program for Asynchronous Task Processing and Result Querying}, label={lst:patexample2}]
 def emptyTask(self:EmptyTask):1 {
     guard self: Compute · *Query {
@@ -390,7 +392,7 @@ Non-functional requirements relate to the usability, and cross-platform compatib
 
 \section{Principles of CEK-style Machine}
 
-\subsection{$\lambda$-Calculus}
+\subsection{\texorpdfstring{$\lambda$}{lambda}-Calculus}
 Before delving into the implementation and optimization of CEK machines, it is crucial to understand the underlying concepts and principles of $\lambda$-Calculus, a formal system for representing the logic of a computational process or mathematical function, introduced by mathematician Alonzo Church in the 1930s, which is one of the core foundations of modern computer science. The system focuses on the process of binding and substitution of variables and serves as a generalized model of computation, equivalent to a Turing machine, that exhibits the fundamentals of the theory of computation.
 
 \begin{figure}[h]
@@ -419,7 +421,7 @@ Hence, the application of the lambda function \(\lambda x.\lambda y.x+y\) to the
 
 \subsection{Traditional CEK Machine}
 
-The CEK machine, developed by \cite{felleisen_1986_control}, is a machine for $\lambda$-Calculus that is particularly well suited for describing and enforcing the semantics of functional programming languages. This machine, with its realism and abstraction, provides a framework to show how computers can efficiently execute programs. The basic CEK machine is based on a ternary configuration of the form $⟨C\:|\:E\:|\:K⟩$. where
+The CEK machine, developed by \cite{felleisen_1986_control}, is a machine for $\lambda$-Calculus that is particularly well suited for describing and enforcing the semantics of functional programming languages. This machine, with its realism and abstraction, provides a framework to show how computers can efficiently execute programs. The basic CEK machine is based on a ternary configuration of the form $ \langle \ C\:|\:E\:|\:K \ \rangle $. where
 \begin{itemize}
     \item $\textbf{C}$ for Control, the expression currently being evaluated;
     \item $\textbf{E}$ for Environment, binding free variables;
@@ -435,7 +437,7 @@ Let us consider an expression "let $x$ = 3 in $x$ + 2". On this occasion we will
 In the initial phase, the CEK machine sets the control section to the full expression $\color{red}{\text{let } x = 3 \text{ in } x + 2}$. At this point, the environment is empty, indicating that no variable binding has been evaluated yet, and the continue section is also empty, indicating that no further computations are waiting to be evaluated. Next, the CEK machine recognizes the variable binding action in the $\color{red}{\text{let}}$ statement and begins to add the variable $\color{red}{x}$ to the environment in preparation for its association with the value $\color{red}{3}$. During this process, the control section is updated to $\color{red}{3}$, the environment is updated accordingly to contain the mapping $\color{blue}{\{x: 3\}}$, and the expression $\color{red}{x + 2}$ is placed in the continue section, waiting for a subsequent computation. When evaluating the computation of $\color{red}{x + 2}$, the CEK machine looks up and replaces the variable $\color{red}{x}$ with $\color{red}{3}$ in the environment, and then evaluates an addition operation to obtain the final result $\color{red}{5}$.
 
 \subsection{Generalized CEK Machine}
-In the design of the Pat language, reference was made to \cite{hillerstrm_2016_liberating}'s work on the generalization of the traditional CEK machine. This generalization process is particularly important for the Pat language because the traditional CEK machine was designed primarily for simple functional programming languages, which are overwhelmed when dealing with complex control flow and state management---especially algebraic effects. In the generalized CEK machine(Figure 4.2), the configuration takes the form of $\langle \boldsymbol{M}\: |\: \boldsymbol{\gamma} \:| \:\boldsymbol{\Sigma} \rangle$, where $\boldsymbol{M}$ represents the current term to be computed, which is equivalent to the control (C) part in the original CEK machine. $\boldsymbol{\gamma}$ represents the current environment, inherited from the environment (E) part in the original machine, which is in charge of binding the variables to the corresponding values. $\boldsymbol{\Sigma}$, on the other hand, represents the continuation part, which, unlike the continuation (K) of a single instruction or state in the original machine, consists of a series of continuation frames $[\boldsymbol{\delta}_1, \ldots , \boldsymbol{\delta}_n]$, each frame $\boldsymbol{\delta} = (\boldsymbol{\chi}, \boldsymbol{\gamma}, \boldsymbol{M})$ representing a pure continuation within a particular processor closure. Here $\boldsymbol{\chi}$ denotes the processor closure (handler closure), $\boldsymbol{\gamma}$ maintains its role as an environment for mapping variables to their values, and $\boldsymbol{M}$ represents the current computational term or expression being evaluated. 
+In the design of the Pat language, reference was made to \cite{hillerstrm_2016_liberating}'s work on the generalization of the traditional CEK machine. This generalization process is particularly important for the Pat language because the traditional CEK machine was designed primarily for simple functional programming languages, which are overwhelmed when dealing with complex control flow and state management---especially algebraic effects. In the generalized CEK machine(Figure \ref{fig:equations}), the configuration takes the form of $\langle \boldsymbol{M}\: |\: \boldsymbol{\gamma} \:| \:\boldsymbol{\Sigma} \rangle$, where $\boldsymbol{M}$ represents the current term to be computed, which is equivalent to the control (C) part in the original CEK machine. $\boldsymbol{\gamma}$ represents the current environment, inherited from the environment (E) part in the original machine, which is in charge of binding the variables to the corresponding values. $\boldsymbol{\Sigma}$, on the other hand, represents the continuation part, which, unlike the continuation (K) of a single instruction or state in the original machine, consists of a series of continuation frames $[\boldsymbol{\delta}_1, \ldots , \boldsymbol{\delta}_n]$, each frame $\boldsymbol{\delta} = (\boldsymbol{\chi}, \boldsymbol{\gamma}, \boldsymbol{M})$ representing a pure continuation within a particular processor closure. Here $\boldsymbol{\chi}$ denotes the processor closure (handler closure), $\boldsymbol{\gamma}$ maintains its role as an environment for mapping variables to their values, and $\boldsymbol{M}$ represents the current computational term or expression being evaluated. 
 \begin{align*}
 \text{ Configurations}\;\; & C ::= \langle M \, | \, \gamma \, | \, \Sigma \rangle \\
 \text{Environment}\;\; & \gamma ::= \cdot \, | \, \gamma, x \mapsto V \\
@@ -469,7 +471,7 @@ Subsequently, when the machine state changes to $\color{red}x + 2$, the environm
 
 The introduction of Environment is an essential improvement when exploring the operational semantics of the Pat language. In previous operational semantics design by \cite{fowler_2023_special}, the substitution of variables was usually accomplished through substitution operations, which required traversing the entire expression to replace all instances of the variable whenever a variable was used. This process is not only inefficient because it may involve multiple traversals of the entire expression tree, but it may also lead to the creation of multiple unnecessary copies. The introduction of environments optimizes this computational process and brings significant improvements at both theoretical and implementation levels.
 
-As can be seen in Figure \ref{fig:equations}, the adopted generalized CEK machine makes important changes to the runtime syntax of the previous version, with environments forming part of the core composition, in a model in which environments are not just static structures storing variable bindings, but rather act as dynamic, queryable and updatable records, in stark contrast to the traditional substitution operation. contrasting with traditional substitution operations. Specifically, an environment ($\gamma$) is defined as a possibly empty sequence in which each entry is associated with a mapping from a variable to its value. Where "$\cdot$" denotes an empty environment, "$\gamma, x \mapsto V$" denotes an extended environment that maps the variable $x$ to the value $V$ on top of the existing environment $\gamma$.
+As can be seen in Figure \ref{fig:Semantics}, the adopted generalized CEK machine makes important changes to the runtime syntax of the previous version, with environments forming part of the core composition, in a model in which environments are not just static structures storing variable bindings, but rather act as dynamic, queryable and updatable records, in stark contrast to the traditional substitution operation. contrasting with traditional substitution operations. Specifically, an environment ($\gamma$) is defined as a possibly empty sequence in which each entry is associated with a mapping from a variable to its value. Where "$\cdot$" denotes an empty environment, "$\gamma, x \mapsto V$" denotes an extended environment that maps the variable $x$ to the value $V$ on top of the existing environment $\gamma$.
 
 In the Reduction rules section it can be seen that the environment component plays a key role. For example, in the E-APP rules, the computation of the function application $f(\overrightarrow V)$ involves retrieving the function definition from the environment and mapping the real parameter $\overrightarrow V$ to the formal parameter $\overrightarrow x$. This process again highlights the role of the environment in simplifying computation and improving efficiency.
 
@@ -492,11 +494,11 @@ In the Reduction rules section it can be seen that the environment component pla
 \quad &\text{E-APP} & \quad \llparenthesis \ f(\overrightarrow{V}),\gamma, \Sigma \ \rrparenthesis & \quad\longrightarrow  \quad \llparenthesis \ M, \gamma[\overrightarrow{x} \mapsto \overrightarrow{V}], \Sigma \ \rrparenthesis \quad \\ 
 &&& \quad \quad \quad \quad  ( \text{if } \mathcal{P} (f) = \textbf{def } f(\overrightarrow{x : A} ) : B \{ M \} )\\
 \quad &\text{E-NEW} & \quad \llparenthesis \ \textbf{new}, \gamma, \Sigma \ \rrparenthesis & \quad \longrightarrow  \quad (va) (\llparenthesis  \ a, \gamma, \Sigma \ \rrparenthesis) \quad (a \text{ is fresh}) \\
-\quad &\text{E-SEND} & \quad \llparenthesis \ a \ ! \ \textcolor{red!80!black}{\textbf{m}} [\overrightarrow{V}], \gamma, \Sigma \ \rrparenthesis & \quad\longrightarrow  \quad \llparenthesis \ (), \gamma, \Sigma \ \rrparenthesis \parallel a \leftarrow \textcolor{red!80!black}{\textbf{m}}[\overrightarrow{V}] \\
+\quad & \text{E-SEND} & \quad \llparenthesis \ a \ ! \ \textcolor{red!80!black}{\textbf{m}} [\overrightarrow{V}], \gamma, \Sigma \ \rrparenthesis & \quad\longrightarrow  \quad \llparenthesis \ (), \gamma, \Sigma \ \rrparenthesis \parallel a \leftarrow \textcolor{red!80!black}{\textbf{m}}[\overrightarrow{V}] \\
 \quad &\text{E-SPAWN} & \quad \llparenthesis \ \textbf{spawn } M, \gamma,\Sigma \ \rrparenthesis & \quad \longrightarrow  \quad \llparenthesis \ (), \gamma, \Sigma \ \rrparenthesis \parallel \llparenthesis \ M, \gamma , \varepsilon \ \rrparenthesis \\
-\quad &\text{E-FREE}&  \quad  \ (va)(\llparenthesis \ \textbf{guard } a: E \{ \mathcal{G}[\textbf{free } \mapsto M]\}, \gamma,\Sigma \ \rrparenthesis ) & \quad \longrightarrow \quad \llparenthesis \ M, \gamma, \Sigma \ \rrparenthesis \\
-\multicolumn{4}{l}{\quad \text{E-RECV} \quad \llparenthesis \ \textbf{guard } a: E \{ G[\textbf{receive } \textcolor{red!80!black}{\textbf{m}}[\overrightarrow{x}] \textbf{ from } y \mapsto M]\}, \gamma, \Sigma \ \rrparenthesis \parallel a \leftarrow \textcolor{red!80!black}{\textbf{m}} [\overrightarrow{V}] \quad } \\
-\multicolumn{4}{r}{\longrightarrow \quad \llparenthesis \ M, \gamma[\overrightarrow{x} \mapsto \overrightarrow{V}, y \mapsto a ], \Sigma \ \rrparenthesis \quad \quad \quad }
+\quad &\text{E-FREE}&  \quad  \ (va)(\llparenthesis \ \textbf{guard } a: E \{ \mathcal{G}[\textbf{free } \mapsto M]\}, \gamma,\Sigma \ \rrparenthesis ) & \quad \longrightarrow \quad \llparenthesis \ M, \gamma, \Sigma \ \rrparenthesis \\ 
+\multicolumn{4}{l}{\quad \text{E-RECV} \quad $\llparenthesis$ \ \textbf{guard } a: E \{ G[\textbf{receive } \textcolor{red!80!black}{\textbf{m}}[$\overrightarrow{x}$] \textbf{ from } y $\mapsto$ M]\}, $\gamma$, $\Sigma$ \ $\rrparenthesis$ $\parallel$ a $\leftarrow$ \textcolor{red!80!black}{\textbf{m}} [$\overrightarrow{V}$] \quad } \\
+\multicolumn{4}{r}{$\longrightarrow$ \quad $\llparenthesis$ \ M, $\gamma$[$\overrightarrow{x}$ $\mapsto$ $\overrightarrow{V}$, y $\mapsto$ a ], $\Sigma$ \ $\rrparenthesis$ \quad \quad \quad }
 \end{align*}
 \vspace{-1.5\baselineskip} 
 \begin{align*}
@@ -505,7 +507,7 @@ In the Reduction rules section it can be seen that the environment component pla
 \vspace{-3\baselineskip} 
 \begin{figure}[ht]
     \caption{Pat Oprational Semantics}
-    \label{fig:equations}
+    \label{fig:Semantics}
 \end{figure}
 
 
@@ -1073,21 +1075,28 @@ let main _env =
 
 %==================================================================================================================================
 \chapter{Conclusion}    
-Summarise the whole project for a lazy reader who didn't read the rest (e.g. a prize-awarding committee).
-\section{Guidance}
-\begin{itemize}
-    \item
-        Summarise briefly and fairly.
-    \item
-        You should be addressing the general problem you introduced in the
-        Introduction.        
-    \item
-        Include summary of concrete results (``the new compiler ran 2x
-        faster'')
-    \item
-        Indicate what future work could be done, but remember: \textbf{you
-        won't get credit for things you haven't done}.
-\end{itemize}
+
+In this research, we explore the importance of concurrent and distributed systems in modern computational science. By comparing the concepts, challenges, and case studies related to concurrent programming and distributed systems, we propose a new programming language, the Pat language.The Pat language, by introducing advanced concurrent programming primitives and a unique mailbox type system, aims to provide developers with a more intuitive and concise way of handling concurrent tasks and communication processes. The goal of this research is to develop a runtime interpreter that specifically supports the Pat language, which not only needs to fulfill the runtime requirements of a general programming language, such as memory management, but also focuses on the specific needs of concurrent computation.
+
+Starting from the foundations of concurrency and distributed systems, our research work provides an deep analysis of the main challenges facing concurrent programming in modern computing environments, such as thread deadlocks, communication mismatches, and data consistency problems. Through case studies, we demonstrate the value of concurrent programming in real-world applications such as multiplayer online game servers and so on. These case studies not only demonstrate the importance of concurrent programming in improving system throughput and response time, but also reveal the technical challenges faced in designing efficient and reliable concurrent systems.
+
+To address these challenges, we have successfully implemented a runtime interpreter for the Pat language, whose main innovation is the introduction of a mailbox type system that statically constrains the order of message passing and processing through a type-checking mechanism, thus reducing the complexity of concurrent program design and improving program security and reliability. In addition, the Pat language provides a series of high-level concurrency primitives, such as Spawn, Send and Guard, which provide developers with flexible tools to build complex concurrency logic.
+
+Our runtime interpreter for the Pat language employs an execution model based on a generalized CEK mechanism that accurately manages a program's control flow, environment bindings, and continued execution state. By implementing a task scheduler based on the Round-Robin algorithm and a garbage collection mechanism similar to the one combining the Mark-Sweep algorithm and a Reference Counting, the interpreter is able to efficiently manage the execution of concurrent tasks and the utilization of system resources, guaranteeing the high-performance execution of concurrent programs.
+
+In order to improve runtime transparency and ease of use, we also implemented detailed step printing and error handling mechanisms. The step-printing feature allows tracking each step of program execution for a better understanding of the concurrent logic's running process, facilitating debugging and performance analysis. The error handling strategy simplifies the problem localization and repair process by catching runtime exceptions and providing clear error messages and failure reasons.
+
+Through a series of tests and evaluations, we verified the effectiveness and efficiency of the Pat language and its runtime interpreter in handling concurrent tasks and communication flows. The test cases we designed cover a wide range of performance benchmarks from basic functionality tests to complex concurrency models, and the results show that the Pat language is able to accurately perform a variety of concurrent programming tasks and exhibits excellent performance in a wide range of test scenarios. These tests not only prove the rationality and usefulness of the Pat language design, but also demonstrate its potential for development in concurrent programming models.
+
+\section{Future Work}
+
+Despite the results of our research, there are still many potential challenges and opportunities for application in practice and further optimization.
+
+First, in future work, the focus will be on further optimization of the runtime interpreter. In particular, in terms of task scheduling and memory management, we plan to explore more efficient methods to improve the execution efficiency of the Pat language. In particular, we will consider introducing the Perceus algorithm(\cite{reinking_2021_perceus}), a garbage collection strategy that combines precise reference counting and deferred processing to address memory management under complex control flow and recursive structures.
+
+In addition, we can research how to utilize the high-performance IO operation features provided by modern operating systems, such as \cite{_2024_ocamlmulticoreeio}, which can support parallel IO operations and may provide better performance and efficiency.
+
+In summary, this research provides a new tool and methodology for the research and development of concurrent programming models by proposing the Pat language and the corresponding runtime interpreter. We believe that with the further development and improvement of the Pat language, it will provide effective solutions to complex problems in the field of concurrent programming and contribute to future technological innovations.
 
 %==================================================================================================================================
 %
