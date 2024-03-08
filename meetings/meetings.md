@@ -147,6 +147,70 @@ Why is there no result for the memory management test? Is the result ()? If so, 
   	* It might be good to cite the book "Behavioural Types: From Theory to Tools" in the behavioural types section, same with the survey paper "Behavioural Types in Programming Languages"
   	* The "Mailbox Type" section (2.3.2) needs a bit of work -- but I've run out of time... I'll get comments from here on out later 
 * **Week 21**
+  * 10:00PM on Wednesday
+  * Meeting content:
+    	* Obviously, add in the title and abstract
+* LaTeX errors need fixing
+* References are very funky -- need to go to DBLP
+* p2 "introduces the notion of mailboxes and mailbox types for first-class" --> "introduces the notion of mailbox types for first-class mailboxes", Pat needs a citation
+* listing 1.1: mention that it is the *payload of the Task message* that is constrained to string 
+* p5: occurring.Java --> occurring. Java
+* "Here is a quick Java example(Listing 2.1), if Thread1 successfully acquires lock1 and Thread2
+acquires lock2 at the same time, and then each of them tries to acquire a lock already held by the
+other, this leads to a classic deadlock situation." --> "Listing 2.1 shows an example of a deadlock in Java. If the first thread successfully acquires lock1, and the second thread acquires lock2 at the same time, then each thread will be blocked waiting for the other thread's lock."
+* p6: citation "message poassing in distributed system" is funky
+* p7: "The Listing 2.2" --> "Listing 2.2"
+* p8: This is my Future example but with different names -- you need to cite Pat here otherwise it could be seen as plagiarism
+* p8: "The Behavioural Typingstem" --> "behavioural type systems". This description is a bit strange anyway -- you want to get across that behavioural type systems in general go further than standard type systems: as well as checking the usual data type errors, they also allow you to check behavioural properties such as the absence of communication mismatches.
+* p9: "process algorithms" --> "process calculi like the \pi calculus" (cite Milner's pi calculus book here)
+* p9: same comment about futures. Also ". and queryableTask represents..." -- should this be a comma?
+* p9: Maybe worth explicitly stating some of the errors that the mailbox typing discipline can catch (e.g., not sending the Compute message, not sending a reply, sending two Compute messages, etc.)
+* p10: Implementation strategies: add in a sentence reminding the reader that the goal of your project is to run these things, rather than just typechecking them -- at the moment the switch to scheduling is quite jarring. I don't think you need to discuss about distributed systems here. By "control flow management techniques" I think you mean that in order implement a scheduling algorithm, you need some way to interrupt each process and in order to do that you need some way of implementing small-step reductions and having some 'handle' on the remainder of the process, and this is why you need CEK / CPS.
+* By the way -- I think before discussing CPS / CEK, it's worth talking about the lambda calculus. What I'd suggest is just moving section 4.1.1 to the background section, before section 2.4 (so it would become the new Section 2.4)
+* Analysis section:
+  - Grammar parsing -- remove this as it is part of Pat already and not part of your project
+  - In the "Memory Management" bullet point you need to state that this is because you need to correctly implement the 'free' guard (maybe it's worth mentioning this in the background somewhere?). The main thing is that although OCaml implements GC already, you need to have some explicit memory management in order to correctly implement the semantics of 'free'
+  - "Communication system enhancement" is very vague
+  - I'd add in "Distributed communication" into "Won't have"
+  - It'd be worth justifying the "Won't have"s: for example justify the lack of distribution saying that MB typing doesn't take failure into account and failure must be handled by distribution. Say IDE / debugging tools are essentially different projects.
+* Sec 4:
+  - Worth saying that the lambda calculus forms the basis of all functional programming languages -- including Pat
+  - Worth also saying that you have given the reductions in small-step (rather than big-step) style
+  - Small suggestion -- in the environments for the CEK machine, use x = 3 or x \mapsto 3 rather than x : 3 (colon is normally used for typing). Additionally I'd avoid adding the explicit "C:", "E:", and "K:" labels. But the example is great
+  - Another small suggestion: I'd use the same CEK syntax throughout -- so the same as you use in your extended CEK machine for Pat -- i.e., (| M, \gamma, \Sigma |). To that end, I'd also delete figure 4.2 (as it's essentially repeated on p17 anyway).
+  - I was a little confused at your description of the Hillerstrom-Lindley CEK machine. It's true that they have a generalised CEK machine to allow the implementation of effect handlers, but I don't think that you actually need the generalised CEK machine in your project. The main point is that their CEK machine formalism is quite suitable because the Pat syntax is written in a style called "fine-grain call-by-value" (see https://www.sciencedirect.com/science/article/pii/S0890540103000889) where each subexpression of a computation is a value (e.g., V + W rather than M + N, with all subexpressions explicitly sequenced using let-bindings). Indeed it's also probably a good idea to include the BNF grammar for Pat, along with a description of each of the constructs.
+  - p17: since you're not low on space I'd probably not bother putting the two columns of runtime syntax next to each other, you might as well have each production on its own line. Additionally you should have descriptions of each rule. As a minor thing, you might want to put the rule names in small caps (i.e., \textsc{E-Return}). The typography for E-Recv is a little funky (a and E should be in italic, and G should be in mathcal)
+  - "Pat chooses the Round-Robin scheduling algorithm" -- this isn't a choice in Pat, this is a choice you've made in your work
+  - Sec 4.3: in general, good, but you need to give an example of why you need GC to implement free (maybe use that coin flip example I showed you?). Additionally there's a missing figure (showing as '??' at present)
+* Sec 5:
+  - It's worth being very specific about the parts of the code you have written (e.g., all of listing 5.1) and which were there before (e.g., the AST).
+  - "process_scheduling" should be in \texttt on page 22 -- same with all of the return codes (Finished / Unfinished / ...)
+  - I wouldn't call Sec 5.3 Case Study -- rather, "Implementing Communication and Concurrency"
+  - generat_new_pid --> generate_new_pid
+  - I didn't really find that section 5.6 added anything (it is fairly standard). It might be better instead spending the space on a more detailed description of the mailbox freeing check (e.g., what does the mailbox_counting_update function do / how is it implemented?)
+ 
+(I've already looked at the evaluation section)
+ 
+* Sec 6:
+ 
+"By comparing the concepts, challenges, and case studies related to
+concurrent programming and distributed systems, we propose a new programming language, the
+Pat language"
+ 
+-- no, I proposed Pat ;) You need to be precise about your contribution; in particular, that you are the first to implement it, and you've done a thorough evaluation.
+ 
+"Through case studies, we demonstrate the value of concurrent programming in
+real-world applications such as multiplayer online game servers and so on. "
+ 
+I don't think you can claim this without having implemented a multiplayer online game server yourself.
+ 
+ 
+"a garbage collection mechanism similar to the one combining the Mark-Sweep
+algorithm and a Reference Counting, the interpreter is able to efficiently manage the execution
+of concurrent tasks and the utilization of system resources, guaranteeing the high-performance
+execution of concurrent programs"
+ 
+The important thing about GC is that it allows you to implement the semantics of free.
 * **Week 22**
 * **Week 23 [TERM ENDS]**
 * **Week 24**
