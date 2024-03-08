@@ -89,6 +89,7 @@
   * Modify the dissertation according to guidance
   * Finish the first draft of dissertation
 * **Week 21**
+  * Finished the dissertation 
 * **Week 22**
 * **Week 23 [TERM ENDS]**
 * **Week 24** Dissertation submission deadline and presentations.
