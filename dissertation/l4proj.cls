@@ -321,10 +321,10 @@ textfont=it,tableposition=above]{caption}
     breakatwhitespace=true,
     title=\lstname,
     escapeinside={(*@}{@*)}, % for escaping to LaTeX
-    morekeywords={interface, def, guard, free, receive, print, let, spawn},
-    emph=[1]{Task,Thread,Compute,Query,Reply}, % Custom identifiers to be emphasized
+    morekeywords={interface, def, guard, free, receive, let, spawn},
+    emph=[1]{Task,Thread,Compute,Query,Reply,M}, % Custom identifiers to be emphasized
     emphstyle=[1]\color{red}, % Custom style for first set of emphasized identifiers
-    emph=[2]{produceTasks,consumeTasks,main},% Second set of emphasized words
+    emph=[2]{produceTasks,consumeTasks,main,random,flip,output},% Second set of emphasized words
     emphstyle=[2]\color{blue}, % Style for second set of emphasized words
 }
 \definecolor{darkgreen}{rgb}{0.0, 0.5, 0.0}
