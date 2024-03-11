@@ -475,3 +475,21 @@
 
 * *0.5 hour* Meeting
 * *0.5 hour* Organize meeting notes
+
+### 08 Mar 2024
+
+* *8 hour* Modify the dissertation based on supervisor's suggestions
+  
+### 09 Mar 2024
+
+* *5 hour* Modify the dissertation based on supervisor's suggestions
+
+### 10 Mar 2024
+
+* *6 hour* Modify the dissertation based on supervisor's suggestions
+
+## Week 22
+
+### 11 Mar 2024
+
+* *2 hour* Modify the dissertation based on supervisor's suggestions, finished the dissertation
