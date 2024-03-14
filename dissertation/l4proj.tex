@@ -337,9 +337,11 @@ def client():1 {
     let self = new in 
     asyncTask ! Compute[2];
     asyncTask ! Query[self];
-    guard self: Reply[Result] from self ->
-        free self;
-        print(intToString(result))
+    guard self: Reply {
+        receive Reply[Result] from self ->
+            free self;
+            print(intToString(result))
+    }
 }
 
 \end{lstlisting}
